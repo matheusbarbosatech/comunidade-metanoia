@@ -60,6 +60,7 @@ Pegar o indivíduo que acabou de ser encontrado por Jesus (como Saulo na estrada
 | :--- | :--- |
 | [`ESTRATEGIA_MINISTERIAL_METANOIA.md`](./ESTRATEGIA_MINISTERIAL_METANOIA.md) | Estratégia pastoral completa, livros, cursos teológicos e visão de expansão. |
 | [`MANUAL_DA_VIDA_CRISTA.md`](./MANUAL_DA_VIDA_CRISTA.md) | O manual prático de instrução, protocolos SOS e disciplinas da vida cristã. |
+| [`PLANO_DE_CONTEUDO_1_ANO.md`](./PLANO_DE_CONTEUDO_1_ANO.md) | Plano de marketing, calendário de 52 semanas e roteiros virais de vídeo. |
 | [`ROTEIROS_CELULA_DIGITAL.md`](./ROTEIROS_CELULA_DIGITAL.md) | Guias de reuniões de 60 minutos, quebra-gelos e estudos bíblicos indutivos. |
 | [`ROTEIROS_VIDEOS_MINISTERIAIS.md`](./ROTEIROS_VIDEOS_MINISTERIAIS.md) | Roteiros de alta conversão para gravação de vídeos verticais e mensagens curtas. |
 
