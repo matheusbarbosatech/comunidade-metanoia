@@ -294,6 +294,15 @@ class RoboTestesMetanoia:
         self.registrar("Mobile APK/AAB", "Ponto de Entrada Nativo main.py Presente", 
                        main_entry.exists(), f"Localizado em: {main_entry}", (time.time()-t0)*1000)
 
+        # 4.5 Testar Favicon & Identidade Visual
+        t0 = time.time()
+        res_fav = self.client.get("/favicon.ico")
+        res_svg = self.client.get("/static/favicon.svg")
+        res_apple = self.client.get("/apple-touch-icon.png")
+        fav_ok = (res_fav.status_code == 200 and res_svg.status_code == 200 and res_apple.status_code == 200)
+        self.registrar("Identidade Visual", "Favicon & Ícones Oficiais do Site (/favicon.ico, SVG e Apple)", 
+                       fav_ok, f"Favicon: {res_fav.status_code}, SVG: {res_svg.status_code}, Apple: {res_apple.status_code}", (time.time()-t0)*1000)
+
     # =========================================================================
     # BATERIA 5: PIPELINES DE IA & AUTOMAÇÃO (DEEPGRAM & TELEGRAM)
     # =========================================================================

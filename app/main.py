@@ -3,7 +3,8 @@ Serve a Landing Page em '/', o Blog em '/blog', a Plataforma Flet em '/plataform
 """
 from pathlib import Path
 from fastapi import FastAPI
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, FileResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import APP_NAME, APP_VERSION, API_PREFIX
 from app.db.database import init_db
@@ -27,6 +28,25 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+STATIC_DIR = Path(__file__).resolve().parent / "static"
+if STATIC_DIR.exists():
+    app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+@app.get("/favicon.ico", include_in_schema=False)
+def favicon():
+    ico_path = STATIC_DIR / "favicon.ico"
+    if ico_path.exists():
+        return FileResponse(ico_path)
+    svg_path = STATIC_DIR / "favicon.svg"
+    return FileResponse(svg_path, media_type="image/svg+xml")
+
+@app.get("/apple-touch-icon.png", include_in_schema=False)
+def apple_touch_icon():
+    icon_path = STATIC_DIR / "apple-touch-icon.png"
+    if icon_path.exists():
+        return FileResponse(icon_path)
+    return FileResponse(STATIC_DIR / "favicon.ico")
 
 # Inicializar Banco SQLite e Sincronizar Músicas + Blog no startup
 @app.on_event("startup")
