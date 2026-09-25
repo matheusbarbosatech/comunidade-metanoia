@@ -167,6 +167,114 @@ def init_db() -> None:
     );
     """)
 
+    # 11. Espaços / Canais da Rede Social Comunitária (Estilo Circle.so)
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS comunidade_espacos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        slug TEXT UNIQUE NOT NULL,
+        nome TEXT NOT NULL,
+        icone TEXT NOT NULL,
+        descricao TEXT,
+        ordem INTEGER DEFAULT 0
+    );
+    """)
+
+    # 12. Publicações / Posts no Feed Social
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS comunidade_posts (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        espaco_id INTEGER REFERENCES comunidade_espacos(id),
+        autor_nome TEXT NOT NULL,
+        autor_papel TEXT DEFAULT 'Discípulo',
+        autor_avatar TEXT DEFAULT '🕊️',
+        titulo TEXT,
+        conteudo TEXT NOT NULL,
+        anonimo BOOLEAN DEFAULT 0,
+        fixado BOOLEAN DEFAULT 0,
+        likes_count INTEGER DEFAULT 0,
+        comentarios_count INTEGER DEFAULT 0,
+        criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+
+    # 13. Comentários / Respostas aos Posts
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS comunidade_comentarios (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        post_id INTEGER REFERENCES comunidade_posts(id),
+        autor_nome TEXT NOT NULL,
+        autor_papel TEXT DEFAULT 'Discípulo',
+        autor_avatar TEXT DEFAULT '🕊️',
+        conteudo TEXT NOT NULL,
+        anonimo BOOLEAN DEFAULT 0,
+        criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+
+    # 14. Reações aos Posts (Estou Orando 🤍, Amém 🙏, Glória 🔥)
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS comunidade_reacoes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        post_id INTEGER REFERENCES comunidade_posts(id),
+        tipo TEXT DEFAULT 'orando',
+        usuario_identificador TEXT,
+        criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+
+    # Povoamento Inicial de Espaços e Posts da Comunidade se vazio
+    cursor.execute("SELECT COUNT(*) as total FROM comunidade_espacos")
+    if cursor.fetchone()["total"] == 0:
+        espacos_iniciais = [
+            ("geral-acolhimento", "Acolhimento & Boas-Vindas", "🕊️", "Apresente-se, conheça outros irmãos e receba as boas-vindas da família.", 1),
+            ("pedidos-oracao", "Mural de Oração & Clamor", "🛡️", "Compartilhe suas lutas para intercedermos juntos diante do Pai.", 2),
+            ("estudos-biblicos", "Estudos & Teologia Bíblica", "📖", "Insights das apostilas, reflexões bíblicas e dúvidas da Palavra.", 3),
+            ("desabafos-sos", "Desabafo Seguro & SOS", "💬", "Espaço com acolhimento fraternal e opção de post anônimo para momentos de crise.", 4),
+            ("testemunhos", "Testemunhos & Vitórias", "🏆", "Conte o que Deus realizou na sua vida para edificar toda a comunidade.", 5),
+            ("louvores-adoracao", "Louvores & Adoração", "🎵", "Compartilhe louvores, playlists e momentos marcantes de louvor.", 6)
+        ]
+        cursor.executemany("""
+        INSERT INTO comunidade_espacos (slug, nome, icone, descricao, ordem)
+        VALUES (?, ?, ?, ?, ?)
+        """, espacos_iniciais)
+
+        # Inserir Posts Iniciais Inspiradores
+        posts_iniciais = [
+            (
+                1, "Pastor Matheus // Metanoia", "👑 Pastor & Fundador", "👑",
+                "Seja Bem-vindo à Comunidade Metanoia: Você Não Precisa Fingir Força Aqui!",
+                "A paz do Senhor a todos os irmãos e irmãs! Criamos este espaço inspirado nas melhores comunidades do mundo para que nenhum servo de Deus lute sozinho no vale da ansiedade ou da solidão. Aqui você tem voz, acolhimento e irmãos fiéis de oração.\n\nSinta-se em casa para deixar um 'Amém' ou se apresentar nos comentários!",
+                0, 1, 15, 2
+            ),
+            (
+                2, "Irmão em Cristo", "Intercessor", "🛡️",
+                "Clamor por cura e restauração na saúde da minha família",
+                "Irmãos amados, peço que levantem um clamor de oração pela saúde da minha mãe que fará exames amanhã e por renovo espiritual para suportar esta semana. Creio no Deus do impossível!",
+                0, 0, 9, 1
+            ),
+            (
+                3, "Discípulo Matheus", "Aluno Teologia", "📖",
+                "A Graça Imerecida: O que aprendi na Apostila 01 de Teologia",
+                "Muitas vezes achamos que precisamos 'comprar' o favor de Deus com nosso esforço. Mas em Romanos aprendemos: 'Nenhuma condenação há para os que estão em Cristo Jesus'. A Graça nos liberta do medo e nos enche de amor.",
+                0, 0, 7, 0
+            )
+        ]
+        cursor.executemany("""
+        INSERT INTO comunidade_posts (espaco_id, autor_nome, autor_papel, autor_avatar, titulo, conteudo, anonimo, fixado, likes_count, comentarios_count)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, posts_iniciais)
+
+        # Comentários iniciais
+        comentarios_iniciais = [
+            (1, "Irmã Débora", "Membro", "🌸", "Amém, Pastor! Que alegria encontrar um lugar de refúgio tão acolhedor. Deus abençoe essa obra!", 0),
+            (1, "Lucas Silva", "Membro", "🌱", "Glória a Deus! Chegando de Goiânia para somar no ministério e orar pelos irmãos.", 0),
+            (2, "Equipe Pastoral Metanoia", "👑 Pastor & Fundador", "👑", "Colocando a vida da sua mãe no altar de oração hoje na vigília! Receba paz no coração.", 0)
+        ]
+        cursor.executemany("""
+        INSERT INTO comunidade_comentarios (post_id, autor_nome, autor_papel, autor_avatar, conteudo, anonimo)
+        VALUES (?, ?, ?, ?, ?, ?)
+        """, comentarios_iniciais)
+
     conn.commit()
     conn.close()
 

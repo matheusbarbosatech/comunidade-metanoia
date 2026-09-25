@@ -7,7 +7,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import APP_NAME, APP_VERSION, API_PREFIX
 from app.db.database import init_db
-from app.routers import estudos, oracao, celula, musica, blog
+from app.routers import estudos, oracao, celula, musica, blog, comunidade
 from app.services.music_service import sync_music_playlist
 
 
@@ -38,8 +38,9 @@ def on_startup():
     except Exception as e:
         print(f"[AVISO] Falha ao sincronizar blog no startup: {e}")
 
-# Incluir Roteadores REST API e Blog
+# Incluir Roteadores REST API, Blog e Comunidade (Circle)
 app.include_router(blog.router)
+app.include_router(comunidade.router)
 app.include_router(estudos.router, prefix=API_PREFIX)
 app.include_router(oracao.router, prefix=API_PREFIX)
 app.include_router(celula.router, prefix=API_PREFIX)

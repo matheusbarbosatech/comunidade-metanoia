@@ -58,6 +58,17 @@ if hasattr(ft, "Margin"):
     ft.margin.only = ft.Margin.only
     ft.margin.symmetric = ft.Margin.symmetric
 
+if hasattr(ft, "Alignment"):
+    ft.alignment.center = getattr(ft.Alignment, "CENTER", ft.alignment.Alignment(0, 0))
+    ft.alignment.top_left = getattr(ft.Alignment, "TOP_LEFT", ft.alignment.Alignment(-1, -1))
+    ft.alignment.top_center = getattr(ft.Alignment, "TOP_CENTER", ft.alignment.Alignment(0, -1))
+    ft.alignment.top_right = getattr(ft.Alignment, "TOP_RIGHT", ft.alignment.Alignment(1, -1))
+    ft.alignment.bottom_left = getattr(ft.Alignment, "BOTTOM_LEFT", ft.alignment.Alignment(-1, 1))
+    ft.alignment.bottom_center = getattr(ft.Alignment, "BOTTOM_CENTER", ft.alignment.Alignment(0, 1))
+    ft.alignment.bottom_right = getattr(ft.Alignment, "BOTTOM_RIGHT", ft.alignment.Alignment(1, 1))
+    ft.alignment.center_left = getattr(ft.Alignment, "CENTER_LEFT", ft.alignment.Alignment(-1, 0))
+    ft.alignment.center_right = getattr(ft.Alignment, "CENTER_RIGHT", ft.alignment.Alignment(1, 0))
+
 # Compatibilidade para ft.Page.dialog e ft.Page.show_snack_bar
 if not hasattr(ft.Page, "dialog"):
     def _get_page_dialog(self):
@@ -97,6 +108,7 @@ if not hasattr(ft.Page, "show_snack_bar"):
     ft.Page.show_snack_bar = _show_snack_bar
 
 from app.db.database import get_connection
+from app.services import comunidade_service
 from app.services.music_service import (
     get_all_musicas,
     get_musicas_stats,
@@ -123,10 +135,12 @@ def main(page: ft.Page):
     # Estado da Aplicação
     estado = {
         "usuario_role": "admin", # "admin" (Pastor) ou "aluno" (Discípulo)
-        "aba_atual": "estudos",
+        "aba_atual": "comunidade", # Comunidade Circle como espaço principal
         "resumo_selecionado": None,
         "filtro_musica_cat": "Todos",
-        "busca_musica": ""
+        "busca_musica": "",
+        "espaco_comunidade_id": None,
+        "busca_comunidade": ""
     }
 
     # Container dinâmico central
@@ -580,10 +594,315 @@ def main(page: ft.Page):
             ft.ListView(controls=cards_musicas, spacing=12, expand=True)
         ], expand=True, spacing=14)
 
+    # --- REDE SOCIAL / COMUNIDADE (ESTILO CIRCLE.SO) ---
+
+    def abrir_modal_novo_post():
+        espacos = comunidade_service.get_espacos()
+        options = [ft.dropdown.Option(key=str(e["id"]), text=f"{e['icone']} {e['nome']}") for e in espacos]
+        dropdown_espaco = ft.Dropdown(
+            label="Escolha o Canal / Espaço",
+            options=options,
+            value=str(espacos[0]["id"]) if espacos else "1",
+            bgcolor="#1E293B",
+            border_color=COLOR_BORDER
+        )
+        campo_titulo = ft.TextField(label="Título (Opcional)", bgcolor="#1E293B", border_color=COLOR_BORDER)
+        campo_conteudo = ft.TextField(
+            label="O que Deus colocou no seu coração? (Desabafo, Oração, Testemunho)",
+            multiline=True,
+            min_lines=4,
+            bgcolor="#1E293B",
+            border_color=COLOR_BORDER
+        )
+        campo_autor = ft.TextField(label="Seu Nome (ou deixe vazio para postar como Anônimo)", bgcolor="#1E293B", border_color=COLOR_BORDER)
+
+        def fechar(e=None):
+            if hasattr(page, "pop_dialog"):
+                page.pop_dialog()
+            else:
+                dialog.open = False
+                page.update()
+
+        def salvar_post(e):
+            if not campo_conteudo.value:
+                return
+            comunidade_service.criar_post(
+                espaco_id=int(dropdown_espaco.value),
+                autor_nome=campo_autor.value or "Discípulo Metanoia",
+                titulo=campo_titulo.value or None,
+                conteudo=campo_conteudo.value,
+                autor_papel="👑 Pastor & Fundador" if estado["usuario_role"] == "admin" else "Discípulo",
+                autor_avatar="👑" if estado["usuario_role"] == "admin" else "🕊️",
+                anonimo=not bool(campo_autor.value)
+            )
+            fechar()
+            page.show_snack_bar(ft.SnackBar(ft.Text("🎉 Publicação enviada com sucesso para a comunidade!")))
+            atualizar_tela()
+
+        dialog = ft.AlertDialog(
+            title=ft.Text("✍️ Nova Publicação na Comunidade", color=COLOR_ACCENT, weight=ft.FontWeight.BOLD),
+            content=ft.Container(
+                width=550,
+                height=380,
+                content=ft.Column([
+                    dropdown_espaco,
+                    campo_titulo,
+                    campo_conteudo,
+                    campo_autor
+                ], spacing=10)
+            ),
+            actions=[
+                ft.TextButton("Cancelar", on_click=fechar),
+                ft.ElevatedButton("Publicar Agora", bgcolor=COLOR_FLAME, color=COLOR_TEXT, on_click=salvar_post)
+            ]
+        )
+        page.dialog = dialog
+        dialog.open = True
+        page.update()
+
+    def abrir_modal_comentarios_post(post):
+        detalhes = comunidade_service.get_post_com_detalhes(post["id"])
+        comentarios = detalhes["comentarios"] if detalhes else []
+
+        campo_comentario = ft.TextField(hint_text="Escreva uma palavra de bênção ou resposta...", bgcolor="#1E293B", border_color=COLOR_BORDER, expand=True)
+        campo_autor_com = ft.TextField(hint_text="Seu nome (vazio = Anônimo)", bgcolor="#1E293B", border_color=COLOR_BORDER, width=170)
+
+        lista_comentarios_controls = []
+        if not comentarios:
+            lista_comentarios_controls.append(ft.Text("Nenhum comentário ainda. Deixe a primeira resposta!", color=COLOR_MUTED, italic=True))
+        else:
+            for c in comentarios:
+                lista_comentarios_controls.append(
+                    ft.Container(
+                        bgcolor="#1E293B",
+                        border_radius=8,
+                        padding=10,
+                        content=ft.Column([
+                            ft.Row([
+                                ft.Text(f"{c['autor_avatar']} {c['autor_nome']}", size=12, weight=ft.FontWeight.BOLD, color=COLOR_ACCENT),
+                                ft.Text(c['autor_papel'], size=10, color=COLOR_MUTED)
+                            ], spacing=6),
+                            ft.Text(c["conteudo"], size=13, color=COLOR_TEXT)
+                        ], spacing=4)
+                    )
+                )
+
+        def fechar(e=None):
+            if hasattr(page, "pop_dialog"):
+                page.pop_dialog()
+            else:
+                dialog.open = False
+                page.update()
+
+        def enviar_com(e):
+            if not campo_comentario.value:
+                return
+            comunidade_service.adicionar_comentario(
+                post_id=post["id"],
+                autor_nome=campo_autor_com.value or "Discípulo",
+                conteudo=campo_comentario.value,
+                autor_papel="👑 Liderança" if estado["usuario_role"] == "admin" else "Membro",
+                autor_avatar="👑" if estado["usuario_role"] == "admin" else "🕊️",
+                anonimo=not bool(campo_autor_com.value)
+            )
+            fechar()
+            page.show_snack_bar(ft.SnackBar(ft.Text("Comentário adicionado!")))
+            atualizar_tela()
+
+        dialog = ft.AlertDialog(
+            title=ft.Text(f"💬 Comentários // {post.get('titulo') or post['espaco_nome']}", color=COLOR_ACCENT, weight=ft.FontWeight.BOLD, size=16),
+            content=ft.Container(
+                width=550,
+                height=420,
+                content=ft.Column([
+                    ft.Container(
+                        bgcolor="#121217",
+                        padding=10,
+                        border_radius=8,
+                        content=ft.Text(post["conteudo"][:200] + ("..." if len(post["conteudo"]) > 200 else ""), size=12, color=COLOR_MUTED)
+                    ),
+                    ft.Divider(color=COLOR_BORDER),
+                    ft.ListView(controls=lista_comentarios_controls, spacing=8, expand=True),
+                    ft.Row([campo_autor_com, campo_comentario, ft.ElevatedButton("Enviar", bgcolor=COLOR_FLAME, color=COLOR_TEXT, on_click=enviar_com)], spacing=8)
+                ], spacing=8)
+            ),
+            actions=[ft.TextButton("Fechar", on_click=fechar)]
+        )
+        page.dialog = dialog
+        dialog.open = True
+        page.update()
+
+    def render_comunidade():
+        espacos = comunidade_service.get_espacos()
+        posts = comunidade_service.get_posts(
+            espaco_id=estado.get("espaco_comunidade_id"),
+            busca=estado.get("busca_comunidade")
+        )
+
+        def filtrar_espaco(esp_id):
+            estado["espaco_comunidade_id"] = esp_id
+            atualizar_tela()
+
+        def buscar_comunidade(e):
+            estado["busca_comunidade"] = e.control.value
+            atualizar_tela()
+
+        # Botões de Canais / Espaços (Pills estilo Circle)
+        botoes_espacos = []
+        is_todos = (estado.get("espaco_comunidade_id") is None)
+        botoes_espacos.append(
+            ft.ElevatedButton(
+                "🌐 Todos os Espaços",
+                bgcolor=COLOR_ACCENT if is_todos else COLOR_CARD,
+                color="#000" if is_todos else COLOR_TEXT,
+                on_click=lambda e: filtrar_espaco(None)
+            )
+        )
+        for esp in espacos:
+            ativo = (estado.get("espaco_comunidade_id") == esp["id"])
+            botoes_espacos.append(
+                ft.ElevatedButton(
+                    f"{esp['icone']} {esp['nome']} ({esp['total_posts']})",
+                    bgcolor=COLOR_ACCENT if ativo else COLOR_CARD,
+                    color="#000" if ativo else COLOR_TEXT,
+                    on_click=lambda e, sid=esp["id"]: filtrar_espaco(sid)
+                )
+            )
+
+        cards_posts = []
+        if not posts:
+            cards_posts.append(
+                ft.Container(
+                    bgcolor=COLOR_CARD,
+                    border=ft.border.all(1, COLOR_BORDER),
+                    border_radius=12,
+                    padding=32,
+                    content=ft.Column([
+                        ft.Icon(ft.Icons.FORUM_OUTLINED, size=40, color=COLOR_MUTED),
+                        ft.Text("Nenhuma publicação neste canal ainda.", size=16, weight=ft.FontWeight.BOLD, color=COLOR_TEXT),
+                        ft.Text("Seja o primeiro a compartilhar uma palavra, pedido de oração ou testemunho com os irmãos!", size=13, color=COLOR_MUTED),
+                        ft.ElevatedButton("✍️ Escrever Primeira Publicação", bgcolor=COLOR_FLAME, color=COLOR_TEXT, on_click=lambda e: abrir_modal_novo_post())
+                    ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, spacing=10)
+                )
+            )
+        else:
+            for p in posts:
+                def on_reagir(pid=p["id"]):
+                    comunidade_service.reagir_post(pid, tipo="orando")
+                    page.show_snack_bar(ft.SnackBar(ft.Text("🤍 Oração registrada! Que Deus ouça o clamor dos santos.")))
+                    atualizar_tela()
+
+                pin_badge = ft.Container(
+                    bgcolor="rgba(245, 158, 11, 0.15)",
+                    padding=ft.padding.symmetric(horizontal=8, vertical=3),
+                    border_radius=6,
+                    content=ft.Text("📌 FIXADO", size=10, weight=ft.FontWeight.BOLD, color=COLOR_ACCENT)
+                ) if p["fixado"] else ft.Container()
+
+                elementos_post = [
+                    ft.Row([
+                        ft.Row([
+                            ft.Container(
+                                width=36, height=36, border_radius=18, bgcolor="#1E293B",
+                                content=ft.Text(p["autor_avatar"] or "🕊️", size=18),
+                                alignment=ft.alignment.center
+                            ),
+                            ft.Column([
+                                ft.Row([
+                                    ft.Text(p["autor_nome"], size=14, weight=ft.FontWeight.BOLD, color=COLOR_TEXT),
+                                    ft.Container(
+                                        bgcolor="rgba(245, 158, 11, 0.12)",
+                                        padding=ft.padding.symmetric(horizontal=6, vertical=2),
+                                        border_radius=4,
+                                        content=ft.Text(p["autor_papel"] or "Discípulo", size=10, color=COLOR_ACCENT, weight=ft.FontWeight.BOLD)
+                                    )
+                                ], spacing=6),
+                                ft.Text(f"{p['espaco_icone']} {p['espaco_nome']}", size=11, color=COLOR_MUTED)
+                            ], spacing=2)
+                        ], spacing=10),
+                        pin_badge
+                    ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
+                ]
+
+                if p.get("titulo"):
+                    elementos_post.append(ft.Text(p["titulo"], size=16, weight=ft.FontWeight.BOLD, color=COLOR_TEXT))
+
+                elementos_post.append(ft.Text(p["conteudo"], size=13.5, color="#CBD5E1"))
+
+                elementos_post.append(
+                    ft.Row([
+                        ft.ElevatedButton(
+                            f"🤍 Estou Orando ({p['likes_count']})",
+                            bgcolor="#1E293B",
+                            color=COLOR_TEXT,
+                            on_click=lambda e, pid=p["id"]: on_reagir(pid)
+                        ),
+                        ft.ElevatedButton(
+                            f"💬 Comentários ({p['comentarios_count']})",
+                            bgcolor="#2A2A38",
+                            color=COLOR_TEXT,
+                            on_click=lambda e, post_obj=p: abrir_modal_comentarios_post(post_obj)
+                        ),
+                        ft.OutlinedButton(
+                            "🌐 Abrir no Hub Web",
+                            style=ft.ButtonStyle(color=COLOR_ACCENT),
+                            on_click=lambda e, pid=p["id"]: page.launch_url(f"/comunidade#post-{pid}")
+                        )
+                    ], spacing=10)
+                )
+
+                cards_posts.append(
+                    ft.Container(
+                        bgcolor=COLOR_CARD,
+                        border=ft.border.all(1, COLOR_BORDER),
+                        border_radius=12,
+                        padding=18,
+                        content=ft.Column(elementos_post, spacing=10)
+                    )
+                )
+
+        campo_busca_com = ft.TextField(
+            hint_text="Buscar publicações, testemunhos ou reflexões da comunidade...",
+            prefix_icon=ft.Icons.SEARCH_ROUNDED,
+            bgcolor="#1E293B",
+            border_color=COLOR_BORDER,
+            value=estado.get("busca_comunidade", ""),
+            on_submit=buscar_comunidade,
+            expand=True
+        )
+
+        return ft.Column([
+            ft.Row([
+                ft.Column([
+                    ft.Text("🌐 Rede Social // Comunidade Metanoia (Circle Hub)", size=22, weight=ft.FontWeight.BOLD, color=COLOR_TEXT),
+                    ft.Text("Espaços temáticos de convivência, partilha bíblica, intercessão e acolhimento.", size=14, color=COLOR_MUTED)
+                ], spacing=4),
+                ft.Row([
+                    ft.ElevatedButton(
+                        "✍️ Nova Publicação",
+                        bgcolor=COLOR_FLAME,
+                        color=COLOR_TEXT,
+                        on_click=lambda e: abrir_modal_novo_post()
+                    ),
+                    ft.OutlinedButton(
+                        "🌐 Abrir Portal Circle",
+                        style=ft.ButtonStyle(color=COLOR_ACCENT),
+                        on_click=lambda e: page.launch_url("/comunidade")
+                    )
+                ], spacing=8)
+            ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
+            ft.Row([campo_busca_com]),
+            ft.Row(botoes_espacos, scroll=ft.ScrollMode.AUTO),
+            ft.Divider(color=COLOR_BORDER),
+            ft.ListView(controls=cards_posts, spacing=14, expand=True)
+        ], expand=True, spacing=14)
+
     # --- BARRA DE NAVEGAÇÃO LATERAL / HEADER ---
     def atualizar_tela():
         conteudo_view.content = None
-        if estado["aba_atual"] == "musica":
+        if estado["aba_atual"] == "comunidade":
+            conteudo_view.content = render_comunidade()
+        elif estado["aba_atual"] == "musica":
             conteudo_view.content = render_louvores()
         elif estado["usuario_role"] == "admin":
             if estado["aba_atual"] == "estudos":
@@ -591,7 +910,7 @@ def main(page: ft.Page):
             elif estado["aba_atual"] == "oracao":
                 conteudo_view.content = render_admin_oracoes()
             else:
-                conteudo_view.content = render_admin_estudos()
+                conteudo_view.content = render_comunidade()
         else:
             conteudo_view.content = render_aluno_home()
         page.update()
@@ -612,6 +931,7 @@ def main(page: ft.Page):
             ], alignment=ft.MainAxisAlignment.START),
             ft.Row([
                 btn_role,
+                ft.IconButton(ft.Icons.FORUM_ROUNDED, tooltip="🌐 Rede Social // Comunidade Circle", on_click=lambda e: navegar_para("comunidade")),
                 ft.IconButton(ft.Icons.BOOK_ROUNDED, tooltip="Estudos & Apostilas", on_click=lambda e: navegar_para("estudos")),
                 ft.IconButton(ft.Icons.VOLUNTEER_ACTIVISM_ROUNDED, tooltip="Mural de Oração", on_click=lambda e: navegar_para("oracao")),
                 ft.IconButton(ft.Icons.MUSIC_NOTE_ROUNDED, tooltip="Louvores & Playlist Matheus", on_click=lambda e: navegar_para("musica")),
