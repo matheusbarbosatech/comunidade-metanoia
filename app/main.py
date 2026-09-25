@@ -59,6 +59,7 @@ except Exception as e:
 # Landing Page de Apresentação em '/'
 STATIC_INDEX = Path(__file__).resolve().parent / "static" / "index.html"
 STATIC_TELEPROMPTER = Path(__file__).resolve().parent / "static" / "teleprompter.html"
+STATIC_ESTUDIO = Path(__file__).resolve().parent / "static" / "estudio.html"
 
 @app.get("/", response_class=HTMLResponse)
 def index_landing():
@@ -73,6 +74,14 @@ def teleprompter_view():
         with open(STATIC_TELEPROMPTER, "r", encoding="utf-8") as f:
             return f.read()
     return "<h1>Teleprompter não encontrado</h1>"
+
+@app.get("/estudio", response_class=HTMLResponse)
+def estudio_web_view():
+    """Estúdio Ministerial Web com câmera, cenário virtual, teleprompter e gravador."""
+    if STATIC_ESTUDIO.exists():
+        with open(STATIC_ESTUDIO, "r", encoding="utf-8") as f:
+            return f.read()
+    return "<h1>Estúdio Web não encontrado</h1>"
 
 if __name__ == "__main__":
     import uvicorn
