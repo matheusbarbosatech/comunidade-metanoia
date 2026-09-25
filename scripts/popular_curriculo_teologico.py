@@ -16,10 +16,6 @@ def popular_catalogo():
     conn = get_connection()
     cursor = conn.cursor()
 
-    if not ACADEMIA_PATH.exists():
-        print(f"Diretório não encontrado: {ACADEMIA_PATH}")
-        return
-
     # Escanear e cadastrar as Trilhas
     trilhas = [
         ("Básico", "BÁSICO EM TEOLOGIA", 188, "Visão panorâmica de toda a Bíblia, Bibliologia, Pentateuco, Profetas e Evangelhos."),
@@ -40,6 +36,12 @@ def popular_catalogo():
             print(f"[OK] Trilha cadastrada: {materia}")
 
     conn.commit()
+
+    # Mapear os PDFs de apostilas encontrados no Básico (se estiver rodando na máquina local com os arquivos)
+    if not ACADEMIA_PATH.exists():
+        print(f"[INFO] Diretório local de apostilas não encontrado ({ACADEMIA_PATH}). Trilhas teológicas prontas no banco.")
+        conn.close()
+        return
 
     # Mapear os PDFs de apostilas encontrados no Básico
     basico_dir = ACADEMIA_PATH / "ACADEMIA DE PREGADORES" / "BÁSICO EM TEOLOGIA"
