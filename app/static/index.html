@@ -90,69 +90,74 @@
             top: 0;
             z-index: 1000;
             width: 100%;
-            background: rgba(7, 9, 14, 0.88);
+            background: rgba(7, 9, 14, 0.92);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
             border-bottom: 1px solid var(--border-subtle);
-            padding: 14px 0;
+            padding: 11px 0;
             transition: all 0.3s ease;
         }
 
         .header-container {
-            max-width: 1360px;
+            max-width: 1380px;
             margin: 0 auto;
-            padding: 0 28px;
+            padding: 0 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
+            gap: 16px;
         }
 
         .brand-box {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             text-decoration: none;
             flex-shrink: 0;
         }
 
         .brand-emblem {
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 12px;
             background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(234, 88, 12, 0.15));
             border: 1px solid rgba(245, 158, 11, 0.45);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 20px var(--gold-glow);
+            box-shadow: 0 0 18px var(--gold-glow);
             transition: all 0.3s ease;
+            flex-shrink: 0;
         }
 
         .brand-box:hover .brand-emblem {
-            transform: scale(1.06) rotate(2deg);
+            transform: scale(1.05) rotate(2deg);
             border-color: var(--gold-light);
-            box-shadow: 0 0 26px rgba(245, 158, 11, 0.45);
+            box-shadow: 0 0 24px rgba(245, 158, 11, 0.45);
         }
 
         .brand-icon {
-            font-size: 22px;
+            font-size: 20px;
+            line-height: 1;
         }
 
         .brand-info {
             display: flex;
             flex-direction: column;
+            justify-content: center;
         }
 
         .brand-name {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 800;
             color: var(--text-pure);
             letter-spacing: -0.3px;
+            white-space: nowrap;
+            line-height: 1.2;
         }
 
         .brand-motto {
-            font-size: 11px;
+            font-size: 10.5px;
             color: var(--gold-light);
             font-weight: 600;
             text-transform: uppercase;
@@ -160,15 +165,18 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            white-space: nowrap;
+            margin-top: 2px;
         }
 
         .motto-dot {
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
             background-color: var(--emerald-healing);
             box-shadow: 0 0 8px var(--emerald-healing);
             animation: pulseDot 2s infinite;
+            flex-shrink: 0;
         }
 
         @keyframes pulseDot {
@@ -176,82 +184,73 @@
             50% { opacity: 0.5; transform: scale(0.85); }
         }
 
+        /* Central Capsule Navigation */
         .nav-capsule {
             display: flex;
             align-items: center;
-            gap: 6px;
-            background: rgba(22, 29, 46, 0.6);
-            border: 1px solid var(--border-subtle);
+            gap: 4px;
+            background: rgba(18, 23, 37, 0.75);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 50px;
-            padding: 5px 8px;
+            padding: 4px 6px;
+            white-space: nowrap;
+            flex-shrink: 1;
         }
 
         .nav-link {
             text-decoration: none;
             color: var(--text-muted);
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 600;
-            padding: 7px 15px;
+            padding: 6px 13px;
             border-radius: 30px;
-            transition: all 0.25s ease;
-            display: flex;
+            transition: all 0.2s ease;
+            display: inline-flex;
             align-items: center;
             gap: 6px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            line-height: 1;
         }
 
         .nav-link:hover {
             color: var(--text-pure);
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .nav-link.active-gold {
             color: var(--gold-light);
-            background: rgba(245, 158, 11, 0.12);
-            border: 1px solid rgba(245, 158, 11, 0.3);
+            background: rgba(245, 158, 11, 0.14);
+            border: 1px solid rgba(245, 158, 11, 0.32);
         }
 
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
-        }
-
-        .btn-header-ghost {
-            color: var(--text-body);
-            background: transparent;
-            border: 1px solid var(--border-subtle);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .btn-header-ghost:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.2);
-            color: var(--text-pure);
+            gap: 10px;
+            flex-shrink: 0;
         }
 
         .btn-header-cta {
             background: linear-gradient(135deg, var(--gold-primary), var(--gold-warm));
             color: #07090E;
-            padding: 9px 20px;
+            padding: 8px 18px;
             border-radius: 50px;
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 800;
             text-decoration: none;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 7px;
-            box-shadow: 0 4px 18px rgba(245, 158, 11, 0.35);
-            transition: all 0.3s;
+            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.3);
+            transition: all 0.25s;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .btn-header-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(245, 158, 11, 0.55);
+            box-shadow: 0 6px 22px rgba(245, 158, 11, 0.5);
             background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
         }
 
@@ -1384,7 +1383,20 @@
             color: var(--gold-light);
         }
 
-        /* RESPONSIVIDADE */
+        /* RESPONSIVIDADE HEADER & NAVBAR */
+        @media (max-width: 1250px) {
+            .header-container { padding: 0 16px; gap: 10px; }
+            .brand-name { font-size: 15px; }
+            .nav-link { font-size: 11.5px; padding: 5px 9px; gap: 5px; }
+            .btn-header-cta { padding: 7px 14px; font-size: 11.5px; }
+        }
+
+        @media (max-width: 1080px) {
+            .brand-motto { display: none; }
+            .nav-capsule { gap: 2px; padding: 3px 5px; }
+            .nav-link { padding: 5px 8px; font-size: 11px; }
+        }
+
         @media (max-width: 900px) {
             .hero-title { font-size: 40px; }
             .metrics-strip { grid-template-columns: repeat(2, 1fr); }
@@ -1395,11 +1407,12 @@
         }
 
         @media (max-width: 600px) {
-            .hero-title { font-size: 32px; }
-            .hero-subtitle { font-size: 16px; }
+            .hero-title { font-size: 30px; }
+            .hero-subtitle { font-size: 15px; }
             .metrics-strip { grid-template-columns: 1fr; }
             .hero-actions { flex-direction: column; width: 100%; }
             .btn-hero-primary, .btn-hero-secondary { width: 100%; justify-content: center; }
+            .brand-name { font-size: 14px; }
         }
     </style>
 </head>
@@ -1422,30 +1435,27 @@
             <!-- Central Pill Navigation -->
             <nav class="nav-capsule">
                 <a href="#trilha-gamificada" class="nav-link active-gold">
-                    <span>⚡</span> Trilha Teológica
+                    <span>⚡</span> <span>Trilha Teológica</span>
                 </a>
                 <a href="#comunidade-skool" class="nav-link">
-                    <span>👥</span> Comunidade Skool
+                    <span>👥</span> <span>Comunidade Skool</span>
                 </a>
                 <a href="#escola-biblica" class="nav-link">
-                    <span>📖</span> Grade 15 Aulas
+                    <span>📖</span> <span>Grade 15 Aulas</span>
                 </a>
                 <a href="#sos-madrugada" class="nav-link">
-                    <span>🌿</span> SOS Madrugada
+                    <span>🌿</span> <span>SOS Madrugada</span>
                 </a>
                 <a href="/blog" class="nav-link">
-                    <span>📑</span> Blog
+                    <span>📑</span> <span>Blog</span>
                 </a>
             </nav>
 
             <!-- Ações CTA -->
             <div class="header-actions">
-                <a href="/comunidade" class="btn-header-ghost">
-                    Feed Circle
-                </a>
-                <a href="/plataforma" class="btn-header-cta">
+                <a href="/plataforma" class="btn-header-cta" title="Acessar Plataforma Web">
                     <span>Entrar na Plataforma</span>
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>
                     </svg>

@@ -1109,8 +1109,96 @@ def main(page: ft.Page):
             ft.ListView(controls=cards_posts, spacing=14, expand=True)
         ], expand=True, spacing=14)
 
-    # --- BARRA DE NAVEGAÇÃO LATERAL / HEADER ---
+    # --- BARRA DE NAVEGAÇÃO SUPERIOR // MASTERCLASS ESTILO SKOOL ---
+    header_container = ft.Container(
+        bgcolor=COLOR_CARD,
+        border=ft.border.only(bottom=ft.BorderSide(1, COLOR_BORDER)),
+        padding=ft.padding.symmetric(horizontal=20, vertical=10)
+    )
+
+    def render_header():
+        aba_atual = estado.get("aba_atual", "comunidade")
+        modo_estudos = estado.get("modo_estudos", "gamificado")
+
+        def item_nav(icon_name, label, aba, modo=None):
+            is_active = (aba_atual == aba)
+            if aba == "estudos" and modo:
+                is_active = (aba_atual == "estudos" and modo_estudos == modo)
+
+            def click_nav(e):
+                estado["aba_atual"] = aba
+                if modo:
+                    estado["modo_estudos"] = modo
+                atualizar_tela()
+
+            bg = "rgba(245, 158, 11, 0.16)" if is_active else "transparent"
+            border_c = COLOR_ACCENT if is_active else "rgba(255, 255, 255, 0.08)"
+            text_c = COLOR_ACCENT if is_active else COLOR_MUTED
+
+            return ft.Container(
+                content=ft.Row([
+                    ft.Icon(icon_name, size=15, color=text_c),
+                    ft.Text(label, size=12, weight=ft.FontWeight.BOLD if is_active else ft.FontWeight.W_500, color=COLOR_TEXT if is_active else COLOR_MUTED)
+                ], spacing=5, alignment=ft.MainAxisAlignment.CENTER),
+                bgcolor=bg,
+                border=ft.border.all(1, border_c),
+                border_radius=20,
+                padding=ft.padding.symmetric(horizontal=12, vertical=6),
+                on_click=click_nav,
+                ink=True
+            )
+
+        botoes_nav = [
+            item_nav(ft.Icons.BOLT_ROUNDED, "Trilha Gamificada", "estudos", "gamificado"),
+            item_nav(ft.Icons.FORUM_ROUNDED, "Comunidade Skool", "comunidade"),
+            item_nav(ft.Icons.BOOK_ROUNDED, "Apostilas & Aulas", "estudos", "grade"),
+            item_nav(ft.Icons.VOLUNTEER_ACTIVISM_ROUNDED, "Mural de Oração", "oracao"),
+            item_nav(ft.Icons.PEOPLE_ROUNDED, "Célula Digital", "celula")
+        ]
+
+        return ft.Row([
+            ft.Row([
+                ft.Container(
+                    width=34,
+                    height=34,
+                    border_radius=10,
+                    bgcolor="rgba(245, 158, 11, 0.2)",
+                    border=ft.border.all(1, "rgba(245, 158, 11, 0.45)"),
+                    alignment=ft.alignment.center,
+                    content=ft.Text("🕊️", size=18)
+                ),
+                ft.Column([
+                    ft.Text("COMUNIDADE METANOIA", size=14, weight=ft.FontWeight.BOLD, color=COLOR_TEXT),
+                    ft.Text("Ninguém luta sozinho", size=10, color=COLOR_ACCENT, weight=ft.FontWeight.W_600)
+                ], spacing=0)
+            ], alignment=ft.MainAxisAlignment.START, spacing=10),
+
+            ft.Row(botoes_nav, spacing=6, scroll=ft.ScrollMode.AUTO),
+
+            ft.Row([
+                ft.Container(
+                    content=ft.Row([
+                        ft.Text("👑" if estado["usuario_role"] == "admin" else "🐑", size=14),
+                        ft.Text("Liderança (ADM)" if estado["usuario_role"] == "admin" else "Aluno", size=11, weight=ft.FontWeight.BOLD, color=COLOR_ACCENT)
+                    ], spacing=5),
+                    bgcolor=COLOR_CARD_HOVER,
+                    border=ft.border.all(1, COLOR_BORDER),
+                    border_radius=20,
+                    padding=ft.padding.symmetric(horizontal=10, vertical=6),
+                    on_click=alternar_papel,
+                    tooltip="Clique para alternar entre perfil de Liderança e Aluno"
+                ),
+                ft.IconButton(
+                    ft.Icons.HOME_ROUNDED,
+                    tooltip="Voltar para a Landing Page",
+                    icon_color=COLOR_MUTED,
+                    on_click=lambda e: page.launch_url("/")
+                )
+            ], spacing=6)
+        ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
+
     def atualizar_tela():
+        header_container.content = render_header()
         conteudo_view.content = None
         if estado["aba_atual"] == "comunidade":
             conteudo_view.content = render_comunidade()
@@ -1130,30 +1218,9 @@ def main(page: ft.Page):
         estado["aba_atual"] = aba
         atualizar_tela()
 
-    header = ft.Container(
-        bgcolor=COLOR_CARD,
-        border=ft.border.only(bottom=ft.BorderSide(1, COLOR_BORDER)),
-        padding=ft.padding.symmetric(horizontal=24, vertical=12),
-        content=ft.Row([
-            ft.Row([
-                ft.Icon(ft.Icons.LOCAL_FIRE_DEPARTMENT_ROUNDED, color=COLOR_FLAME, size=28),
-                ft.Text("METANOIA", size=20, weight=ft.FontWeight.BOLD, color=COLOR_TEXT),
-                ft.Text("MINISTÉRIO & ESCOLA", size=12, color=COLOR_ACCENT, weight=ft.FontWeight.BOLD)
-            ], alignment=ft.MainAxisAlignment.START),
-            ft.Row([
-                btn_role,
-                ft.IconButton(ft.Icons.BOLT_ROUNDED, tooltip="⚡ Trilha Gamificada Duolingo (Módulo 01)", icon_color=COLOR_ACCENT, on_click=lambda e: (estado.update({"aba_atual": "estudos", "modo_estudos": "gamificado"}), atualizar_tela())),
-                ft.IconButton(ft.Icons.FORUM_ROUNDED, tooltip="🌐 Rede Social // Comunidade Skool", on_click=lambda e: navegar_para("comunidade")),
-                ft.IconButton(ft.Icons.BOOK_ROUNDED, tooltip="Estudos & Apostilas", on_click=lambda e: (estado.update({"aba_atual": "estudos", "modo_estudos": "grade"}), atualizar_tela())),
-                ft.IconButton(ft.Icons.VOLUNTEER_ACTIVISM_ROUNDED, tooltip="Mural de Oração", on_click=lambda e: navegar_para("oracao")),
-                ft.IconButton(ft.Icons.PEOPLE_ROUNDED, tooltip="Célula Digital", on_click=lambda e: navegar_para("celula")),
-            ], spacing=10)
-        ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
-    )
-
     page.add(
         ft.Column([
-            header,
+            header_container,
             conteudo_view
         ], expand=True, spacing=0)
     )
