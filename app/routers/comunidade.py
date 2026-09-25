@@ -766,12 +766,12 @@ def interface_comunidade(espaco: Optional[int] = None):
 
             <div class="widget-card">
                 <div class="widget-title">
-                    <span>📻 Rádio Web 24h</span>
+                    <span>🕊️ Mural de Intercessão</span>
                 </div>
                 <p class="widget-text">
-                    Louvores contínuos de adoração e quebra de cadeias sem comerciais para trazer paz ao seu dia.
+                    "Orai uns pelos outros, para que sejais curados. A oração feita por um justo pode muito em seus efeitos."
                 </p>
-                <a href="/#btn-radio-web" class="btn-plat" style="display: block; text-align: center; margin-top: 10px; font-size: 12px;">Ouvir Rádio Web</a>
+                <div class="pill-badge" style="background: rgba(245, 158, 11, 0.12); color: var(--gold-light); border-color: rgba(245, 158, 11, 0.3);">📖 Tiago 5:16</div>
             </div>
 
             <div class="widget-card">

@@ -103,7 +103,7 @@ class RoboTestesMetanoia:
             "188", # CVV
             "Célula Digital",
             "Mural de Oração",
-            "secao-louvores"
+            "secao-escola"
         ]
         conteudo_ok = res.status_code == 200 and all(el in html for el in elementos_acolhimento)
         self.registrar("Usuário Final", "Acesso à Landing Page & Elementos Emocionais", conteudo_ok,
