@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ministério Metanoia // Forja Bíblica & Célula Digital</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #08080A;
+            --bg-card: #121217;
+            --bg-card-hover: #181820;
+            --gold-accent: #F59E0B;
+            --flame: #EA580C;
+            --border: #23232E;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 48px;
+            background: rgba(18, 18, 23, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'Cinzel', serif;
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: var(--text-main);
+        }
+
+        .logo span {
+            color: var(--gold-accent);
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 28px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--gold-accent);
+        }
+
+        .btn-cta {
+            background: linear-gradient(135deg, var(--flame), var(--gold-accent));
+            color: #000;
+            font-weight: 700;
+            padding: 10px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 90px 24px 60px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(245, 158, 11, 0.12);
+            color: var(--gold-accent);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 48px;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            font-weight: 900;
+        }
+
+        h1 span {
+            background: linear-gradient(135deg, #FFF, var(--gold-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 36px;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            padding: 10px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            background: var(--bg-card);
+            transition: background 0.3s;
+        }
+
+        .btn-outline:hover {
+            background: var(--bg-card-hover);
+        }
+
+        /* PILARES */
+        .pilares {
+            padding: 70px 24px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+            font-size: 16px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 32px 24px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--gold-accent);
+        }
+
+        .card-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* BANNER CÉLULA */
+        .banner-celula {
+            background: linear-gradient(135deg, rgba(234, 88, 12, 0.1), rgba(245, 158, 11, 0.05));
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            border-radius: 20px;
+            padding: 48px 36px;
+            max-width: 1100px;
+            margin: 40px auto 80px;
+            text-align: center;
+        }
+
+        .banner-celula h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 36px 24px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        footer strong {
+            color: var(--gold-accent);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            ⚔️ METANOIA <span>MINISTÉRIO</span>
+        </div>
+        <nav>
+            <a href="#pilares">Os 3 Pilares</a>
+            <a href="#celula">Célula Digital</a>
+            <a href="/plataforma" class="btn-cta">Entrar na Plataforma</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="badge">🔥 Romanos 12:2 // Forja Bíblica & Pastoreio</div>
+        <h1>Transformai-vos pela Renovação da <span>Vossa Mente</span></h1>
+        <p>Um ministério bíblico radical que une o fogo do altar, a teologia expositiva e a tecnologia moderna para garantir que <strong>nenhuma ovelha fique para trás</strong>.</p>
+        <div class="hero-actions">
+            <a href="/plataforma" class="btn-cta">Acessar Plataforma & Estudos</a>
+            <a href="#celula" class="btn-outline">Participar da Célula Digital</a>
+        </div>
+    </section>
+
+    <section class="pilares" id="pilares">
+        <h2 class="section-title">O Tripé do Ministério</h2>
+        <p class="section-subtitle">Construído sobre a rocha: do chão da congregação até o resgate digital.</p>
+        
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-icon">📖</div>
+                <h3>1. Escola Bíblica & Púlpito</h3>
+                <p>Estudo sistemático das Escrituras inspirado nas matérias clássicas da fé cristã (Bibliologia, Hermenêutica, Escatologia). Teologia sólida descomplicada para a vida diária.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🌐</div>
+                <h3>2. A Célula Digital</h3>
+                <p>O refúgio sagrado para quem não consegue estar nas reuniões físicas: trabalhadores noturnos, escala 12x36, acamados e enfermos. Encontro semanal ao vivo no Google Meet.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🛡️</div>
+                <h3>3. O Codex da Vida Cristã</h3>
+                <p>Um manual de instruções operacionais para o novo convertido: a Ordem Matinal das 06h, o protocolo Sentinela SOS 180s contra a dopamina e a aliança de honra no WhatsApp.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="banner-celula" id="celula">
+        <h2>Você Trabalha à Noite ou Está Impossibilitado de Ir à Igreja?</h2>
+        <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto 28px; font-size: 16px;">
+            A Igreja não é um prédio de concreto de quatro paredes; a Igreja é o corpo de Cristo reunido em Seu nome. Junte-se à nossa Célula Digital toda semana.
+        </p>
+        <a href="/plataforma" class="btn-cta">Entrar na Sala & Pedir Oração</a>
+    </section>
+
+    <footer>
+        <p>© 2026 Ministério Metanoia // Pr. Matheus Barbosa. Todos os direitos reservados para o Reino de Deus.</p>
+        <p style="margin-top: 8px; font-size: 12px;">"Como o ferro afia o ferro, o homem afia o seu irmão." — <strong>Provérbios 27:17</strong></p>
+    </footer>
+
+</body>
+</html>
