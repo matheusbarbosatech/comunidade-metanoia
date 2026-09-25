@@ -3,46 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comunidade Metanoia // "Ninguém Luta Sozinho"</title>
-    <meta name="description" content="Comunidade Metanoia: Ninguém luta sozinho. Um refúgio de acolhimento para ansiedade e dor, rede social fraternal, mural de oração anônimo e Escola Bíblica gratuita.">
-    <meta name="keywords" content="comunidade metanoia, rede social crista, oração ansiedade, escola bíblica, academia de pregadores, discipulado, célula digital, refúgio metanoia">
+    <title>Comunidade Metanoia // "Ninguém Luta Sozinho" — MasterClass, Skool & Trilha Teológica</title>
+    <meta name="description" content="Comunidade Metanoia: Ninguém luta sozinho. Formação teológica cinematográfica (15 aulas gratuitas), trilha gamificada estilo Duolingo, comunidade Skool e refúgio acolhedor na madrugada.">
+    <meta name="keywords" content="comunidade metanoia, teologia basica, duolingo biblico, comunidade skool crista, rede social crista, oração ansiedade, escola bíblica, discipulado, célula digital">
     <meta name="author" content="Matheus Barbosa">
     
-    <!-- Open Graph / WhatsApp / Facebook -->
+    <!-- Open Graph / Redes Sociais -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://comunidade-metanoia.onrender.com/">
-    <meta property="og:title" content="Comunidade Metanoia // Ninguém Luta Sozinho">
-    <meta property="og:description" content="Você não precisa fingir força aqui. Apoio na ansiedade, rede social da comunidade, mural de oração e estudos bíblicos gratuitos.">
+    <meta property="og:title" content="Comunidade Metanoia // MasterClass & Comunidade Bíblica">
+    <meta property="og:description" content="Transformai-vos pela renovação da vossa mente. 15 Aulas de Teologia gratuitas, trilha gamificada e comunidade fraterna. Ninguém luta sozinho.">
     <meta property="og:image" content="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1200&h=630&fit=crop">
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://comunidade-metanoia.onrender.com/">
-    <meta property="twitter:title" content="Comunidade Metanoia // Ninguém Luta Sozinho">
-    <meta property="twitter:description" content="Um refúgio de acolhimento para ansiedade, rede social e Escola Bíblica gratuita.">
-    <meta property="twitter:image" content="https://images.unsplash.com/photo-1507692049790-de58290a4334?w=1200&h=630&fit=crop">
-    <!-- Favicon & Touch Icons // Comunidade Metanoia -->
+    <!-- Favicon & Touch Icons // Metanoia -->
     <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <meta name="theme-color" content="#090B10">
+    <meta name="theme-color" content="#07090E">
 
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --bg-night: #090B10;
-            --bg-card: #11141D;
-            --bg-card-soft: rgba(23, 28, 42, 0.7);
+            --bg-obsidian: #07090E;
+            --bg-surface: #0E131F;
+            --bg-surface-elevated: #161D2E;
+            --bg-card: #121725;
+            --bg-card-hover: #192135;
+            
+            --gold-primary: #F59E0B;
             --gold-light: #FCD34D;
-            --gold-warm: #F59E0B;
-            --rose-soft: #FDA4AF;
-            --border-soft: rgba(245, 158, 11, 0.15);
-            --border-card: #1F2536;
-            --text-title: #FFFFFF;
+            --gold-warm: #D97706;
+            --gold-glow: rgba(245, 158, 11, 0.28);
+
+            --flame-orange: #EA580C;
+            --flame-glow: rgba(234, 88, 12, 0.35);
+
+            --emerald-healing: #10B981;
+            --emerald-glow: rgba(16, 185, 129, 0.3);
+
+            --sky-accent: #38BDF8;
+            --purple-accent: #A855F7;
+
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-card: #1E2638;
+            --border-gold: rgba(245, 158, 11, 0.25);
+
+            --text-pure: #FFFFFF;
+            --text-title: #F8FAFC;
             --text-body: #CBD5E1;
             --text-muted: #94A3B8;
         }
@@ -53,473 +66,1175 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: var(--bg-night);
+            background-color: var(--bg-obsidian);
             color: var(--text-body);
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.7;
             overflow-x: hidden;
             background-image: 
-                radial-gradient(circle at 50% 10%, rgba(245, 158, 11, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(225, 29, 72, 0.04) 0%, transparent 40%);
+                radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.09) 0%, transparent 45%),
+                radial-gradient(circle at 85% 35%, rgba(234, 88, 12, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 15% 65%, rgba(16, 185, 129, 0.04) 0%, transparent 45%),
+                radial-gradient(circle at 50% 90%, rgba(56, 189, 248, 0.04) 0%, transparent 50%);
+            background-attachment: fixed;
         }
 
-        /* HEADER PREMIUM REDESIGN */
+        /* HEADER PREMIUM ESTILO MASTERCLASS */
         header.main-header {
             position: sticky;
             top: 0;
             z-index: 1000;
             width: 100%;
-            background: rgba(8, 10, 15, 0.85);
-            backdrop-filter: blur(18px) saturate(180%);
-            -webkit-backdrop-filter: blur(18px) saturate(180%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 12px 0;
+            background: rgba(7, 9, 14, 0.88);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 14px 0;
             transition: all 0.3s ease;
         }
 
         .header-container {
-            max-width: 1400px;
+            max-width: 1360px;
             margin: 0 auto;
-            padding: 0 32px;
+            padding: 0 28px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 20px;
         }
 
-        /* BRAND / LOGO */
         .brand-box {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             text-decoration: none;
             flex-shrink: 0;
         }
 
         .brand-emblem {
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             border-radius: 12px;
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.22), rgba(234, 88, 12, 0.14));
-            border: 1px solid rgba(245, 158, 11, 0.38);
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(234, 88, 12, 0.15));
+            border: 1px solid rgba(245, 158, 11, 0.45);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 16px rgba(245, 158, 11, 0.15);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            box-shadow: 0 0 20px var(--gold-glow);
+            transition: all 0.3s ease;
         }
 
         .brand-box:hover .brand-emblem {
-            transform: scale(1.05);
-            border-color: rgba(245, 158, 11, 0.6);
-            box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+            transform: scale(1.06) rotate(2deg);
+            border-color: var(--gold-light);
+            box-shadow: 0 0 26px rgba(245, 158, 11, 0.45);
         }
 
         .brand-icon {
-            font-size: 20px;
+            font-size: 22px;
         }
 
         .brand-info {
             display: flex;
             flex-direction: column;
-            gap: 2px;
         }
 
         .brand-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 20px;
-            font-weight: 700;
-            color: #F8FAFC;
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--text-pure);
             letter-spacing: -0.3px;
-            line-height: 1.1;
-            white-space: nowrap;
         }
 
         .brand-motto {
+            font-size: 11px;
+            color: var(--gold-light);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
             display: flex;
             align-items: center;
             gap: 6px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--gold-light);
-            letter-spacing: 0.8px;
-            text-transform: uppercase;
-            white-space: nowrap;
         }
 
         .motto-dot {
-            width: 5px;
-            height: 5px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-            background: var(--gold-warm);
-            box-shadow: 0 0 6px var(--gold-warm);
+            background-color: var(--emerald-healing);
+            box-shadow: 0 0 8px var(--emerald-healing);
+            animation: pulseDot 2s infinite;
         }
 
-        /* NAV CAPSULE (CENTER PILL) */
+        @keyframes pulseDot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.85); }
+        }
+
         .nav-capsule {
             display: flex;
             align-items: center;
-            gap: 4px;
-            background: rgba(18, 20, 29, 0.65);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            gap: 6px;
+            background: rgba(22, 29, 46, 0.6);
+            border: 1px solid var(--border-subtle);
             border-radius: 50px;
-            padding: 4px 6px;
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 4px 16px rgba(0, 0, 0, 0.25);
-            overflow-x: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-        }
-
-        .nav-capsule::-webkit-scrollbar {
-            display: none;
+            padding: 5px 8px;
         }
 
         .nav-link {
-            display: inline-flex;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 7px 15px;
+            border-radius: 30px;
+            transition: all 0.25s ease;
+            display: flex;
             align-items: center;
             gap: 6px;
-            padding: 6px 13px;
-            border-radius: 50px;
-            color: #94A3B8;
-            font-size: 13px;
-            font-weight: 500;
-            text-decoration: none;
-            white-space: nowrap;
-            transition: all 0.2s ease;
         }
 
         .nav-link:hover {
-            color: #F8FAFC;
-            background: rgba(255, 255, 255, 0.06);
-            transform: translateY(-1px);
+            color: var(--text-pure);
+            background: rgba(255, 255, 255, 0.05);
         }
 
-        .nav-link .nav-icon {
-            font-size: 14px;
-            opacity: 0.9;
+        .nav-link.active-gold {
+            color: var(--gold-light);
+            background: rgba(245, 158, 11, 0.12);
+            border: 1px solid rgba(245, 158, 11, 0.3);
         }
 
-        /* RIGHT ACTION / CTA */
-        .header-action {
+        .header-actions {
             display: flex;
             align-items: center;
-            flex-shrink: 0;
+            gap: 12px;
+        }
+
+        .btn-header-ghost {
+            color: var(--text-body);
+            background: transparent;
+            border: 1px solid var(--border-subtle);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-header-ghost:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: var(--text-pure);
         }
 
         .btn-header-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #F59E0B, #D97706);
-            color: #08080A;
-            border: none;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-warm));
+            color: #07090E;
             padding: 9px 20px;
             border-radius: 50px;
+            font-size: 13px;
+            font-weight: 800;
             text-decoration: none;
-            font-size: 13.5px;
-            font-weight: 700;
-            letter-spacing: -0.2px;
-            white-space: nowrap;
-            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.28);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            box-shadow: 0 4px 18px rgba(245, 158, 11, 0.35);
+            transition: all 0.3s;
         }
 
         .btn-header-cta:hover {
-            background: linear-gradient(135deg, #FBBF24, #F59E0B);
             transform: translateY(-2px);
-            box-shadow: 0 6px 22px rgba(245, 158, 11, 0.45);
-            color: #000;
+            box-shadow: 0 6px 24px rgba(245, 158, 11, 0.55);
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-primary));
         }
 
-        .btn-header-cta svg {
-            transition: transform 0.25s ease;
-        }
-
-        .btn-header-cta:hover svg {
-            transform: translateX(3px);
-        }
-
-        /* REUTILIZÁVEL PARA BOTÕES SECUNDÁRIOS DE CABEÇALHO */
-        .btn-header {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.08));
-            color: var(--gold-light);
-            border: 1px solid rgba(245, 158, 11, 0.35);
-            padding: 10px 24px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-header:hover {
-            background: var(--gold-warm);
-            color: #000;
-            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
-        }
-
-        /* MEDIA QUERIES FOR HEADER */
-        @media (max-width: 1120px) {
-            .nav-link:nth-child(n+5) {
-                display: none;
-            }
-        }
-
-        @media (max-width: 820px) {
-            .header-container {
-                padding: 0 16px;
-            }
-            .nav-capsule {
-                display: none;
-            }
-            .brand-name {
-                font-size: 18px;
-            }
-            .brand-motto {
-                font-size: 10px;
-            }
-            .btn-header-cta {
-                padding: 8px 16px;
-                font-size: 12.5px;
-            }
-        }
-
-        /* HERO SECTION */
+        /* HERO CINEMATOGRÁFICO */
         .hero {
             padding: 90px 24px 70px;
-            text-align: center;
-            max-width: 860px;
+            max-width: 1240px;
             margin: 0 auto;
+            text-align: center;
+            position: relative;
         }
 
-        .tag-acolhimento {
+        .hero-pill-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: rgba(245, 158, 11, 0.1);
+            gap: 9px;
+            background: linear-gradient(90deg, rgba(245, 158, 11, 0.12), rgba(234, 88, 12, 0.12));
             color: var(--gold-light);
-            border: 1px solid rgba(245, 158, 11, 0.25);
-            padding: 8px 20px;
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            padding: 8px 22px;
             border-radius: 50px;
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
             margin-bottom: 28px;
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.15);
         }
 
-        h1 {
+        .hero-pill-badge .flame-icon {
+            font-size: 15px;
+            animation: flameFlicker 1.8s infinite alternate ease-in-out;
+        }
+
+        @keyframes flameFlicker {
+            0% { transform: scale(1); filter: drop-shadow(0 0 2px #F59E0B); }
+            100% { transform: scale(1.18); filter: drop-shadow(0 0 8px #EA580C); }
+        }
+
+        .hero-title {
             font-family: 'Playfair Display', serif;
-            font-size: 46px;
-            line-height: 1.25;
-            color: var(--text-title);
+            font-size: 58px;
+            line-height: 1.15;
+            color: var(--text-pure);
             margin-bottom: 24px;
             font-weight: 700;
+            letter-spacing: -1px;
         }
 
-        h1 em {
+        .hero-title em {
             font-style: italic;
-            color: var(--gold-light);
+            background: linear-gradient(135deg, #FFE6A7 0%, #F59E0B 50%, #FBBF24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             font-weight: 600;
         }
 
-        .hero-desc {
-            font-size: 19px;
+        .hero-subtitle {
+            font-size: 20px;
             color: var(--text-body);
-            margin-bottom: 40px;
-            max-width: 720px;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 820px;
+            margin: 0 auto 38px;
+            line-height: 1.75;
             font-weight: 300;
-            line-height: 1.8;
         }
 
         .hero-actions {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 18px;
             flex-wrap: wrap;
+            margin-bottom: 50px;
         }
 
-        .btn-principal {
-            background: linear-gradient(135deg, var(--gold-warm), #D97706);
-            color: #0F172A;
-            padding: 16px 36px;
+        .btn-hero-primary {
+            background: linear-gradient(135deg, var(--gold-primary), #D97706);
+            color: #07090E;
+            padding: 18px 40px;
             border-radius: 50px;
+            font-size: 16px;
+            font-weight: 800;
             text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.38);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-hero-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 16px 40px rgba(245, 158, 11, 0.55);
+            background: linear-gradient(135deg, #FDE68A, var(--gold-primary));
+        }
+
+        .btn-hero-secondary {
+            background: rgba(22, 29, 46, 0.85);
+            color: var(--text-pure);
+            border: 1px solid var(--border-card);
+            padding: 18px 36px;
+            border-radius: 50px;
             font-size: 16px;
             font-weight: 700;
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.25);
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
 
-        .btn-principal:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 14px 30px rgba(245, 158, 11, 0.4);
-        }
-
-        .btn-suave {
-            background: var(--bg-card);
-            color: var(--text-title);
-            border: 1px solid var(--border-card);
-            padding: 16px 32px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .btn-suave:hover {
-            background: #1A2030;
+        .btn-hero-secondary:hover {
+            background: var(--bg-surface-elevated);
             border-color: rgba(245, 158, 11, 0.4);
+            transform: translateY(-2px);
         }
 
-        /* SEÇÃO: A DOR QUE NINGUÉM VÊ */
-        .secao-dor {
-            padding: 70px 24px;
-            max-width: 1000px;
+        /* METRICS BAR */
+        .metrics-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            max-width: 1080px;
             margin: 0 auto;
+            padding: 24px 30px;
+            background: rgba(14, 19, 31, 0.7);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
         }
 
-        .quote-box {
-            background: linear-gradient(135deg, rgba(23, 28, 42, 0.9), rgba(17, 20, 29, 0.95));
-            border-left: 4px solid var(--gold-warm);
-            border-radius: 0 16px 16px 0;
-            padding: 36px 40px;
-            margin-bottom: 50px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        .metric-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
         }
 
-        .quote-box p {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            font-style: italic;
-            color: var(--text-title);
-            margin-bottom: 12px;
-            line-height: 1.6;
+        .metric-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -9px;
+            top: 15%;
+            height: 70%;
+            width: 1px;
+            background: var(--border-subtle);
         }
 
-        .quote-box span {
+        .metric-value {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text-pure);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .metric-value span.gold {
             color: var(--gold-light);
-            font-size: 14px;
+        }
+
+        .metric-label {
+            font-size: 12px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+            margin-top: 4px;
         }
 
-        .grid-feridas {
+        /* MASTERCLASS SPOTLIGHT PREVIEW */
+        .spotlight-card {
+            margin: 60px auto 0;
+            max-width: 1040px;
+            background: linear-gradient(135deg, rgba(22, 29, 46, 0.95), rgba(14, 19, 31, 0.98));
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 24px;
+            padding: 36px 40px;
+            text-align: left;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(245, 158, 11, 0.08);
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-            gap: 24px;
-            margin-top: 36px;
-        }
-
-        .card-ferida {
-            background: var(--bg-card);
-            border: 1px solid var(--border-card);
-            border-radius: 16px;
-            padding: 32px 26px;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 32px;
+            align-items: center;
             position: relative;
-            transition: all 0.3s ease;
+            overflow: hidden;
         }
 
-        .card-ferida:hover {
-            border-color: rgba(245, 158, 11, 0.3);
-            transform: translateY(-4px);
+        .spotlight-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--gold-light), var(--flame-orange));
         }
 
-        .card-ferida .icone {
-            font-size: 32px;
-            margin-bottom: 16px;
-        }
-
-        .card-ferida h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 20px;
-            color: var(--text-title);
+        .spotlight-tag {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--gold-light);
+            background: rgba(245, 158, 11, 0.14);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            padding: 4px 14px;
+            border-radius: 20px;
+            display: inline-block;
             margin-bottom: 12px;
         }
 
-        .card-ferida p {
-            font-size: 15px;
-            color: var(--text-muted);
-            line-height: 1.7;
-        }
-
-        /* SEÇÃO: O ABRAÇO DO PAI */
-        .secao-abraco {
-            padding: 80px 24px;
-            background: linear-gradient(180deg, transparent 0%, rgba(18, 22, 33, 0.6) 50%, transparent 100%);
-            text-align: center;
-        }
-
-        .conteudo-abraco {
-            max-width: 820px;
-            margin: 0 auto;
-        }
-
-        .conteudo-abraco h2 {
+        .spotlight-title {
             font-family: 'Playfair Display', serif;
-            font-size: 38px;
-            color: var(--text-title);
+            font-size: 26px;
+            color: var(--text-pure);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .spotlight-desc {
+            font-size: 14px;
+            color: var(--text-body);
+            line-height: 1.7;
             margin-bottom: 20px;
         }
 
-        .conteudo-abraco p {
-            font-size: 17px;
-            color: var(--text-body);
-            margin-bottom: 32px;
+        .spotlight-player-box {
+            background: #090C14;
+            border: 1px solid var(--border-card);
+            border-radius: 18px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .player-track-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .player-album-art {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.3), #1E2538);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .player-track-meta h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-pure);
+        }
+
+        .player-track-meta p {
+            font-size: 12px;
+            color: var(--gold-light);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .audio-wave-demo {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            height: 34px;
+            padding: 0 4px;
+        }
+
+        .wave-bar {
+            flex: 1;
+            background: rgba(245, 158, 11, 0.35);
+            border-radius: 3px;
+            transition: all 0.2s ease;
+        }
+
+        .wave-bar.active {
+            background: var(--gold-light);
+            box-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+        }
+
+        .player-controls-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .btn-play-demo {
+            background: var(--gold-primary);
+            color: #07090E;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s;
+        }
+
+        .btn-play-demo:hover {
+            background: var(--gold-light);
+            transform: scale(1.04);
+        }
+
+        /* SEÇÃO: TRILHA GAMIFICADA BÍBLICA (ESTILO DUOLINGO) */
+        .secao-gamificacao {
+            padding: 90px 24px;
+            max-width: 1240px;
+            margin: 0 auto;
+        }
+
+        .section-header-center {
+            text-align: center;
+            max-width: 780px;
+            margin: 0 auto 50px;
+        }
+
+        .section-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--gold-light);
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            padding: 6px 18px;
+            border-radius: 30px;
+            margin-bottom: 16px;
+        }
+
+        .section-header-center h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            color: var(--text-pure);
+            margin-bottom: 16px;
+            line-height: 1.25;
+        }
+
+        .section-header-center p {
+            font-size: 16px;
+            color: var(--text-muted);
             line-height: 1.8;
         }
 
-        /* CARD DA CÉLULA DIGITAL */
-        .card-celula-hospital {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            border-radius: 24px;
-            padding: 48px 36px;
-            max-width: 900px;
-            margin: 40px auto 80px;
-            text-align: center;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        /* HUD GAMIFICAÇÃO DUOLINGO */
+        .duolingo-hud {
+            background: #0E1320;
+            border: 1px solid var(--border-card);
+            border-radius: 18px;
+            padding: 16px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .card-celula-hospital .badge-suave {
-            background: rgba(245, 158, 11, 0.15);
+        .hud-stats-group {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .hud-stat {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-pure);
+        }
+
+        .hud-stat-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .badge-flame {
+            background: rgba(234, 88, 12, 0.18);
+            border: 1px solid rgba(234, 88, 12, 0.4);
+            box-shadow: 0 0 12px rgba(234, 88, 12, 0.25);
+        }
+
+        .badge-xp {
+            background: rgba(245, 158, 11, 0.18);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            box-shadow: 0 0 12px rgba(245, 158, 11, 0.25);
+        }
+
+        .badge-shield {
+            background: rgba(56, 189, 248, 0.18);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+        }
+
+        .hud-progress-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .hud-progress-bar {
+            width: 140px;
+            height: 10px;
+            background: #1A2234;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hud-progress-fill {
+            width: 45%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--gold-primary), var(--gold-light));
+            border-radius: 20px;
+            transition: width 0.4s ease;
+        }
+
+        /* DUOLINGO PATH & INSPECTOR GRID */
+        .duolingo-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px;
+            align-items: start;
+        }
+
+        .duolingo-path-container {
+            background: #0B0F19;
+            border: 1px solid var(--border-card);
+            border-radius: 24px;
+            padding: 32px 24px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .path-world-banner {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(234, 88, 12, 0.1));
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            border-radius: 14px;
+            padding: 12px 18px;
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .path-world-banner h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-pure);
+        }
+
+        .path-world-banner span {
+            font-size: 12px;
             color: var(--gold-light);
-            padding: 6px 16px;
+            font-weight: 600;
+        }
+
+        /* NODES MAP */
+        .path-nodes-flow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 22px;
+            position: relative;
+        }
+
+        .node-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .node-row.pos-left { justify-content: flex-start; padding-left: 20%; }
+        .node-row.pos-center { justify-content: center; }
+        .node-row.pos-right { justify-content: flex-end; padding-right: 20%; }
+
+        .path-node {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            background: #141A29;
+            border: 3px solid var(--border-card);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+        }
+
+        .path-node:hover {
+            transform: scale(1.12);
+            border-color: var(--gold-light);
+        }
+
+        .path-node.active-selected {
+            background: linear-gradient(135deg, var(--gold-primary), #D97706);
+            border-color: #FFFFFF;
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.6);
+            transform: scale(1.15);
+        }
+
+        .path-node.active-selected .node-icon {
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+        }
+
+        .path-node.completed {
+            border-color: var(--emerald-healing);
+            background: #0B221B;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
+        }
+
+        .node-icon {
+            font-size: 24px;
+        }
+
+        .node-crown {
+            position: absolute;
+            top: -12px;
+            font-size: 15px;
+            animation: bounceCrown 2s infinite ease-in-out;
+        }
+
+        @keyframes bounceCrown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        .node-label-popup {
+            position: absolute;
+            bottom: -22px;
+            background: #0A0D15;
+            border: 1px solid var(--border-card);
+            border-radius: 20px;
+            padding: 2px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-body);
+            white-space: nowrap;
+            pointer-events: none;
+        }
+
+        /* DUOLINGO CHALLENGE / LESSON INSPECTOR CARD */
+        .duolingo-inspector-card {
+            background: linear-gradient(135deg, #101524, #0D111D);
+            border: 1px solid var(--border-gold);
+            border-radius: 24px;
+            padding: 32px 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(245, 158, 11, 0.08);
+            position: sticky;
+            top: 90px;
+        }
+
+        .inspector-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .lesson-code-pill {
+            background: rgba(245, 158, 11, 0.18);
+            color: var(--gold-light);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .lesson-duration-badge {
+            font-size: 12px;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .inspector-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--text-pure);
+            margin-bottom: 10px;
+            line-height: 1.35;
+        }
+
+        .inspector-verse {
+            font-size: 13px;
+            color: var(--gold-light);
+            font-style: italic;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .inspector-summary {
+            font-size: 14px;
+            color: var(--text-body);
+            line-height: 1.7;
+            margin-bottom: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 14px 18px;
+            border-left: 3px solid var(--gold-primary);
+        }
+
+        /* MICRO QUIZ DUOLINGO BOX */
+        .duolingo-quiz-box {
+            background: #090C14;
+            border: 1px solid var(--border-card);
+            border-radius: 18px;
+            padding: 22px;
+            margin-bottom: 24px;
+        }
+
+        .quiz-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .quiz-badge {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #38BDF8;
+            background: rgba(56, 189, 248, 0.12);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .quiz-reward {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--gold-light);
+        }
+
+        .quiz-question {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-pure);
+            margin-bottom: 14px;
+            line-height: 1.5;
+        }
+
+        .quiz-options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-option-btn {
+            background: #131927;
+            border: 1px solid var(--border-card);
+            border-radius: 12px;
+            padding: 12px 16px;
+            font-size: 13px;
+            color: var(--text-body);
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .quiz-option-btn:hover {
+            background: #1B2337;
+            border-color: rgba(245, 158, 11, 0.3);
+            color: var(--text-pure);
+        }
+
+        .quiz-option-btn.correct-burst {
+            background: rgba(16, 185, 129, 0.15) !important;
+            border-color: var(--emerald-healing) !important;
+            color: #A7F3D0 !important;
+            box-shadow: 0 0 16px rgba(16, 185, 129, 0.35);
+        }
+
+        .quiz-option-btn.wrong-burst {
+            background: rgba(225, 29, 72, 0.15) !important;
+            border-color: #E11D48 !important;
+            color: #FDA4AF !important;
+        }
+
+        .quiz-feedback-banner {
+            margin-top: 14px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 13px;
+            display: none;
+            line-height: 1.6;
+        }
+
+        .btn-open-lesson-full {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-warm));
+            color: #07090E;
+            width: 100%;
+            padding: 14px;
             border-radius: 50px;
+            font-size: 14px;
+            font-weight: 800;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
+            transition: all 0.3s;
+        }
+
+        .btn-open-lesson-full:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.45);
+        }
+
+        /* SEÇÃO: SKOOL COMMUNITY SHOWCASE */
+        .secao-skool-showcase {
+            padding: 80px 24px;
+            background: linear-gradient(180deg, transparent 0%, rgba(14, 19, 31, 0.7) 50%, transparent 100%);
+        }
+
+        .skool-preview-container {
+            max-width: 1160px;
+            margin: 0 auto;
+            background: #0B0E17;
+            border: 1px solid var(--border-card);
+            border-radius: 24px;
+            padding: 36px 32px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .skool-header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 28px;
+        }
+
+        .skool-header-bar h3 {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--text-pure);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .channels-pills-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .channel-pill {
+            background: #141A2A;
+            border: 1px solid var(--border-card);
+            border-radius: 30px;
+            padding: 6px 16px;
             font-size: 13px;
             font-weight: 600;
-            display: inline-block;
+            color: var(--text-muted);
+            text-decoration: none;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .channel-pill:hover, .channel-pill.active {
+            background: rgba(245, 158, 11, 0.15);
+            border-color: rgba(245, 158, 11, 0.4);
+            color: var(--gold-light);
+        }
+
+        .skool-feed-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .skool-post-card {
+            background: #111624;
+            border: 1px solid var(--border-card);
+            border-radius: 18px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s;
+        }
+
+        .skool-post-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(245, 158, 11, 0.35);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .post-author-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .author-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: #1B2338;
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .author-details strong {
+            font-size: 14px;
+            color: var(--text-pure);
+            display: block;
+        }
+
+        .author-details span {
+            font-size: 11px;
+            color: var(--gold-light);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .post-content-preview {
+            font-size: 14px;
+            color: var(--text-body);
+            line-height: 1.65;
             margin-bottom: 18px;
+        }
+
+        .post-footer-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 14px;
+            border-top: 1px solid var(--border-subtle);
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .post-reactions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .reaction-chip {
+            background: #171E30;
+            border: 1px solid var(--border-card);
+            border-radius: 12px;
+            padding: 4px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .reaction-chip:hover {
+            border-color: var(--gold-light);
+            color: var(--text-pure);
+        }
+
+        /* SEÇÃO SOS MADRUGADA & RESPIRAÇÃO 4-4-4 */
+        .secao-sos {
+            margin: 70px auto;
+            max-width: 980px;
+            padding: 46px 36px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(14, 19, 31, 0.95) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box-respiracao {
+            margin: 30px auto 22px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(16, 185, 129, 0.05) 70%);
+            border: 2px solid #10B981;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: respirarCycle 12s infinite ease-in-out;
+            cursor: pointer;
+            box-shadow: 0 0 28px rgba(16, 185, 129, 0.25);
+            transition: all 0.3s;
+        }
+
+        .box-respiracao:hover {
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.5);
+            transform: scale(1.05);
+        }
+
+        @keyframes respirarCycle {
+            0%, 100% { transform: scale(1); border-color: #10B981; }
+            33% { transform: scale(1.2); border-color: #38BDF8; box-shadow: 0 0 40px rgba(56, 189, 248, 0.4); }
+            66% { transform: scale(1.06); border-color: #F59E0B; }
+        }
+
+        /* CARD DA CÉLULA DIGITAL & MURAL */
+        .card-celula-hospital {
+            background: linear-gradient(135deg, rgba(22, 29, 46, 0.85), rgba(14, 19, 31, 0.95));
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            border-radius: 24px;
+            padding: 44px 36px;
+            max-width: 980px;
+            margin: 40px auto;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
         }
 
         .card-celula-hospital h2 {
             font-family: 'Playfair Display', serif;
             font-size: 34px;
-            color: var(--text-title);
+            color: var(--text-pure);
             margin-bottom: 16px;
         }
 
         .card-celula-hospital p {
             font-size: 16px;
             color: var(--text-body);
-            max-width: 700px;
+            max-width: 740px;
             margin: 0 auto 30px;
             line-height: 1.8;
         }
 
-        .card-celula-hospital .regras-acolhimento {
+        .regras-acolhimento {
             display: flex;
             justify-content: center;
             gap: 24px;
             flex-wrap: wrap;
-            margin-bottom: 36px;
+            margin-bottom: 34px;
             text-align: left;
         }
 
@@ -532,84 +1247,14 @@
         }
 
         .regra-item span {
-            color: var(--gold-warm);
+            color: var(--gold-primary);
             font-weight: bold;
         }
 
-        /* AVISO CVV */
-        .cvv-box {
-            max-width: 700px;
-            margin: 0 auto 60px;
-            padding: 18px 24px;
-            background: rgba(225, 29, 72, 0.08);
-            border: 1px solid rgba(225, 29, 72, 0.2);
-            border-radius: 12px;
-            text-align: center;
-            font-size: 13px;
-            color: #FDA4AF;
-        }
-
-        .cvv-box strong {
-            color: #FFE4E6;
-        }
-
-        /* FOOTER */
-        footer {
-            border-top: 1px solid var(--border-card);
-            padding: 40px 24px;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        footer strong {
-            color: var(--gold-light);
-        }
-    /* SEÇÃO SOS MADRUGADA (MODELADO DO GLORIFY) */
-        .secao-sos {
-            margin: 60px auto;
-            max-width: 860px;
-            padding: 36px 32px;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(17, 20, 29, 0.9) 100%);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 24px;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .box-respiracao {
-            margin: 28px auto 20px;
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(16, 185, 129, 0.05) 70%);
-            border: 2px solid #10B981;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            animation: respirarCycle 12s infinite ease-in-out;
-            cursor: pointer;
-            box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
-            transition: all 0.3s;
-        }
-
-        .box-respiracao:hover {
-            box-shadow: 0 0 35px rgba(16, 185, 129, 0.5);
-        }
-
-        @keyframes respirarCycle {
-            0%, 100% { transform: scale(1); border-color: #10B981; }
-            33% { transform: scale(1.2); border-color: #38BDF8; box-shadow: 0 0 35px rgba(56, 189, 248, 0.4); }
-            66% { transform: scale(1.08); border-color: #F59E0B; }
-        }
-
-        /* SEÇÃO ESCOLA BÍBLICA METANOIA (MODELADO DA ACADEMIA DE PREGADORES & BIBLEPROJECT) */
+        /* GRADE ESCOLA BÍBLICA METANOIA (secao-escola) */
         .secao-escola {
-            margin: 80px auto;
-            max-width: 1100px;
+            margin: 90px auto;
+            max-width: 1200px;
             padding: 0 24px;
         }
 
@@ -621,10 +1266,10 @@
         }
 
         .card-trilha {
-            background: #11141D;
+            background: #101524;
             border: 1px solid var(--border-card);
             border-radius: 20px;
-            padding: 26px;
+            padding: 28px;
             transition: all 0.3s ease;
             position: relative;
             display: flex;
@@ -634,24 +1279,133 @@
 
         .card-trilha:hover {
             transform: translateY(-5px);
-            border-color: rgba(245, 158, 11, 0.4);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+            border-color: rgba(245, 158, 11, 0.45);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
         }
 
         .trilha-nivel {
             display: inline-block;
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
             padding: 4px 12px;
             border-radius: 20px;
             margin-bottom: 12px;
         }
+
+        /* GRADE COMPLETA DAS 15 AULAS */
+        .grade-15-box {
+            margin-top: 45px;
+            background: #0E1320;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 24px;
+            padding: 36px 32px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+        }
+
+        .grade-aulas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 14px;
+            margin-top: 24px;
+        }
+
+        .aula-card-pill {
+            padding: 14px 18px;
+            background: #141A2A;
+            border-radius: 14px;
+            border: 1px solid var(--border-card);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            transition: all 0.25s;
+        }
+
+        .aula-card-pill:hover {
+            border-color: rgba(245, 158, 11, 0.4);
+            background: #182033;
+            transform: translateX(3px);
+        }
+
+        .aula-code {
+            color: var(--gold-light);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .aula-nome {
+            font-size: 13px;
+            color: var(--text-pure);
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .aula-badge {
+            font-size: 11px;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--emerald-healing);
+            padding: 3px 8px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        /* CVV & AVISO */
+        .cvv-box {
+            max-width: 860px;
+            margin: 40px auto 60px;
+            padding: 20px 28px;
+            background: rgba(225, 29, 72, 0.08);
+            border: 1px solid rgba(225, 29, 72, 0.25);
+            border-radius: 16px;
+            text-align: center;
+            font-size: 14px;
+            color: #FDA4AF;
+            line-height: 1.7;
+        }
+
+        .cvv-box strong {
+            color: #FFE4E6;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 50px 24px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+            background: #05070B;
+        }
+
+        footer strong {
+            color: var(--gold-light);
+        }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 900px) {
+            .hero-title { font-size: 40px; }
+            .metrics-strip { grid-template-columns: repeat(2, 1fr); }
+            .spotlight-card { grid-template-columns: 1fr; }
+            .duolingo-layout { grid-template-columns: 1fr; }
+            .duolingo-inspector-card { position: static; }
+            .nav-capsule { display: none; }
+        }
+
+        @media (max-width: 600px) {
+            .hero-title { font-size: 32px; }
+            .hero-subtitle { font-size: 16px; }
+            .metrics-strip { grid-template-columns: 1fr; }
+            .hero-actions { flex-direction: column; width: 100%; }
+            .btn-hero-primary, .btn-hero-secondary { width: 100%; justify-content: center; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- CABEÇALHO PRINCIPAL // MASTERCLASS AESTHETICS -->
     <header class="main-header">
         <div class="header-container">
             <!-- Brand / Logo -->
@@ -667,27 +1421,30 @@
 
             <!-- Central Pill Navigation -->
             <nav class="nav-capsule">
-                <a href="/comunidade" class="nav-link" style="color: var(--gold-light);">
-                    <span class="nav-icon">🌐</span> Rede Social
+                <a href="#trilha-gamificada" class="nav-link active-gold">
+                    <span>⚡</span> Trilha Teológica
                 </a>
-                <a href="#sos-madrugada" class="nav-link">
-                    <span class="nav-icon">🌿</span> SOS Madrugada
+                <a href="#comunidade-skool" class="nav-link">
+                    <span>👥</span> Comunidade Skool
                 </a>
                 <a href="#escola-biblica" class="nav-link">
-                    <span class="nav-icon">📖</span> Escola Bíblica
+                    <span>📖</span> Grade 15 Aulas
+                </a>
+                <a href="#sos-madrugada" class="nav-link">
+                    <span>🌿</span> SOS Madrugada
                 </a>
                 <a href="/blog" class="nav-link">
-                    <span class="nav-icon">📑</span> Blog Bíblico
-                </a>
-                <a href="/estudio" class="nav-link">
-                    <span class="nav-icon">🎬</span> Estúdio
+                    <span>📑</span> Blog
                 </a>
             </nav>
 
-            <!-- CTA Button -->
-            <div class="header-action">
+            <!-- Ações CTA -->
+            <div class="header-actions">
+                <a href="/comunidade" class="btn-header-ghost">
+                    Feed Circle
+                </a>
                 <a href="/plataforma" class="btn-header-cta">
-                    <span>Entrar na Comunidade</span>
+                    <span>Entrar na Plataforma</span>
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>
@@ -697,112 +1454,494 @@
         </div>
     </header>
 
+    <!-- HERO SECTION CINEMATOGRÁFICO -->
     <section class="hero">
-        <div class="tag-acolhimento">
-            🕊️ "Vinde a mim todos os que estais cansados e sobrecarregados"
+        <div class="hero-pill-badge">
+            <span class="flame-icon">🔥</span>
+            <span>FORMAÇÃO TEOLÓGICA & COMUNIDADE 100% GRATUITA</span>
         </div>
-        <h1>Você Não Precisa Fingir Força Aqui.<br><em>Deus Te Ouve Mesmo em Silêncio.</em></h1>
-        <p class="hero-desc">
-            Se hoje a sua alma só consegue chorar, se a dor da ansiedade trava o seu peito, ou se a escuridão do desespero fez você pensar em desistir de tudo... 
-            <strong>pare por um segundo</strong>. Esta página não foi um acaso. Deus está de braços abertos para te acolher exatamente como você está.
+
+        <h1 class="hero-title">
+            Transformai-vos Pela<br>
+            <em>Renovação da Vossa Mente.</em>
+        </h1>
+
+        <p class="hero-subtitle">
+            A profundidade bíblica de uma <strong>MasterClass</strong>, a gamificação viciante do <strong>Duolingo</strong> e o acolhimento fraterno de uma comunidade <strong>Skool</strong>. Aqui a teologia é viva, prática e ninguém fica para trás.
         </p>
+
         <div class="hero-actions">
-            <a href="/plataforma" class="btn-principal">
-                🤍 Só Preciso de um Abraço e Oração
+            <a href="#trilha-gamificada" class="btn-hero-primary">
+                ⚡ Começar a Trilha Gamificada (15 Aulas)
             </a>
-            <a href="/comunidade" class="btn-suave">
-                🌐 Conhecer a Comunidade
+            <a href="/comunidade" class="btn-hero-secondary">
+                🌐 Conhecer a Comunidade Skool
             </a>
-            <a href="#celula" class="btn-suave">
-                Conhecer a Célula Digital
+            <a href="#celula" class="btn-hero-secondary">
+                🤍 Célula Digital & Oração
             </a>
+        </div>
+
+        <!-- BARRA DE MÉTRICAS -->
+        <div class="metrics-strip">
+            <div class="metric-item">
+                <div class="metric-value">15 <span class="gold">+ 4</span></div>
+                <div class="metric-label">Aulas Gravadas em Áudio</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-value">100% <span class="gold">Livre</span></div>
+                <div class="metric-label">Gratuito & Sem Pegadinhas</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-value">24h <span class="gold">SOS</span></div>
+                <div class="metric-label">Acolhimento na Madrugada</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-value">Bereano <span class="gold">XP</span></div>
+                <div class="metric-label">Jornada com Gamificação</div>
+            </div>
+        </div>
+
+        <!-- SPOTLIGHT MASTERCLASS PREVIEW -->
+        <div class="spotlight-card">
+            <div>
+                <span class="spotlight-tag">✦ Degustação MasterClass • Aula 01</span>
+                <h2 class="spotlight-title">O Que É Teologia e o Chamado Supremo do Teólogo</h2>
+                <p class="spotlight-desc">
+                    Descubra por que todo cristão — quer queira ou não — é um teólogo. Aprenda a sair da superficialidade das redes sociais e edificar a sua fé sobre a rocha sólida das Escrituras Sagradas com zelo pastoral.
+                </p>
+                <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                    <span style="font-size: 13px; color: var(--gold-light); font-weight: 600;">📖 2 Timóteo 2:15 & Oséias 4:6</span>
+                    <span style="font-size: 13px; color: var(--text-muted);">• Áudio Studio HD (pt-BR)</span>
+                </div>
+            </div>
+
+            <div class="spotlight-player-box">
+                <div class="player-track-info">
+                    <div class="player-album-art">🎧</div>
+                    <div class="player-track-meta">
+                        <h4>A0001 - Introdução</h4>
+                        <p>14:20 min • Teologia Sistemática</p>
+                    </div>
+                </div>
+
+                <div class="audio-wave-demo" id="wave-bars">
+                    <div class="wave-bar active" style="height: 14px;"></div>
+                    <div class="wave-bar active" style="height: 22px;"></div>
+                    <div class="wave-bar active" style="height: 30px;"></div>
+                    <div class="wave-bar active" style="height: 18px;"></div>
+                    <div class="wave-bar active" style="height: 26px;"></div>
+                    <div class="wave-bar" style="height: 12px;"></div>
+                    <div class="wave-bar" style="height: 20px;"></div>
+                    <div class="wave-bar" style="height: 28px;"></div>
+                    <div class="wave-bar" style="height: 16px;"></div>
+                    <div class="wave-bar" style="height: 24px;"></div>
+                    <div class="wave-bar" style="height: 10px;"></div>
+                    <div class="wave-bar" style="height: 18px;"></div>
+                </div>
+
+                <div class="player-controls-row">
+                    <a href="/plataforma" class="btn-play-demo">
+                        ▶ Ouvir Aula Completa
+                    </a>
+                    <span style="font-size: 12px; color: var(--gold-light); font-weight: 700;">+50 XP</span>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section class="secao-dor">
-        <div class="quote-box">
-            <p>"Perto está o Senhor dos que têm o coração quebrantado e salva os de espírito abatido. Ele cura os quebrantados de coração e lhes ata as feridas."</p>
-            <span>Salmo 34:18 & 147:3</span>
+    <!-- SEÇÃO TRILHA GAMIFICADA BÍBLICA (DUOLINGO STYLE) -->
+    <section class="secao-gamificacao" id="trilha-gamificada">
+        <div class="section-header-center">
+            <div class="section-pill">
+                <span>⚡</span> TRILHA GAMIFICADA DO DISCÍPULO
+            </div>
+            <h2>Aprenda Teologia Como Quem Zera um Jogo</h2>
+            <p>
+                Chega de apostilas pesadas e teologia fria. Avance aula por aula pelo mapa, acumule XP de discipulado, mantenha sua ofensiva diária e teste seus conhecimentos com micro-desafios práticos.
+            </p>
         </div>
 
-        <div style="text-align: center; max-width: 680px; margin: 0 auto 36px;">
-            <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; color: var(--text-title); margin-bottom: 12px;">Nós Conhecemos o Peso da Sua Noite</h2>
-            <p style="color: var(--text-muted); font-size: 15px;">A religião dos homens muitas vezes aponta o dedo e exige perfeição. Jesus, porém, estendeu a mão ferida e caminhou até quem estava no chão.</p>
+        <!-- HUD GAMIFICADO -->
+        <div class="duolingo-hud">
+            <div class="hud-stats-group">
+                <div class="hud-stat">
+                    <div class="hud-stat-badge badge-flame">🔥</div>
+                    <div>
+                        <div id="hud-streak-count" style="font-size: 16px; color: var(--gold-light);">7 Dias</div>
+                        <div style="font-size: 11px; color: var(--text-muted); font-weight: 500;">Ofensiva Ativa</div>
+                    </div>
+                </div>
+
+                <div class="hud-stat">
+                    <div class="hud-stat-badge badge-xp">⚡</div>
+                    <div>
+                        <div id="hud-xp-count" style="font-size: 16px; color: var(--gold-light);">450 XP</div>
+                        <div style="font-size: 11px; color: var(--text-muted); font-weight: 500;">Experiência</div>
+                    </div>
+                </div>
+
+                <div class="hud-stat">
+                    <div class="hud-stat-badge badge-shield">🛡️</div>
+                    <div>
+                        <div style="font-size: 16px; color: #38BDF8;">Discípulo Bereano</div>
+                        <div style="font-size: 11px; color: var(--text-muted); font-weight: 500;">Nível II (Ortodoxia)</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hud-progress-info">
+                <span style="font-size: 12px; font-weight: 700; color: var(--text-muted);">Mundo 1 de 3</span>
+                <div class="hud-progress-bar">
+                    <div class="hud-progress-fill" id="hud-fill-bar"></div>
+                </div>
+                <span style="font-size: 12px; font-weight: 700; color: var(--gold-light);" id="hud-perc">40%</span>
+            </div>
         </div>
 
-        <div class="grid-feridas">
-            <div class="card-ferida">
-                <div class="icone">🌧️</div>
-                <h3>A Ansiedade & O Pânico</h3>
-                <p>O coração acelerado na madrugada, o ar que parece faltar e o medo constante de um futuro que você não consegue controlar. Você não é culpado por sentir isso.</p>
+        <!-- LAYOUT MAPA + INSPECTOR -->
+        <div class="duolingo-layout">
+            <!-- MAPA DUOLINGO -->
+            <div class="duolingo-path-container">
+                <div class="path-world-banner">
+                    <div>
+                        <span style="font-size: 11px; color: var(--gold-light); font-weight: 700;">MUNDO 01</span>
+                        <h3>O Despertar da Mente & O Chamado</h3>
+                    </div>
+                    <span>Aulas 01 a 05</span>
+                </div>
+
+                <div class="path-nodes-flow">
+                    <!-- NÓ 1 -->
+                    <div class="node-row pos-center">
+                        <div class="path-node active-selected" onclick="selecionarAula(1)" id="node-1">
+                            <span class="node-crown">👑</span>
+                            <span class="node-icon">📖</span>
+                            <span class="node-label-popup">01. O Chamado</span>
+                        </div>
+                    </div>
+
+                    <!-- NÓ 2 -->
+                    <div class="node-row pos-left">
+                        <div class="path-node" onclick="selecionarAula(2)" id="node-2">
+                            <span class="node-icon">🎯</span>
+                            <span class="node-label-popup">02. Objetivo Supremo</span>
+                        </div>
+                    </div>
+
+                    <!-- NÓ 3 -->
+                    <div class="node-row pos-center">
+                        <div class="path-node" onclick="selecionarAula(3)" id="node-3">
+                            <span class="node-icon">🏛️</span>
+                            <span class="node-label-popup">03. Divisão Clássica</span>
+                        </div>
+                    </div>
+
+                    <!-- NÓ 4 -->
+                    <div class="node-row pos-right">
+                        <div class="path-node" onclick="selecionarAula(4)" id="node-4">
+                            <span class="node-icon">⚖️</span>
+                            <span class="node-label-popup">04. Bíblica vs Sistemática</span>
+                        </div>
+                    </div>
+
+                    <!-- NÓ 5 -->
+                    <div class="node-row pos-center">
+                        <div class="path-node" onclick="selecionarAula(5)" id="node-5">
+                            <span class="node-icon">🔥</span>
+                            <span class="node-label-popup">05. Teologia Pentecostal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="path-world-banner" style="margin-top: 36px;">
+                    <div>
+                        <span style="font-size: 11px; color: var(--gold-light); font-weight: 700;">MUNDO 02</span>
+                        <h3>A Rocha Firme das Escrituras</h3>
+                    </div>
+                    <span>Aulas 06 a 10</span>
+                </div>
+
+                <div class="path-nodes-flow">
+                    <!-- NÓ 6 -->
+                    <div class="node-row pos-left">
+                        <div class="path-node" onclick="selecionarAula(6)" id="node-6">
+                            <span class="node-icon">⏳</span>
+                            <span class="node-label-popup">06. Século XXI</span>
+                        </div>
+                    </div>
+
+                    <!-- NÓ 7 -->
+                    <div class="node-row pos-center">
+                        <div class="path-node" onclick="selecionarAula(7)" id="node-7">
+                            <span class="node-icon">📜</span>
+                            <span class="node-label-popup">07. Fontes & Revelação</span>
+                        </div>
+                    </div>
+
+                    <!-- NÓ 8 -->
+                    <div class="node-row pos-right">
+                        <div class="path-node" onclick="selecionarAula(8)" id="node-8">
+                            <span class="node-icon">🛡️</span>
+                            <span class="node-label-popup">08. Sola Scriptura</span>
+                        </div>
+                    </div>
+
+                    <!-- NÓ 9 -->
+                    <div class="node-row pos-center">
+                        <div class="path-node" onclick="selecionarAula(9)" id="node-9">
+                            <span class="node-icon">🕊️</span>
+                            <span class="node-label-popup">09. Perfil do Teólogo</span>
+                        </div>
+                    </div>
+
+                    <!-- NÓ 10 -->
+                    <div class="node-row pos-left">
+                        <div class="path-node" onclick="selecionarAula(10)" id="node-10">
+                            <span class="node-icon">💎</span>
+                            <span class="node-label-popup">10. Doutrina & Dogma</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="path-world-banner" style="margin-top: 36px;">
+                    <div>
+                        <span style="font-size: 11px; color: var(--gold-light); font-weight: 700;">MUNDO 03</span>
+                        <h3>O Crisol da Fé e da Dor</h3>
+                    </div>
+                    <span>Aulas 11 a 15</span>
+                </div>
+
+                <div class="path-nodes-flow">
+                    <!-- NÓ 11 -->
+                    <div class="node-row pos-center">
+                        <div class="path-node" onclick="selecionarAula(11)" id="node-11">
+                            <span class="node-icon">⚓</span>
+                            <span class="node-label-popup">11. Ortodoxia Bíblica</span>
+                        </div>
+                    </div>
+
+                    <!-- NÓ 12 -->
+                    <div class="node-row pos-right">
+                        <div class="path-node" onclick="selecionarAula(12)" id="node-12">
+                            <span class="node-icon">💔</span>
+                            <span class="node-label-popup">12. Teodiceia & Dor</span>
+                        </div>
+                    </div>
+
+                    <!-- NÓ 13 -->
+                    <div class="node-row pos-center">
+                        <div class="path-node" onclick="selecionarAula(13)" id="node-13">
+                            <span class="node-icon">🌱</span>
+                            <span class="node-label-popup">13. Fé vs Credulidade</span>
+                        </div>
+                    </div>
+
+                    <!-- NÓ 14 -->
+                    <div class="node-row pos-left">
+                        <div class="path-node" onclick="selecionarAula(14)" id="node-14">
+                            <span class="node-icon">⚔️</span>
+                            <span class="node-label-popup">14. Apologética Mansa</span>
+                        </div>
+                    </div>
+
+                    <!-- NÓ 15 -->
+                    <div class="node-row pos-center">
+                        <div class="path-node" onclick="selecionarAula(15)" id="node-15">
+                            <span class="node-crown">🏆</span>
+                            <span class="node-icon">👑</span>
+                            <span class="node-label-popup">15. Síntese & Prática</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="card-ferida">
-                <div class="icone">🌑</div>
-                <h3>A Depressão & O Silêncio</h3>
-                <p>A sensação de que a vida perdeu a cor, de que você é um fardo para quem está perto e de que ninguém sentiria sua falta. Essa mentira não define quem você é para o Pai.</p>
-            </div>
+            <!-- INSPECTOR & MICRO-QUIZ INTERATIVO (DUOLINGO CHALLENGE) -->
+            <div class="duolingo-inspector-card" id="inspector-card">
+                <div class="inspector-header">
+                    <span class="lesson-code-pill" id="insp-codigo">A0001</span>
+                    <span class="lesson-duration-badge" id="insp-tempo">⏱️ 14:20 min</span>
+                </div>
 
-            <div class="card-ferida">
-                <div class="icone">💼</div>
-                <h3>O Desemprego & A Humilhação</h3>
-                <p>O envio de dezenas de currículos sem resposta, a vergonha de não conseguir honrar a mesa e o peso da incerteza. Deus conhece o seu suor e não te deixará desamparado.</p>
+                <h3 class="inspector-title" id="insp-titulo">Aula 01: O Que É Teologia e o Chamado do Teólogo</h3>
+                <span class="inspector-verse" id="insp-versiculo">📖 2 Timóteo 2:15; Oséias 4:6</span>
+
+                <div class="inspector-summary" id="insp-resumo">
+                    Definição etimológica (Theos + Logos). A teologia como ciência de Deus e de suas relações com o homem e o universo. Por que todo cristão, querendo ou não, é um teólogo e como ter uma fé embasada nas Escrituras sem cair no racionalismo frio.
+                </div>
+
+                <!-- BOX DO MICRO-QUIZ -->
+                <div class="duolingo-quiz-box">
+                    <div class="quiz-title-row">
+                        <span class="quiz-badge">⚡ Desafio Bereano</span>
+                        <span class="quiz-reward">+50 XP</span>
+                    </div>
+
+                    <div class="quiz-question" id="quiz-pergunta">
+                        Qual é o significado literal da junção etimológica das palavras gregas que formam "Teologia"?
+                    </div>
+
+                    <div class="quiz-options-list" id="quiz-options">
+                        <!-- Gerado via JavaScript -->
+                    </div>
+
+                    <div class="quiz-feedback-banner" id="quiz-feedback"></div>
+                </div>
+
+                <a href="/plataforma" class="btn-open-lesson-full">
+                    🚀 Iniciar Aula Completa na Plataforma →
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- SEÇÃO SOS MADRUGADA & RESPIRAÇÃO BÍBLICA (MODELO GLORIFY) -->
+    <!-- SEÇÃO SKOOL COMMUNITY PREVIEW -->
+    <section class="secao-skool-showcase" id="comunidade-skool">
+        <div class="section-header-center">
+            <div class="section-pill">
+                <span>👥</span> AMBIENTE ESTILO SKOOL & CIRCLE
+            </div>
+            <h2>Uma Comunidade Viva Que Te Sustenta</h2>
+            <p>
+                Diferente do barulho tóxico e polarizado das redes sociais tradicionais, criamos um espaço acolhedor, focado em oração mútua, estudos bíblicos e discipulado genuíno.
+            </p>
+        </div>
+
+        <div class="skool-preview-container">
+            <div class="skool-header-bar">
+                <h3><span>🕊️</span> Feed Geral da Comunidade Metanoia</h3>
+                <div class="channels-pills-row">
+                    <a href="/comunidade?espaco=1" class="channel-pill active">#Geral</a>
+                    <a href="/comunidade?espaco=2" class="channel-pill">#Acolhimento & Oração</a>
+                    <a href="/comunidade?espaco=3" class="channel-pill">#Estudos & Teologia</a>
+                    <a href="/comunidade?espaco=4" class="channel-pill">#SOS Madrugada</a>
+                    <a href="/comunidade" class="channel-pill" style="border-color: var(--gold-light); color: var(--gold-light);">+ Ver Todos</a>
+                </div>
+            </div>
+
+            <div class="skool-feed-grid">
+                <!-- POST 1: FIXADO -->
+                <div class="skool-post-card" style="border-color: rgba(245, 158, 11, 0.4);">
+                    <div>
+                        <span style="font-size: 11px; background: rgba(245, 158, 11, 0.2); color: var(--gold-light); padding: 3px 10px; border-radius: 20px; font-weight: 700; text-transform: uppercase;">📌 Fixado pelo Pastor</span>
+                        <div class="post-author-row" style="margin-top: 10px;">
+                            <div class="author-avatar">🕊️</div>
+                            <div class="author-details">
+                                <strong>Matheus Barbosa</strong>
+                                <span>Fundador // Ministério Metanoia</span>
+                            </div>
+                        </div>
+                        <p class="post-content-preview">
+                            "Irmãos, a Comunidade Metanoia nasceu com uma regra inegociável: você não precisa fingir força aqui. Se estiver chorando, se a ansiedade apertar, desabafe. Estaremos em oração por você."
+                        </p>
+                    </div>
+                    <div class="post-footer-actions">
+                        <div class="post-reactions">
+                            <span class="reaction-chip" onclick="incrementarReacao(this)">🤍 48 Orando</span>
+                            <span class="reaction-chip" onclick="incrementarReacao(this)">🔥 32 Amém</span>
+                        </div>
+                        <span>12 comentários</span>
+                    </div>
+                </div>
+
+                <!-- POST 2: TESTEMUNHO -->
+                <div class="skool-post-card">
+                    <div>
+                        <span style="font-size: 11px; background: rgba(16, 185, 129, 0.15); color: #6EE7B7; padding: 3px 10px; border-radius: 20px; font-weight: 700;">#Acolhimento</span>
+                        <div class="post-author-row" style="margin-top: 10px;">
+                            <div class="author-avatar">🌸</div>
+                            <div class="author-details">
+                                <strong>Ana Clara</strong>
+                                <span>Discípula</span>
+                            </div>
+                        </div>
+                        <p class="post-content-preview">
+                            "A crise de pânico que estava me travando na madrugada passou enquanto eu acompanhava a respiração bíblica do SOS e ouvia a mensagem de paz. Obrigada a todos que oraram por mim!"
+                        </p>
+                    </div>
+                    <div class="post-footer-actions">
+                        <div class="post-reactions">
+                            <span class="reaction-chip" onclick="incrementarReacao(this)">🤍 64 Glória</span>
+                            <span class="reaction-chip" onclick="incrementarReacao(this)">🌿 19 Paz</span>
+                        </div>
+                        <span>8 comentários</span>
+                    </div>
+                </div>
+
+                <!-- POST 3: ESTUDO TEOLÓGICO -->
+                <div class="skool-post-card">
+                    <div>
+                        <span style="font-size: 11px; background: rgba(56, 189, 248, 0.15); color: #7DD3FC; padding: 3px 10px; border-radius: 20px; font-weight: 700;">#Estudos</span>
+                        <div class="post-author-row" style="margin-top: 10px;">
+                            <div class="author-avatar">📖</div>
+                            <div class="author-details">
+                                <strong>Lucas Silveira</strong>
+                                <span>Estudante Bereano</span>
+                            </div>
+                        </div>
+                        <p class="post-content-preview">
+                            "Acabei de concluir a Aula 12 sobre Teodiceia (Onde está Deus na dor). Que clareza bíblica! Livrou meu coração de culpar a Deus pelas tempestades da vida. Super recomendo!"
+                        </p>
+                    </div>
+                    <div class="post-footer-actions">
+                        <div class="post-reactions">
+                            <span class="reaction-chip" onclick="incrementarReacao(this)">💡 41 Revelação</span>
+                            <span class="reaction-chip" onclick="incrementarReacao(this)">⚡ 27 XP</span>
+                        </div>
+                        <span>15 comentários</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 32px;">
+                <a href="/comunidade" class="btn-hero-primary" style="font-size: 15px; padding: 14px 34px;">
+                    🌐 Acessar o Feed Completo da Comunidade
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO SOS MADRUGADA & RESPIRAÇÃO 4-4-4 (MODELO GLORIFY) -->
     <section class="secao-sos" id="sos-madrugada">
-        <div class="tag-acolhimento" style="color: #6EE7B7; border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.1);">
-            🌿 SOS Madrugada // Alívio Imediato da Crise
+        <div class="section-pill" style="color: #6EE7B7; border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.1);">
+            🌿 SOS Madrugada // Alívio da Ansiedade
         </div>
-        <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; color: var(--text-title); margin: 14px 0 10px;">
-            O Coração Apertou? Respire Fundo com a Palavra.
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 36px; color: var(--text-pure); margin: 16px 0 10px;">
+            O Coração Apertou? Respire com a Palavra.
         </h2>
         <p style="color: var(--text-muted); font-size: 15px; max-width: 640px; margin: 0 auto;">
-            Quando o ar parecer faltar ou a insônia bater forte na madrugada: toque no círculo abaixo e acompanhe o ritmo da respiração guiada enquanto descansa na promessa do Pai.
+            Quando o ar faltar ou a insônia bater forte: toque no círculo abaixo e acompanhe o ritmo da respiração guiada 4-4-4 enquanto descansa no cuidado do Pai.
         </p>
 
         <div class="box-respiracao" id="circulo-sos" onclick="alternarRespiracaoGuiada()" title="Toque para iniciar o exercício de respiração bíblica">
-            <span style="font-size: 24px;" id="icone-respiro">🕊️</span>
-            <span style="font-size: 13px; font-weight: 700; margin-top: 4px;" id="texto-respiro">Inspire Paz</span>
-            <span style="font-size: 11px; opacity: 0.75;" id="segundos-respiro">4s</span>
+            <span style="font-size: 28px;" id="icone-respiro">🕊️</span>
+            <span style="font-size: 13px; font-weight: 700; margin-top: 4px; color: #FFFFFF;" id="texto-respiro">Inspire Paz</span>
+            <span style="font-size: 11px; opacity: 0.8; color: #A7F3D0;" id="segundos-respiro">4s</span>
         </div>
 
-        <div class="quote-box" style="margin-top: 20px; padding: 18px 24px; border-color: rgba(16, 185, 129, 0.3);">
-            <p style="font-size: 17px; color: #A7F3D0;">
+        <div style="max-width: 600px; margin: 20px auto 0; padding: 16px 20px; background: rgba(16, 185, 129, 0.1); border-radius: 12px; border: 1px solid rgba(16, 185, 129, 0.25);">
+            <p style="font-size: 16px; color: #A7F3D0; font-style: italic;">
                 "Em paz me deito e logo pego no sono, porque só Tu, Senhor, me fazes viver em segurança."
             </p>
-            <span style="color: #6EE7B7;">Salmo 4:8</span>
+            <span style="color: #6EE7B7; font-size: 12px; font-weight: 700;">Salmo 4:8</span>
         </div>
 
-        <div style="margin-top: 22px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
-            <a href="/comunidade?espaco=4" class="btn-principal" style="background: linear-gradient(135deg, #10B981, #059669); font-size: 14px; padding: 12px 26px; text-decoration: none;">
+        <div style="margin-top: 24px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+            <a href="/comunidade?espaco=4" class="btn-hero-primary" style="background: linear-gradient(135deg, #10B981, #059669); font-size: 14px; padding: 12px 28px;">
                 🤍 Desabafar com a Comunidade
             </a>
-            <a href="/teleprompter" class="btn-header" style="font-size: 14px; padding: 12px 24px; border-color: rgba(245, 158, 11, 0.4);">
+            <a href="/teleprompter" class="btn-hero-secondary" style="font-size: 14px; padding: 12px 24px;">
                 📜 Ouvir Mensagem de Paz
             </a>
         </div>
     </section>
 
-    <section class="secao-abraco">
-        <div class="conteudo-abraco">
-            <h2>O Amor de um Pai que Corre ao Seu Encontro</h2>
-            <p>
-                Na parábola do filho pródigo (Lucas 15), o rapaz voltou sujo, quebrado e sem nada a oferecer. Ele vinha ensaiando um pedido de desculpas humilhado. Mas a Bíblia diz que, quando ele ainda estava longe, <strong>o pai o avistou, encheu-se de compaixão, correu até ele, lançou-se ao seu pescoço e o cobriu de beijos.</strong>
-            </p>
-            <p style="color: var(--gold-light); font-style: italic; font-size: 18px;">
-                Deus não quer o seu discurso perfeito de fé hoje. Ele quer o seu coração machucado para derramar óleo e curar as suas feridas.
-            </p>
-        </div>
-    </section>
-
+    <!-- SEÇÃO: CÉLULA DIGITAL & HOSPITAL DE ALMAS -->
     <section class="card-celula-hospital" id="celula">
-        <div class="badge-suave">🌐 Um Hospital de Almas Sem Quatro Paredes</div>
+        <div class="section-pill" style="color: var(--gold-light);">🌐 Um Hospital de Almas Sem Quatro Paredes</div>
         <h2>A Célula Digital: Ninguém Fica Abandonado</h2>
         <p>
-            Criamos este encontro online semanal para quem não consegue estar nas reuniões físicas de uma igreja: quem trabalha em plantões noturnos, quem está preso em uma cama por enfermidade, quem cuida de parentes doentes ou quem está travado por uma crise de pânico e não consegue sair de casa.
+            Criamos este encontro online semanal para quem não consegue estar nas reuniões físicas de uma igreja: quem trabalha em plantões noturnos, quem cuida de enfermos ou quem está travado por crise de pânico.
         </p>
 
         <div class="regras-acolhimento">
@@ -813,57 +1952,55 @@
                 <span>✓</span> Você não precisa falar se faltarem palavras.
             </div>
             <div class="regra-item">
-                <span>✓</span> Apenas coloque o fone e receba oração e a Palavra.
+                <span>✓</span> Apenas coloque o fone e receba oração sincera e a Palavra.
             </div>
         </div>
 
-        <a href="/plataforma" class="btn-principal" style="font-size: 17px; padding: 18px 42px;">
+        <a href="/plataforma" class="btn-hero-primary" style="font-size: 16px; padding: 16px 38px;">
             🤍 Entrar na Sala & Pedir Cobertura de Oração
         </a>
     </section>
 
     <!-- SEÇÃO MURAL DE ORAÇÃO & DESABAFO ANÔNIMO -->
-    <section class="card-celula-hospital" id="mural-oracao" style="margin-top: 48px; border-color: rgba(245, 158, 11, 0.35);">
-        <div class="badge-suave">🕊️ Mural de Oração & Intercessão Contínua</div>
+    <section class="card-celula-hospital" id="mural-oracao" style="margin-top: 48px; border-color: rgba(245, 158, 11, 0.4);">
+        <div class="section-pill" style="color: var(--gold-light);">🕊️ Mural de Oração & Intercessão Contínua</div>
         <h2>Deixe o Peso do Seu Coração no Altar</h2>
         <p>
             Mesmo que você só consiga chorar e não tenha forças nem para pedir ajuda: Deus conhece o som das suas lágrimas. 
-            Envie seu desabafo ou pedido anônimo. Nossa liderança e grupo de intercessores estarão clamando pelo seu alívio e restauração.
+            Envie seu desabafo ou pedido anônimo. Nossa liderança e intercessores estarão clamando pelo seu alívio e restauração.
         </p>
 
         <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 24px;">
-            <a href="/plataforma" class="btn-principal" style="background: linear-gradient(135deg, #10B981, #059669); font-size: 16px; padding: 14px 32px;">
+            <a href="/plataforma" class="btn-hero-primary" style="background: linear-gradient(135deg, #10B981, #059669); font-size: 15px; padding: 14px 32px;">
                 🙏 Deixar Meu Pedido no Mural de Oração
             </a>
-            <a href="/plataforma" class="btn-principal" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border); font-size: 16px; padding: 14px 32px;">
+            <a href="/plataforma" class="btn-hero-secondary" style="font-size: 15px; padding: 14px 32px;">
                 🤍 Só Preciso de um Abraço e Oração
             </a>
         </div>
     </section>
 
-    <!-- SEÇÃO ESCOLA BÍBLICA METANOIA (MODELO ACADEMIA DE PREGADORES & BIBLEPROJECT) -->
+    <!-- SEÇÃO ESCOLA BÍBLICA METANOIA (secao-escola) -->
     <section class="secao-escola" id="escola-biblica">
-        <div style="text-align: center; max-width: 780px; margin: 0 auto;">
-            <div class="tag-acolhimento" style="color: var(--gold-light); border-color: rgba(245, 158, 11, 0.35);">
-                📖 Escola Bíblica Metanoia // Discipulado & Formação Teológica
+        <div class="section-header-center">
+            <div class="section-pill">
+                <span>📖</span> ESCOLA BÍBLICA METANOIA // FORMAÇÃO COMPLETA
             </div>
-            <h2 style="font-family: 'Playfair Display', serif; font-size: 36px; color: var(--text-title); margin: 16px 0 12px;">
-                Aprofunde Suas Raízes na Palavra de Deus
-            </h2>
-            <p style="color: var(--text-muted); font-size: 16px;">
-                Depois de ser acolhido e curado pela comunidade, é hora de ser forjado na Verdade. Mais de 800 estudos, 5 trilhas estruturadas e resumos bíblicos didáticos para edificação da sua fé.
+            <h2>Aprofunde Suas Raízes na Palavra</h2>
+            <p>
+                Depois de ser acolhido e restaurado, é hora de ser forjado na Verdade. Conheça as 5 trilhas estruturadas inspiradas no rigor da Academia de Pregadores e na clareza visual do BibleProject.
             </p>
         </div>
 
         <div class="grid-trilhas">
-            <div class="card-trilha" style="border-color: rgba(245, 158, 11, 0.4); background: linear-gradient(135deg, rgba(245, 158, 11, 0.05) 0%, #11141D 100%);">
+            <div class="card-trilha" style="border-color: rgba(245, 158, 11, 0.45); background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, #101524 100%);">
                 <div>
-                    <span class="trilha-nivel" style="background: rgba(245, 158, 11, 0.2); color: var(--gold-light); border: 1px solid rgba(245, 158, 11, 0.4);">🔥 Curso Disponível • 15 Aulas</span>
-                    <h3 style="color: var(--text-title); font-size: 20px; margin-bottom: 8px;">1. Introdução à Teologia & Doutrina</h3>
+                    <span class="trilha-nivel" style="background: rgba(245, 158, 11, 0.2); color: var(--gold-light); border: 1px solid rgba(245, 158, 11, 0.4);">🔥 Disponível Agora • 15 Aulas</span>
+                    <h3 style="color: var(--text-pure); font-size: 20px; margin-bottom: 8px;">1. Introdução à Teologia & Doutrina</h3>
                     <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">15 Aulas completas em áudio e roteiro: O Que é Teologia, Objetivo Supremo, Divisão Clássica, Teologia Pentecostal, Sola Scriptura, Caráter do Teólogo e Teodiceia no sofrimento.</p>
                 </div>
-                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-card); display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-size: 13px; color: var(--gold-light); font-weight: 600;">🎧 15 Aulas MP3 + Apostila</span>
+                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 13px; color: var(--gold-light); font-weight: 600;">🎧 15 MP3s + Apostilas</span>
                     <span style="font-size: 13px; color: #10B981; font-weight: 700;">🟢 No Ar</span>
                 </div>
             </div>
@@ -871,10 +2008,10 @@
             <div class="card-trilha">
                 <div>
                     <span class="trilha-nivel" style="background: rgba(245, 158, 11, 0.15); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.3);">Nível Médio</span>
-                    <h3 style="color: var(--text-title); font-size: 20px; margin-bottom: 8px;">2. Oração & Batalha Espiritual</h3>
+                    <h3 style="color: var(--text-pure); font-size: 20px; margin-bottom: 8px;">2. Oração & Batalha Espiritual</h3>
                     <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">O poder do clamor secreto, jejum bíblico, a armadura de Deus em Efésios 6 e autoridade espiritual em dias de batalha.</p>
                 </div>
-                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-card); display: flex; justify-content: space-between; align-items: center;">
+                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-size: 13px; color: var(--gold-light); font-weight: 600;">📑 Apostila PDF Incluída</span>
                     <span style="font-size: 13px; color: var(--text-muted);">Trilha 02</span>
                 </div>
@@ -883,10 +2020,10 @@
             <div class="card-trilha">
                 <div>
                     <span class="trilha-nivel" style="background: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.3);">Nível Avançado</span>
-                    <h3 style="color: var(--text-title); font-size: 20px; margin-bottom: 8px;">3. Hermenêutica & Interpretação</h3>
+                    <h3 style="color: var(--text-pure); font-size: 20px; margin-bottom: 8px;">3. Hermenêutica & Interpretação</h3>
                     <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">Aprenda a interpretar qualquer texto da Bíblia sem tirar do contexto histórico, cultural e literário, guardando a sã doutrina.</p>
                 </div>
-                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-card); display: flex; justify-content: space-between; align-items: center;">
+                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-size: 13px; color: var(--gold-light); font-weight: 600;">📑 Apostila PDF Incluída</span>
                     <span style="font-size: 13px; color: var(--text-muted);">Trilha 03</span>
                 </div>
@@ -895,10 +2032,10 @@
             <div class="card-trilha">
                 <div>
                     <span class="trilha-nivel" style="background: rgba(192, 132, 252, 0.15); color: #C084FC; border: 1px solid rgba(192, 132, 252, 0.3);">Nível Bacharel</span>
-                    <h3 style="color: var(--text-title); font-size: 20px; margin-bottom: 8px;">4. Panorama dos 66 Livros</h3>
+                    <h3 style="color: var(--text-pure); font-size: 20px; margin-bottom: 8px;">4. Panorama dos 66 Livros</h3>
                     <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">Estudo esquematizado estilo BibleProject: o fio condutor de Cristo desde o Gênesis até as profecias do Apocalipse.</p>
                 </div>
-                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-card); display: flex; justify-content: space-between; align-items: center;">
+                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-size: 13px; color: var(--gold-light); font-weight: 600;">📑 Apostila PDF Incluída</span>
                     <span style="font-size: 13px; color: var(--text-muted);">Trilha 04</span>
                 </div>
@@ -907,69 +2044,375 @@
             <div class="card-trilha">
                 <div>
                     <span class="trilha-nivel" style="background: rgba(251, 113, 133, 0.15); color: #FB7185; border: 1px solid rgba(251, 113, 133, 0.3);">Especialização</span>
-                    <h3 style="color: var(--text-title); font-size: 20px; margin-bottom: 8px;">5. Aconselhamento & Célula Digital</h3>
+                    <h3 style="color: var(--text-pure); font-size: 20px; margin-bottom: 8px;">5. Aconselhamento & Célula Digital</h3>
                     <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">Como acolher e discipular pessoas quebrantadas, lidar com desabafos e liderar pequenos grupos de apoio com amor cristão.</p>
                 </div>
-                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-card); display: flex; justify-content: space-between; align-items: center;">
+                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-size: 13px; color: var(--gold-light); font-weight: 600;">📑 Apostila PDF Incluída</span>
                     <span style="font-size: 13px; color: var(--text-muted);">Trilha 05</span>
                 </div>
             </div>
         </div>
 
-        <!-- GRADE DAS 15 AULAS: INTRODUÇÃO À TEOLOGIA -->
-        <div style="margin-top: 40px; background: #11141D; border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 20px; padding: 32px 28px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 22px;">
+        <!-- GRADE DAS 15 AULAS CATALOGADAS -->
+        <div class="grade-15-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
                 <div>
-                    <span style="font-size: 11px; background: rgba(245, 158, 11, 0.15); color: var(--gold-light); padding: 5px 12px; border-radius: 20px; font-weight: 700; text-transform: uppercase; border: 1px solid rgba(245, 158, 11, 0.3);">🔥 Grade Curricular • 15 Aulas Catalogadas</span>
-                    <h3 style="color: var(--text-title); font-size: 22px; margin-top: 8px;">Módulo 01: Introdução à Teologia Sistemática & Doutrina</h3>
+                    <span class="section-pill" style="font-size: 11px;">🔥 GRADE CURRICULAR COMPLETA</span>
+                    <h3 style="color: var(--text-pure); font-size: 22px; margin-top: 6px;">Módulo 01: Introdução à Teologia & Bibliologia (19 Aulas)</h3>
                 </div>
-                <a href="/plataforma" class="btn-principal" style="font-size: 13px; padding: 10px 22px;">Ouvir e Estudar na Plataforma →</a>
+                <a href="/plataforma" class="btn-hero-primary" style="font-size: 13px; padding: 10px 22px;">
+                    Acessar Tudo na Plataforma →
+                </a>
             </div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; font-size: 13px;">
-                <div style="padding: 12px 16px; background: #151926; border-radius: 12px; border: 1px solid var(--border-card); display: flex; align-items: center; gap: 10px;"><span style="color: var(--gold-light); font-weight: 700;">#A0001</span> <span>O Que É Teologia e o Chamado</span></div>
-                <div style="padding: 12px 16px; background: #151926; border-radius: 12px; border: 1px solid var(--border-card); display: flex; align-items: center; gap: 10px;"><span style="color: var(--gold-light); font-weight: 700;">#A0002</span> <span>O Objetivo Supremo da Teologia</span></div>
-                <div style="padding: 12px 16px; background: #151926; border-radius: 12px; border: 1px solid var(--border-card); display: flex; align-items: center; gap: 10px;"><span style="color: var(--gold-light); font-weight: 700;">#A0003</span> <span>Divisão Clássica da Teologia</span></div>
-                <div style="padding: 12px 16px; background: #151926; border-radius: 12px; border: 1px solid var(--border-card); display: flex; align-items: center; gap: 10px;"><span style="color: var(--gold-light); font-weight: 700;">#A0004</span> <span>Teologia Bíblica vs Sistemática</span></div>
-                <div style="padding: 12px 16px; background: #151926; border-radius: 12px; border: 1px solid var(--border-card); display: flex; align-items: center; gap: 10px;"><span style="color: var(--gold-light); font-weight: 700;">#A0005</span> <span>A Teologia Pentecostal e o Espírito</span></div>
-                <div style="padding: 12px 16px; background: #151926; border-radius: 12px; border: 1px solid var(--border-card); display: flex; align-items: center; gap: 10px;"><span style="color: var(--gold-light); font-weight: 700;">#A0006</span> <span>A Necessidade de Fazer Teologia</span></div>
-                <div style="padding: 12px 16px; background: #151926; border-radius: 12px; border: 1px solid var(--border-card); display: flex; align-items: center; gap: 10px;"><span style="color: var(--gold-light); font-weight: 700;">#A0007</span> <span>As Fontes da Teologia & Revelação</span></div>
-                <div style="padding: 12px 16px; background: #151926; border-radius: 12px; border: 1px solid var(--border-card); display: flex; align-items: center; gap: 10px;"><span style="color: var(--gold-light); font-weight: 700;">#A0008</span> <span>A Suficiência das Escrituras (Sola Scriptura)</span></div>
-                <div style="padding: 12px 16px; background: #151926; border-radius: 12px; border: 1px solid var(--border-card); display: flex; align-items: center; gap: 10px;"><span style="color: var(--gold-light); font-weight: 700;">#A0009</span> <span>O Perfil Espiritual do Teólogo</span></div>
-                <div style="padding: 12px 16px; background: #151926; border-radius: 12px; border: 1px solid var(--border-card); display: flex; align-items: center; gap: 10px;"><span style="color: var(--gold-light); font-weight: 700;">#A0010</span> <span>Doutrina, Dogma e Religião</span></div>
-                <div style="padding: 12px 16px; background: #151926; border-radius: 12px; border: 1px solid var(--border-card); display: flex; align-items: center; gap: 10px;"><span style="color: var(--gold-light); font-weight: 700;">#A0011</span> <span>Fundamentalismo Bíblico e Ortodoxia</span></div>
-                <div style="padding: 12px 16px; background: #151926; border-radius: 12px; border: 1px solid var(--border-card); display: flex; align-items: center; gap: 10px;"><span style="color: var(--gold-light); font-weight: 700;">#A0012</span> <span>Teodiceia: Onde Está Deus na Minha Dor?</span></div>
-                <div style="padding: 12px 16px; background: #151926; border-radius: 12px; border: 1px solid var(--border-card); display: flex; align-items: center; gap: 10px;"><span style="color: var(--gold-light); font-weight: 700;">#A0013</span> <span>Fé Genuína vs Credulidade Humana</span></div>
-                <div style="padding: 12px 16px; background: #151926; border-radius: 12px; border: 1px solid var(--border-card); display: flex; align-items: center; gap: 10px;"><span style="color: var(--gold-light); font-weight: 700;">#A0014</span> <span>Perigos das Falsas Doutrinas & Apologética</span></div>
-                <div style="padding: 12px 16px; background: #151926; border-radius: 12px; border: 1px solid var(--border-card); display: flex; align-items: center; gap: 10px;"><span style="color: var(--gold-light); font-weight: 700;">#A0015</span> <span>Síntese e Aplicação Prática no Dia a Dia</span></div>
-            </div>
-        </div>
 
-        <div style="text-align: center; margin-top: 40px;">
-            <a href="/plataforma" class="btn-principal" style="font-size: 16px; padding: 16px 38px;">
-                📚 Acessar Escola Bíblica & Apostilas na Plataforma
-            </a>
-            <p style="margin-top: 12px; font-size: 13px; color: var(--gold-light);">
-                ✦ 100% Gratuito • Inspirado no modelo BibleProject de generosidade e livre acesso à Palavra
-            </p>
+            <div class="grade-aulas-grid">
+                <div class="aula-card-pill"><span class="aula-code">#A0001</span><span class="aula-nome">O Que É Teologia e o Chamado</span><span class="aula-badge">MP3</span></div>
+                <div class="aula-card-pill"><span class="aula-code">#A0002</span><span class="aula-nome">O Objetivo Supremo da Teologia</span><span class="aula-badge">MP3</span></div>
+                <div class="aula-card-pill"><span class="aula-code">#A0003</span><span class="aula-nome">Divisão Clássica da Teologia</span><span class="aula-badge">MP3</span></div>
+                <div class="aula-card-pill"><span class="aula-code">#A0004</span><span class="aula-nome">Teologia Bíblica vs Sistemática</span><span class="aula-badge">MP3</span></div>
+                <div class="aula-card-pill"><span class="aula-code">#A0005</span><span class="aula-nome">A Teologia Pentecostal & Espírito</span><span class="aula-badge">MP3</span></div>
+                <div class="aula-card-pill"><span class="aula-code">#A0006</span><span class="aula-nome">A Necessidade de Fazer Teologia</span><span class="aula-badge">MP3</span></div>
+                <div class="aula-card-pill"><span class="aula-code">#A0007</span><span class="aula-nome">As Fontes da Teologia & Revelação</span><span class="aula-badge">MP3</span></div>
+                <div class="aula-card-pill"><span class="aula-code">#A0008</span><span class="aula-nome">Sola Scriptura: Suficiência</span><span class="aula-badge">MP3</span></div>
+                <div class="aula-card-pill"><span class="aula-code">#A0009</span><span class="aula-nome">O Perfil Espiritual do Teólogo</span><span class="aula-badge">MP3</span></div>
+                <div class="aula-card-pill"><span class="aula-code">#A0010</span><span class="aula-nome">Doutrina, Dogma e Religião</span><span class="aula-badge">MP3</span></div>
+                <div class="aula-card-pill"><span class="aula-code">#A0011</span><span class="aula-nome">Fundamentalismo e Ortodoxia</span><span class="aula-badge">MP3</span></div>
+                <div class="aula-card-pill"><span class="aula-code">#A0012</span><span class="aula-nome">Teodiceia: Onde Está Deus na Dor?</span><span class="aula-badge">MP3</span></div>
+                <div class="aula-card-pill"><span class="aula-code">#A0013</span><span class="aula-nome">Fé Genuína vs Credulidade</span><span class="aula-badge">MP3</span></div>
+                <div class="aula-card-pill"><span class="aula-code">#A0014</span><span class="aula-nome">Perigos de Falsas Doutrinas</span><span class="aula-badge">MP3</span></div>
+                <div class="aula-card-pill"><span class="aula-code">#A0015</span><span class="aula-nome">Síntese e Aplicação Prática</span><span class="aula-badge">MP3</span></div>
+                <div class="aula-card-pill"><span class="aula-code">#B0001</span><span class="aula-nome">Bibliologia 01: Origem dos Escritos</span><span class="aula-badge">MP3</span></div>
+                <div class="aula-card-pill"><span class="aula-code">#B0002</span><span class="aula-nome">Bibliologia 02: Inspiração Verbal</span><span class="aula-badge">MP3</span></div>
+                <div class="aula-card-pill"><span class="aula-code">#B0003</span><span class="aula-nome">Bibliologia 03: Canonicidade</span><span class="aula-badge">MP3</span></div>
+                <div class="aula-card-pill"><span class="aula-code">#B0004</span><span class="aula-nome">Bibliologia 04: Transmissão Textual</span><span class="aula-badge">MP3</span></div>
+            </div>
         </div>
     </section>
 
-
-
+    <!-- BANNER DE APOIO PSICOLÓGICO / CVV 188 -->
     <div class="cvv-box">
         💛 <strong>Se você está em crise profunda ou com pensamentos de desistir da vida:</strong> Você não precisa passar por isso sozinho. Ligue agora gratuitamente para o <strong>188 (CVV)</strong> ou entre na nossa sala para conversarmos e orarmos por você. <strong>A sua vida tem um valor infinito para Deus.</strong>
     </div>
 
+    <!-- RODAPÉ OFICIAL -->
     <footer>
         <p>© 2026 Comunidade Metanoia // Matheus Barbosa. "Ninguém Luta Sozinho." Um refúgio de acolhimento bíblico, rede social fraternal e escola teológica.</p>
-        <p style="margin-top: 8px; font-size: 13px; color: var(--gold-light);">"Ele não quebrará a cana trilhada, nem apagará a torcida que fumega." — <strong>Isaías 42:3</strong></p>
+        <p style="margin-top: 10px; font-size: 13px; color: var(--gold-light);">
+            "Ele não quebrará a cana trilhada, nem apagará a torcida que fumega." — <strong>Isaías 42:3</strong>
+        </p>
     </footer>
 
-
-
-    <!-- ENGINE JAVASCRIPT: SOS RESPIRAÇÃO BÍBLICA -->
+    <!-- ENGINE JAVASCRIPT: DUOLINGO CHALLENGE & SOS 4-4-4 -->
     <script>
+        // Dados Oficiais das Aulas & Micro-Quizzes Bereanos
+        const aulasCatalogo = [
+            {
+                num: 1,
+                codigo: "A0001",
+                titulo: "Aula 01: O Que É Teologia e o Chamado do Teólogo",
+                versiculo: "📖 2 Timóteo 2:15; Oséias 4:6",
+                tempo: "⏱️ 14:20 min",
+                resumo: "Definição etimológica (Theos + Logos). A teologia como ciência de Deus e de suas relações com o homem e o universo. Por que todo cristão, querendo ou não, é um teólogo e como ter uma fé embasada nas Escrituras sem cair no intelectualismo frio.",
+                pergunta: "Qual é o sentido etimológico original do termo Teologia?",
+                opcoes: [
+                    { texto: "Theos (Deus) + Logos (Discurso / Estudo racional)", correta: true },
+                    { texto: "Theos (Igreja) + Logos (Tradição eclesiástica)", correta: false },
+                    { texto: "Theos (Templo) + Logos (Ritos sacerdotais)", correta: false }
+                ],
+                explicacao: "Perfeito! Theos significa Deus e Logos significa razão, palavra, estudo. Teologia é refletir com reverência sobre a revelação divina."
+            },
+            {
+                num: 2,
+                codigo: "A0002",
+                titulo: "Aula 02: O Objetivo Supremo da Teologia: Conhecer e Adorar",
+                versiculo: "📖 Jeremias 9:23-24; João 17:3",
+                tempo: "⏱️ 12:45 min",
+                resumo: "O propósito da teologia não é o mero acúmulo de conhecimento intelectual, mas a transformação interior (Metanoia) e a intimidade espiritual com o Criador. A oração como combustível da reflexão bíblica.",
+                pergunta: "Qual o objetivo final e supremo do estudo da Teologia segundo Jeremias 9:23-24?",
+                opcoes: [
+                    { texto: "Vencer debates religiosos na internet", correta: false },
+                    { texto: "Conhecer e glorificar a Deus de todo o coração", correta: true },
+                    { texto: "Alcançar títulos eclesiásticos de prestígio", correta: false }
+                ],
+                explicacao: "Glória a Deus! A teologia bíblica gera adoração sincera e coração quebrantado, nunca soberba."
+            },
+            {
+                num: 3,
+                codigo: "A0003",
+                titulo: "Aula 03: Divisão Clássica da Teologia",
+                versiculo: "📖 Lucas 24:27; Atos 17:11",
+                tempo: "⏱️ 15:10 min",
+                resumo: "Panorama dos quatro ramos fundamentais da teologia: Teologia Bíblica (desenvolvimento histórico-revelacional), Sistemática (doutrinas organizadas), Histórica (como a Igreja compreendeu a verdade nos séculos) e Prática (ação pastoral e ética).",
+                pergunta: "Quais são os 4 ramos da divisão clássica da Teologia?",
+                opcoes: [
+                    { texto: "Bíblica, Sistemática, Histórica e Prática", correta: true },
+                    { texto: "Mística, Política, Filosófica e Dogmática", correta: false },
+                    { texto: "Literal, Alegórica, Poética e Canônica", correta: false }
+                ],
+                explicacao: "Excelente! Essa divisão nos ajuda a investigar o texto na sua história, sistema doutrinário e aplicação diária."
+            },
+            {
+                num: 4,
+                codigo: "A0004",
+                titulo: "Aula 04: Teologia Bíblica vs Teologia Sistemática",
+                versiculo: "📖 Romanos 11:33-36; 2 Pedro 3:16",
+                tempo: "⏱️ 16:30 min",
+                resumo: "Como trabalhar a linha do tempo da Revelação sem distorcer o ensino bíblico. A importância de deixar a Bíblia interpretar a si mesma antes de construir sistemas dogmáticos rígidos.",
+                pergunta: "Qual o foco central da Teologia Bíblica?",
+                opcoes: [
+                    { texto: "A revelação progressiva de Deus ao longo da história bíblica", correta: true },
+                    { texto: "Criar regras e manuais de membros de igrejas", correta: false },
+                    { texto: "Focar exclusivamente na filosofia grega antiga", correta: false }
+                ],
+                explicacao: "Muito bem! A Teologia Bíblica rastreia o desdobramento da graça divina desde o Éden até a Nova Jerusalém."
+            },
+            {
+                num: 5,
+                codigo: "A0005",
+                titulo: "Aula 05: A Teologia Pentecostal e a Operação Viva do Espírito",
+                versiculo: "📖 Atos 1:8; 1 Coríntios 2:10-14",
+                tempo: "⏱️ 18:05 min",
+                resumo: "O equilíbrio vital entre a Palavra e o Espírito. Como a experiência de Pentecostes ilumina a mente do estudante e capacita o crente para testemunho com autoridade, sinais e amor sacrificial.",
+                pergunta: "Qual o equilíbrio essencial ensinado na Teologia Pentecostal sadia?",
+                opcoes: [
+                    { texto: "Palavra sem o Espírito Santo", correta: false },
+                    { texto: "União indissolúvel entre a sã doutrina da Palavra e o fogo do Espírito", correta: true },
+                    { texto: "Apenas emoções sem qualquer fundamento nas Escrituras", correta: false }
+                ],
+                explicacao: "Amém! A Palavra sem o Espírito seca; o Espírito sem a Palavra dispersa; mas a Palavra com o Espírito inflama a Igreja!"
+            },
+            {
+                num: 6,
+                codigo: "A0006",
+                titulo: "Aula 06: A Necessidade de Fazer Teologia no Século XXI",
+                versiculo: "📖 1 Pedro 3:15; Tito 1:9",
+                tempo: "⏱️ 14:40 min",
+                resumo: "Responder ao relativismo cultural, secularismo e heresias digitais com mansidão, firmeza apologética e integridade de vida.",
+                pergunta: "Como 1 Pedro 3:15 nos orienta a defender a nossa esperança em Cristo?",
+                opcoes: [
+                    { texto: "Com ataques verbais e soberba intelectual", correta: false },
+                    { texto: "Com mansidão, respeito e boa consciência", correta: true },
+                    { texto: "Fugindo de qualquer conversa ou questionamento", correta: false }
+                ],
+                explicacao: "Correto! A apologética bíblica é feita de joelhos, com amor pastoral e mansidão."
+            },
+            {
+                num: 7,
+                codigo: "A0007",
+                titulo: "Aula 07: As Fontes da Teologia & Revelação Geral e Especial",
+                versiculo: "📖 Salmo 19:1-4; 2 Timóteo 3:16",
+                tempo: "⏱️ 17:15 min",
+                resumo: "A criação manifesta a glória de Deus (Revelação Geral), mas somente as Escrituras revelam o plano redentor de Cristo (Revelação Especial).",
+                pergunta: "O que a Revelação Especial oferece que a Revelação Geral (natureza) não pode conceder?",
+                opcoes: [
+                    { texto: "Apenas noções astronômicas do universo", correta: false },
+                    { texto: "O conhecimento salvífico de Jesus Cristo e o perdão dos pecados", correta: true },
+                    { texto: "Explicações biológicas sobre plantas", correta: false }
+                ],
+                explicacao: "Exato! A natureza mostra que Deus existe, mas a cruz revela quem Ele é e como somos salvos."
+            },
+            {
+                num: 8,
+                codigo: "A0008",
+                titulo: "Aula 08: A Suficiência das Escrituras (Sola Scriptura)",
+                versiculo: "📖 Gálatas 1:8; Apocalipse 22:18-19",
+                tempo: "⏱️ 19:00 min",
+                resumo: "A Bíblia como única regra infalível de fé e prática cristã. Nenhum dogma ou visão pode sobrepor o texto sagrado inspirado.",
+                pergunta: "O princípio de Sola Scriptura afirma que:",
+                opcoes: [
+                    { texto: "A Bíblia é a suprema e inerrante autoridade sobre tradições humanas", correta: true },
+                    { texto: "Não devemos ler nenhum livro histórico ou comentário", correta: false },
+                    { texto: "Cada pessoa pode inventar suas próprias doutrinas", correta: false }
+                ],
+                explicacao: "Glória a Deus! Tudo é examinado e provado à luz da Palavra inspirada."
+            },
+            {
+                num: 9,
+                codigo: "A0009",
+                titulo: "Aula 09: O Perfil Espiritual e Moral do Teólogo",
+                versiculo: "📖 Esdras 7:10; 1 Timóteo 4:16",
+                tempo: "⏱️ 15:50 min",
+                resumo: "O perigo do orgulho intelectual. A tríade de Esdras: dispor o coração para buscar a Lei, praticá-la na vida e só então ensiná-la.",
+                pergunta: "Qual era a ordem do ministério do escriba Esdras em Esdras 7:10?",
+                opcoes: [
+                    { texto: "Ensinar aos outros antes de praticar em sua vida", correta: false },
+                    { texto: "Buscar a lei do Senhor, praticá-la, e então ensinar", correta: true },
+                    { texto: "Buscar aplausos das multidões em Jerusalém", correta: false }
+                ],
+                explicacao: "Perfeito! A prática precede o ensino. Não há sã teologia sem santidade de vida."
+            },
+            {
+                num: 10,
+                codigo: "A0010",
+                titulo: "Aula 10: Doutrina, Dogma e Religião",
+                versiculo: "📖 Mateus 15:8-9; Romanos 14:1-4",
+                tempo: "⏱️ 13:40 min",
+                resumo: "Discernindo os fundamentos imutáveis da fé das tradições culturais secundárias de homens. Guardando o amor no essencial.",
+                pergunta: "Em coisas essenciais a unidade, em secundárias a liberdade, e em tudo:",
+                opcoes: [
+                    { texto: "O amor cristão fraternal", correta: true },
+                    { texto: "A disputa e divisão de igrejas", correta: false },
+                    { texto: "A exclusão imediata do irmão", correta: false }
+                ],
+                explicacao: "Maravilha! Esse é o lema da Igreja de Cristo: no essencial unidade, no não-essencial liberdade, e em tudo amor."
+            },
+            {
+                num: 11,
+                codigo: "A0011",
+                titulo: "Aula 11: Fundamentalismo Bíblico e Ortodoxia Sadia",
+                versiculo: "📖 Judas 1:3; Tito 2:1",
+                tempo: "⏱️ 16:10 min",
+                resumo: "Batalhar pela fé que uma vez foi entregue aos santos sem cair no farisaísmo legalista ou no extremismo raivoso.",
+                pergunta: "O que Judas nos exorta em Judas 1:3?",
+                opcoes: [
+                    { texto: "Batalhar pela fé que uma vez foi dada aos santos", correta: true },
+                    { texto: "Criar inovações espirituais sem apoio bíblico", correta: false },
+                    { texto: "Desprezar as Escrituras antigas", correta: false }
+                ],
+                explicacao: "Excelente! A ortodoxia verdadeira preserva a mensagem apostólica sem tirar nem acrescentar."
+            },
+            {
+                num: 12,
+                codigo: "A0012",
+                titulo: "Aula 12: Teodiceia: Onde Está Deus na Minha Dor?",
+                versiculo: "📖 Jó 42:1-6; 2 Coríntios 12:9-10",
+                tempo: "⏱️ 21:15 min",
+                resumo: "A reconciliação da soberania de Deus com a existência do mal e do sofrimento. O consolo de Cristo na cruz ao lado de quem chora.",
+                pergunta: "O que a Teodiceia cristã nos ensina sobre a presença de Deus no sofrimento?",
+                opcoes: [
+                    { texto: "Que Deus é indiferente e abandonou a humanidade à própria sorte", correta: false },
+                    { texto: "Que em Cristo Ele sofreu conosco e Sua graça nos sustenta até a redenção", correta: true },
+                    { texto: "Que todo sofrimento é resultado imediato de falta de fé", correta: false }
+                ],
+                explicacao: "Glória a Deus! Ele é o Deus Emanuel — o Deus conosco até mesmo no vale da sombra da morte."
+            },
+            {
+                num: 13,
+                codigo: "A0013",
+                titulo: "Aula 13: Fé Genuína vs Credulidade Humana",
+                versiculo: "📖 Hebreus 11:1; Provérbios 14:15",
+                tempo: "⏱️ 14:50 min",
+                resumo: "A diferença vital entre a fé bíblica fundamentada no caráter de Deus e a credulidade cega que engole qualquer engano humano.",
+                pergunta: "Segundo Provérbios 14:15, qual a atitude do tolo versus a do prudente?",
+                opcoes: [
+                    { texto: "O ingênuo dá crédito a toda palavra, mas o prudente atenta para seus passos", correta: true },
+                    { texto: "Ambos acreditam em boatos sem examinar nada", correta: false },
+                    { texto: "O prudente desiste de crer em Deus", correta: false }
+                ],
+                explicacao: "Isso mesmo! O crente bereano confere na Palavra antes de abraçar qualquer ensinamento."
+            },
+            {
+                num: 14,
+                codigo: "A0014",
+                titulo: "Aula 14: Perigos das Falsas Doutrinas & Apologética Mansa",
+                versiculo: "📖 Efésios 4:14; 2 Timóteo 4:3-4",
+                tempo: "⏱️ 17:30 min",
+                resumo: "Como identificar o evangelho da prosperidade ganancioso, o misticismo sincretista e manter os olhos fixos na suficiência da Graça.",
+                pergunta: "Qual o antídoto bíblico em Efésios 4:14 contra ventos de doutrina enganosa?",
+                opcoes: [
+                    { texto: "O crescimento no conhecimento do Filho de Deus e maturidade espiritual", correta: true },
+                    { texto: "Comprar amuletos ungidos e campanhas financeiras", correta: false },
+                    { texto: "Isolar-se de qualquer comunidade de fé", correta: false }
+                ],
+                explicacao: "Glória! O discipulado constante nos protege das ciladas do erro doutrinário."
+            },
+            {
+                num: 15,
+                codigo: "A0015",
+                titulo: "Aula 15: Síntese e Aplicação Prática: Teologia Viva",
+                versiculo: "📖 Tiago 1:22; Miquéias 6:8",
+                tempo: "⏱️ 19:40 min",
+                resumo: "Conclusão do Módulo 01: Fazer teologia de joelhos e com as mãos estendidas aos necessitados. Praticantes da Palavra e não meros ouvintes.",
+                pergunta: "De acordo com Tiago 1:22, o que devemos ser em relação à Palavra?",
+                opcoes: [
+                    { texto: "Apenas acumuladores de teorias e debates", correta: false },
+                    { texto: "Praticantes da Palavra e não meros ouvintes", correta: true },
+                    { texto: "Críticos distantes da dor do próximo", correta: false }
+                ],
+                explicacao: "Parabéns, Discípulo! Você completou a jornada de 15 aulas fundamentais da Teologia Metanoia!"
+            }
+        ];
+
+        let aulaAtual = 1;
+        let xpTotal = 450;
+        let streakDias = 7;
+
+        function selecionarAula(num) {
+            aulaAtual = num;
+            const aula = aulasCatalogo.find(a => a.num === num) || aulasCatalogo[0];
+
+            // Atualizar classes ativas dos nós no mapa
+            for (let i = 1; i <= 15; i++) {
+                const nodeEl = document.getElementById('node-' + i);
+                if (nodeEl) {
+                    nodeEl.classList.remove('active-selected');
+                    if (i === num) {
+                        nodeEl.classList.add('active-selected');
+                    }
+                }
+            }
+
+            // Atualizar Card Inspector
+            document.getElementById('insp-codigo').textContent = aula.codigo;
+            document.getElementById('insp-tempo').textContent = aula.tempo;
+            document.getElementById('insp-titulo').textContent = aula.titulo;
+            document.getElementById('insp-versiculo').textContent = aula.versiculo;
+            document.getElementById('insp-resumo').textContent = aula.resumo;
+
+            // Atualizar Quiz
+            document.getElementById('quiz-pergunta').textContent = aula.pergunta;
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+
+            const feedbackEl = document.getElementById('quiz-feedback');
+            feedbackEl.style.display = 'none';
+
+            aula.opcoes.forEach((op, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option-btn';
+                btn.innerHTML = `<span style="font-weight: 700; color: var(--gold-light);">${String.fromCharCode(65 + index)})</span> <span>${op.texto}</span>`;
+                btn.onclick = () => responderQuiz(op.correta, aula.explicacao, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function responderQuiz(correta, explicacao, btnClicado) {
+            const feedbackEl = document.getElementById('quiz-feedback');
+            const todosBotoes = document.querySelectorAll('.quiz-option-btn');
+            todosBotoes.forEach(b => b.disabled = true);
+
+            if (correta) {
+                btnClicado.classList.add('correct-burst');
+                feedbackEl.style.display = 'block';
+                feedbackEl.style.background = 'rgba(16, 185, 129, 0.15)';
+                feedbackEl.style.border = '1px solid #10B981';
+                feedbackEl.style.color = '#A7F3D0';
+                feedbackEl.innerHTML = `🎉 <strong>Resposta Correta! +50 XP Adicionados!</strong><br>${explicacao}`;
+
+                // Incrementar XP no HUD
+                xpTotal += 50;
+                document.getElementById('hud-xp-count').textContent = xpTotal + ' XP';
+            } else {
+                btnClicado.classList.add('wrong-burst');
+                feedbackEl.style.display = 'block';
+                feedbackEl.style.background = 'rgba(225, 29, 72, 0.12)';
+                feedbackEl.style.border = '1px solid #E11D48';
+                feedbackEl.style.color = '#FDA4AF';
+                feedbackEl.innerHTML = `💡 <strong>Quase lá! Dica bíblica:</strong><br>${explicacao}`;
+            }
+        }
+
+        function incrementarReacao(element) {
+            const parts = element.innerText.split(' ');
+            if (parts.length >= 2) {
+                const num = parseInt(parts[1]) || 0;
+                element.innerText = parts[0] + ' ' + (num + 1) + ' ' + (parts[2] || '');
+                element.style.borderColor = 'var(--gold-light)';
+                element.style.color = '#FFFFFF';
+            }
+        }
+
         // Exercício de Respiração Bíblica (Modelado do Glorify)
         let timerRespiracao = null;
         let faseRespiro = 0;
@@ -1005,6 +2448,11 @@
             ciclo();
             timerRespiracao = setInterval(ciclo, 4000);
         }
+
+        // Inicializar com a Aula 01 ativa
+        document.addEventListener('DOMContentLoaded', () => {
+            selecionarAula(1);
+        });
     </script>
 </body>
 </html>
