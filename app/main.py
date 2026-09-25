@@ -1,5 +1,5 @@
-"""Ponto de entrada oficial do Backend Ministério Metanoia.
-Serve a Landing Page em '/', a Plataforma Flet em '/plataforma' e a API REST em '/api/v1'.
+"""Ponto de entrada oficial do Backend Comunidade Metanoia.
+Serve a Landing Page em '/', o Blog em '/blog', a Plataforma Flet em '/plataforma' e a API REST em '/api/v1'.
 """
 from pathlib import Path
 from fastapi import FastAPI
@@ -7,7 +7,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import APP_NAME, APP_VERSION, API_PREFIX
 from app.db.database import init_db
-from app.routers import estudos, oracao, celula, musica
+from app.routers import estudos, oracao, celula, musica, blog
 from app.services.music_service import sync_music_playlist
 
 
@@ -28,13 +28,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Inicializar Banco SQLite e Sincronizar Músicas no startup
+# Inicializar Banco SQLite e Sincronizar Músicas + Blog no startup
 @app.on_event("startup")
 def on_startup():
     init_db()
     sync_music_playlist()
+    try:
+        blog.sync_blog_articles()
+    except Exception as e:
+        print(f"[AVISO] Falha ao sincronizar blog no startup: {e}")
 
-# Incluir Roteadores REST API
+# Incluir Roteadores REST API e Blog
+app.include_router(blog.router)
 app.include_router(estudos.router, prefix=API_PREFIX)
 app.include_router(oracao.router, prefix=API_PREFIX)
 app.include_router(celula.router, prefix=API_PREFIX)
@@ -60,7 +65,7 @@ def index_landing():
     if STATIC_INDEX.exists():
         with open(STATIC_INDEX, "r", encoding="utf-8") as f:
             return f.read()
-    return "<h1>Ministério Metanoia</h1><a href='/plataforma'>Acessar Plataforma</a>"
+    return "<h1>Comunidade Metanoia</h1><a href='/plataforma'>Acessar Plataforma</a>"
 
 @app.get("/teleprompter", response_class=HTMLResponse)
 def teleprompter_view():

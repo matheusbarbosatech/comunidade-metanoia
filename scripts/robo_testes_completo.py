@@ -98,7 +98,7 @@ class RoboTestesMetanoia:
         res = self.client.get("/")
         html = res.text
         elementos_acolhimento = [
-            "Ministério Metanoia",
+            "Comunidade Metanoia",
             "Isaías 42:3",
             "188", # CVV
             "Célula Digital",

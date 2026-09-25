@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teleprompter Ministerial // Refúgio Metanoia</title>
+    <title>Teleprompter Ministerial // Comunidade Metanoia</title>
     <style>
         :root {
             --bg-color: #050508;
@@ -428,6 +428,13 @@
                 updateSpeedLabel();
             }
         });
+
+        // Suporte a carregamento de texto dinâmico via URL (?texto=...)
+        const urlParams = new URLSearchParams(window.location.search);
+        const customText = urlParams.get('texto');
+        if (customText) {
+            textElement.innerText = customText;
+        }
 
         // Clique na tela para pausar/retomar
         container.addEventListener('click', (e) => {

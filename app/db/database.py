@@ -134,6 +134,39 @@ def init_db() -> None:
     except sqlite3.OperationalError:
         pass
 
+    # 9. Artigos do Blog Bíblico & Estudos da Palavra (Automated Blog Engine)
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS artigos_blog (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        slug TEXT UNIQUE NOT NULL,
+        titulo TEXT NOT NULL,
+        subtitulo TEXT,
+        categoria TEXT DEFAULT 'Teologia & Vida Cristã',
+        tempo_leitura_min INTEGER DEFAULT 5,
+        autor TEXT DEFAULT 'Matheus Barbosa // Comunidade Metanoia',
+        conteudo_markdown TEXT NOT NULL,
+        texto_biblico TEXT,
+        visualizacoes INTEGER DEFAULT 0,
+        publicado BOOLEAN DEFAULT 1,
+        publicado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+
+    # 10. Postagens Automáticas para Redes Sociais (Instagram, WhatsApp, Shorts, X)
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS postagens_redes_sociais (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        artigo_slug TEXT NOT NULL,
+        plataforma TEXT NOT NULL, -- instagram, whatsapp, shorts, twitter, telegram
+        tipo TEXT DEFAULT 'carrossel', -- carrossel, legenda, roteiro_video, mensagem_grupo, thread
+        titulo TEXT NOT NULL,
+        conteudo TEXT NOT NULL,
+        hashtags TEXT DEFAULT '',
+        status TEXT DEFAULT 'pronto', -- pronto, agendado, publicado
+        criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+
     conn.commit()
     conn.close()
 
