@@ -1,5 +1,6 @@
 import os
 import sys
+import urllib.parse
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -151,69 +152,167 @@ def main(page: ft.Page):
         on_click=alternar_papel
     )
 
-    # --- TELAS DO PAINEL DO PASTOR (ADMIN) ---
+    # --- TELAS DO PAINEL DE ESTUDOS & TEOLOGIA ---
+
+    def tocar_aula_audio(caminho, titulo):
+        if caminho and os.path.exists(caminho):
+            try:
+                os.startfile(caminho)
+                page.show_snack_bar(ft.SnackBar(ft.Text(f"▶️ Reproduzindo aula: {titulo}")))
+            except Exception as ex:
+                page.show_snack_bar(ft.SnackBar(ft.Text(f"Erro ao abrir áudio: {ex}")))
+        else:
+            page.show_snack_bar(ft.SnackBar(ft.Text(f"Arquivo localizado em: {caminho or 'Pasta Desktop'}")))
 
     def render_admin_estudos():
         conn = get_connection()
         cursor = conn.cursor()
-        cursor.execute("SELECT * FROM estudos_aulas ORDER BY id ASC")
+
+        filtro = estado.get("filtro_estudos", "todos")
+        if filtro == "teologia_15":
+            cursor.execute("SELECT * FROM estudos_aulas WHERE codigo_aula BETWEEN 'A0001' AND 'A0015' ORDER BY codigo_aula ASC")
+        elif filtro == "bibliologia_4":
+            cursor.execute("SELECT * FROM estudos_aulas WHERE codigo_aula BETWEEN 'A0016' AND 'A0019' ORDER BY codigo_aula ASC")
+        elif filtro == "apostilas":
+            cursor.execute("SELECT * FROM estudos_aulas WHERE codigo_aula IS NULL ORDER BY id ASC")
+        else:
+            cursor.execute("SELECT * FROM estudos_aulas ORDER BY id ASC")
+
         aulas = cursor.fetchall()
+        cursor.execute("SELECT COUNT(*) as tot FROM estudos_aulas")
+        total_aulas = cursor.fetchone()["tot"]
         conn.close()
+
+        def set_filtro(f):
+            estado["filtro_estudos"] = f
+            atualizar_tela()
+
+        botoes_filtro = [
+            ft.ElevatedButton(
+                f"Todos ({total_aulas})",
+                bgcolor=COLOR_ACCENT if filtro == "todos" else COLOR_CARD,
+                color="#000" if filtro == "todos" else COLOR_TEXT,
+                on_click=lambda e: set_filtro("todos")
+            ),
+            ft.ElevatedButton(
+                "🔥 Introdução à Teologia (15 Aulas)",
+                bgcolor=COLOR_ACCENT if filtro == "teologia_15" else COLOR_CARD,
+                color="#000" if filtro == "teologia_15" else COLOR_TEXT,
+                on_click=lambda e: set_filtro("teologia_15")
+            ),
+            ft.ElevatedButton(
+                "📜 Bibliologia (4 Aulas)",
+                bgcolor=COLOR_ACCENT if filtro == "bibliologia_4" else COLOR_CARD,
+                color="#000" if filtro == "bibliologia_4" else COLOR_TEXT,
+                on_click=lambda e: set_filtro("bibliologia_4")
+            ),
+            ft.ElevatedButton(
+                "📑 Apostilas Gerais",
+                bgcolor=COLOR_ACCENT if filtro == "apostilas" else COLOR_CARD,
+                color="#000" if filtro == "apostilas" else COLOR_TEXT,
+                on_click=lambda e: set_filtro("apostilas")
+            )
+        ]
 
         cards_aulas = []
         for aula in aulas:
             titulo = aula["titulo"]
             resumo = aula["resumo_conteudo"] or "Clique para ver os tópicos da apostila."
+            codigo = aula["codigo_aula"]
+            audio_path = aula["audio_path"]
+            texto_biblico = aula["texto_biblico"]
+
+            botoes_card = [
+                ft.ElevatedButton(
+                    "📖 Ver Resumo & Tópicos",
+                    bgcolor="#2A2A38",
+                    color=COLOR_TEXT,
+                    on_click=lambda e, a=aula: abrir_detalhe_aula(a)
+                )
+            ]
+
+            if audio_path:
+                botoes_card.append(
+                    ft.ElevatedButton(
+                        "▶️ Ouvir Aula (MP3)",
+                        bgcolor=COLOR_FLAME,
+                        color=COLOR_TEXT,
+                        on_click=lambda e, p=audio_path, t=titulo: tocar_aula_audio(p, t)
+                    )
+                )
+
+            botoes_card.append(
+                ft.OutlinedButton(
+                    "🎬 Teleprompter / Gravação",
+                    style=ft.ButtonStyle(color=COLOR_ACCENT),
+                    on_click=lambda e, r=resumo, t=titulo: page.launch_url(f"/teleprompter?texto={urllib.parse.quote(r or t)}")
+                )
+            )
+
+            tags_row = []
+            if codigo:
+                tags_row.append(
+                    ft.Container(
+                        bgcolor="rgba(245, 158, 11, 0.15)",
+                        padding=ft.padding.symmetric(horizontal=8, vertical=3),
+                        border_radius=6,
+                        content=ft.Text(f"#{codigo}", size=11, color=COLOR_ACCENT, weight=ft.FontWeight.BOLD)
+                    )
+                )
+            if texto_biblico:
+                tags_row.append(
+                    ft.Container(
+                        bgcolor="#1E293B",
+                        padding=ft.padding.symmetric(horizontal=8, vertical=3),
+                        border_radius=6,
+                        content=ft.Text(f"📖 {texto_biblico}", size=11, color="#38BDF8")
+                    )
+                )
+            if audio_path:
+                tags_row.append(
+                    ft.Container(
+                        bgcolor="rgba(16, 185, 129, 0.15)",
+                        padding=ft.padding.symmetric(horizontal=8, vertical=3),
+                        border_radius=6,
+                        content=ft.Text("🎧 Áudio Disponível (Desktop)", size=11, color="#10B981", weight=ft.FontWeight.BOLD)
+                    )
+                )
 
             cards_aulas.append(
                 ft.Container(
                     bgcolor=COLOR_CARD,
                     border=ft.border.all(1, COLOR_BORDER),
-                    border_radius=12,
-                    padding=16,
+                    border_radius=14,
+                    padding=18,
                     content=ft.Column([
                         ft.Row([
-                            ft.Icon(ft.Icons.BOOK_ROUNDED, color=COLOR_ACCENT, size=24),
-                            ft.Text(titulo, size=16, weight=ft.FontWeight.BOLD, color=COLOR_TEXT, expand=True),
-                            ft.Container(
-                                bgcolor="#1E293B",
-                                padding=ft.padding.symmetric(horizontal=8, vertical=4),
-                                border_radius=6,
-                                content=ft.Text(aula["status_estudo"].upper(), size=10, color=COLOR_ACCENT, weight=ft.FontWeight.BOLD)
-                            )
+                            ft.Icon(ft.Icons.AUTO_STORIES_ROUNDED if not audio_path else ft.Icons.HEADPHONES_ROUNDED, color=COLOR_ACCENT, size=26),
+                            ft.Text(titulo, size=16, weight=ft.FontWeight.BOLD, color=COLOR_TEXT, expand=True)
                         ]),
-                        ft.Text(resumo[:160] + "...", size=13, color=COLOR_MUTED),
-                        ft.Row([
-                            ft.ElevatedButton(
-                                "📖 Ver Resumo & Tópicos",
-                                bgcolor="#2A2A38",
-                                color=COLOR_TEXT,
-                                on_click=lambda e, a=aula: abrir_detalhe_aula(a)
-                            ),
-                            ft.OutlinedButton(
-                                "🎬 Gravar Vídeo do YouTube",
-                                style=ft.ButtonStyle(color=COLOR_ACCENT),
-                                on_click=lambda e, t=titulo: page.show_snack_bar(ft.SnackBar(ft.Text(f"Roteiro de '{t}' aberto para gravação!")))
-                            )
-                        ], alignment=ft.MainAxisAlignment.END)
+                        ft.Row(tags_row, wrap=True, spacing=8),
+                        ft.Text(resumo[:200] + ("..." if len(resumo) > 200 else ""), size=13, color=COLOR_MUTED),
+                        ft.Row(botoes_card, alignment=ft.MainAxisAlignment.END, spacing=10, wrap=True)
                     ], spacing=10)
                 )
             )
 
         return ft.Column([
             ft.Row([
-                ft.Text("📚 Minhas Apostilas & Estudos (Academia de Pregadores)", size=22, weight=ft.FontWeight.BOLD, color=COLOR_TEXT),
+                ft.Column([
+                    ft.Text("📚 Escola Bíblica & Apostilas Teológicas", size=22, weight=ft.FontWeight.BOLD, color=COLOR_TEXT),
+                    ft.Text("15 Aulas de Introdução à Teologia, Bibliologia e acervo de apostilas completas.", size=14, color=COLOR_MUTED)
+                ], spacing=4),
                 ft.Container(
                     bgcolor=COLOR_CARD,
                     border_radius=8,
-                    padding=ft.padding.symmetric(horizontal=12, vertical=6),
-                    content=ft.Text(f"{len(aulas)} Apostilas Estudadas", color=COLOR_ACCENT, weight=ft.FontWeight.BOLD)
+                    padding=ft.padding.symmetric(horizontal=14, vertical=8),
+                    content=ft.Text(f"{len(aulas)} Aulas Listadas", color=COLOR_ACCENT, weight=ft.FontWeight.BOLD)
                 )
             ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
-            ft.Text("Todo o seu acervo teológico estudado pelo robô, pronto para gravação de vídeos longos e aulas.", size=14, color=COLOR_MUTED),
+            ft.Row(botoes_filtro, scroll=ft.ScrollMode.AUTO),
             ft.Divider(color=COLOR_BORDER),
             ft.ListView(controls=cards_aulas, spacing=16, expand=True)
-        ], expand=True, spacing=12)
+        ], expand=True, spacing=14)
 
     def abrir_detalhe_aula(aula):
         def fechar(e=None):
@@ -223,18 +322,54 @@ def main(page: ft.Page):
                 dialog.open = False
                 page.update()
 
-        dialog = ft.AlertDialog(
-            title=ft.Text(aula["titulo"], color=COLOR_ACCENT, weight=ft.FontWeight.BOLD),
-            content=ft.Container(
-                width=600,
-                height=450,
-                content=ft.ListView([
-                    ft.Markdown(aula["resumo_conteudo"] or "Sem resumo disponível.")
+        audio_path = aula["audio_path"]
+        titulo = aula["titulo"]
+
+        dialog_actions = [
+            ft.TextButton("Fechar", on_click=fechar)
+        ]
+        if audio_path:
+            dialog_actions.insert(0, ft.ElevatedButton(
+                "▶️ Tocar Áudio da Aula",
+                bgcolor=COLOR_FLAME,
+                color=COLOR_TEXT,
+                on_click=lambda e: tocar_aula_audio(audio_path, titulo)
+            ))
+
+        dialog_actions.insert(1, ft.OutlinedButton(
+            "🎬 Roteiro Teleprompter",
+            style=ft.ButtonStyle(color=COLOR_ACCENT),
+            on_click=lambda e: page.launch_url(f"/teleprompter?texto={urllib.parse.quote(aula['resumo_conteudo'] or titulo)}")
+        ))
+
+        corpo_dialog = [
+            ft.Text(aula["titulo"], size=18, weight=ft.FontWeight.BOLD, color=COLOR_TEXT),
+            ft.Text(f"📖 Texto Bíblico: {aula['texto_biblico'] or 'Conforme apostila'}", size=13, color=COLOR_ACCENT, weight=ft.FontWeight.BOLD),
+            ft.Divider(color=COLOR_BORDER),
+            ft.Markdown(aula["resumo_conteudo"] or "Sem resumo disponível.")
+        ]
+        if audio_path:
+            corpo_dialog.append(ft.Container(
+                bgcolor="#1E293B",
+                padding=10,
+                border_radius=8,
+                content=ft.Row([
+                    ft.Icon(ft.Icons.FOLDER_ROUNDED, color=COLOR_ACCENT, size=18),
+                    ft.Text(f"Local do Arquivo: {audio_path}", size=11, color=COLOR_MUTED, expand=True)
                 ])
+            ))
+
+        dialog = ft.AlertDialog(
+            title=ft.Row([
+                ft.Icon(ft.Icons.BOOK_ROUNDED, color=COLOR_ACCENT),
+                ft.Text("Guia Didático da Aula", color=COLOR_TEXT, weight=ft.FontWeight.BOLD)
+            ], spacing=8),
+            content=ft.Container(
+                width=650,
+                height=480,
+                content=ft.ListView(corpo_dialog, spacing=10)
             ),
-            actions=[
-                ft.TextButton("Fechar", on_click=fechar)
-            ]
+            actions=dialog_actions
         )
         page.dialog = dialog
         dialog.open = True
@@ -729,13 +864,14 @@ def main(page: ft.Page):
         conteudo_view.content = None
         if estado["aba_atual"] == "comunidade":
             conteudo_view.content = render_comunidade()
+        elif estado["aba_atual"] == "estudos":
+            conteudo_view.content = render_admin_estudos()
+        elif estado["aba_atual"] == "oracao":
+            conteudo_view.content = render_admin_oracoes()
+        elif estado["aba_atual"] == "celula":
+            conteudo_view.content = render_aluno_home()
         elif estado["usuario_role"] == "admin":
-            if estado["aba_atual"] == "estudos":
-                conteudo_view.content = render_admin_estudos()
-            elif estado["aba_atual"] == "oracao":
-                conteudo_view.content = render_admin_oracoes()
-            else:
-                conteudo_view.content = render_comunidade()
+            conteudo_view.content = render_comunidade()
         else:
             conteudo_view.content = render_aluno_home()
         page.update()
