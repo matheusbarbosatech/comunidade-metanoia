@@ -66,6 +66,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        /* Modo Ring Light Iluminador de Tela */
+        .ring-light-active .video-wrapper {
+            border: 14px solid #FFFDF2 !important;
+            box-shadow: 0 0 160px 70px rgba(255, 253, 235, 0.45) !important;
+        }
+        .ring-light-active .camera-panel {
+            background: #181B26 !important;
         }
 
         #webcam-video { display: none; }
@@ -362,8 +372,31 @@
                     </div>
                 </div>
 
+                <div class="option-group" style="background:#0F1420; border:1px solid rgba(245,158,11,0.35); border-radius:12px; padding:16px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                        <span class="option-title" style="margin-bottom:0;">💡 Ring Light de Monitor (Iluminador Facial)</span>
+                        <input type="checkbox" id="check-ring-light" onchange="toggleRingLight()" style="width:20px; height:20px; cursor:pointer; accent-color:var(--gold);">
+                    </div>
+                    <p style="font-size:12px; color:var(--text-muted); line-height:1.5; margin-bottom:12px;">
+                        Transforma as bordas da tela do notebook em uma fonte de luz difusa e suave para o seu rosto, eliminando a granulação escura da câmera!
+                    </p>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <div style="display:flex; justify-content:space-between; font-size:12px;">
+                            <span>☀️ Brilho / Exposição:</span>
+                            <span id="label-brightness" style="color:var(--gold-light); font-weight:700;">115%</span>
+                        </div>
+                        <input type="range" id="slider-brightness" min="100" max="150" value="115" oninput="atualizarFiltros()" style="width:100%; accent-color:var(--gold);">
+
+                        <div style="display:flex; justify-content:space-between; font-size:12px; margin-top:4px;">
+                            <span>🎨 Contraste & Tom da Pele:</span>
+                            <span id="label-contrast" style="color:var(--gold-light); font-weight:700;">110%</span>
+                        </div>
+                        <input type="range" id="slider-contrast" min="100" max="140" value="110" oninput="atualizarFiltros()" style="width:100%; accent-color:var(--gold);">
+                    </div>
+                </div>
+
                 <div class="option-group">
-                    <span class="option-title">2. Disfarce da Camiseta (Cobre Estampas):</span>
+                    <span class="option-title">3. Disfarce da Camiseta (Cobre Estampas):</span>
                     <label style="display:flex; align-items:center; gap:10px; cursor:pointer; margin-bottom:12px; font-size:14px;">
                         <input type="checkbox" id="check-lower-third" checked onchange="toggleLowerThird()">
                         <strong>Tarja Ministerial de Identificação</strong>
@@ -517,16 +550,40 @@ No final da história, a dor acaba, a lágrima é enxugada e nós vencemos com E
             }
         }
 
+        // Variáveis de Filtro de Imagem
+        let filterBrightness = 115;
+        let filterContrast = 110;
+        let ringLightActive = false;
+
+        function toggleRingLight() {
+            ringLightActive = document.getElementById('check-ring-light').checked;
+            if (ringLightActive) {
+                document.body.classList.add('ring-light-active');
+            } else {
+                document.body.classList.remove('ring-light-active');
+            }
+        }
+
+        function atualizarFiltros() {
+            filterBrightness = document.getElementById('slider-brightness').value;
+            filterContrast = document.getElementById('slider-contrast').value;
+            document.getElementById('label-brightness').innerText = filterBrightness + '%';
+            document.getElementById('label-contrast').innerText = filterContrast + '%';
+        }
+
         // Processamento de Vídeo em Tempo Real no Canvas
         function processFrame() {
             if (videoEl.readyState >= 2) {
                 ctx.save();
                 
+                // Aplicar filtros de exposição e contraste na imagem
+                const filterStr = `brightness(${filterBrightness}%) contrast(${filterContrast}%)`;
+
                 if (currentCenario === 'blur') {
                     // Efeito Bokeh / Desfoque de Cinema
-                    ctx.filter = 'blur(10px)';
+                    ctx.filter = `blur(10px) ${filterStr}`;
                     ctx.drawImage(videoEl, 0, 0, canvasEl.width, canvasEl.height);
-                    ctx.filter = 'none';
+                    ctx.filter = filterStr;
 
                     // Camada de nitidez no centro (busto/rosto)
                     const gradRadial = ctx.createRadialGradient(640, 340, 120, 640, 360, 500);
@@ -539,13 +596,16 @@ No final da história, a dor acaba, a lágrima é enxugada e nós vencemos com E
                 } else if (currentCenario === 'studio_dark') {
                     // Cenário Virtual Estúdio Podcast
                     ctx.drawImage(bgCanvasDarkStudio, 0, 0, canvasEl.width, canvasEl.height);
-                    // Composição do apresentador com corte suave
+                    ctx.filter = filterStr;
                     ctx.drawImage(videoEl, 0, 0, canvasEl.width, canvasEl.height);
 
                 } else {
-                    // Normal / Puro
+                    // Normal / Puro com tratamento
+                    ctx.filter = filterStr;
                     ctx.drawImage(videoEl, 0, 0, canvasEl.width, canvasEl.height);
                 }
+
+                ctx.filter = 'none';
 
                 // Vinheta Escura no Peito (Para garantir que a estampa da blusa fique disfarçada!)
                 const chestVignette = ctx.createLinearGradient(0, 500, 0, 720);
