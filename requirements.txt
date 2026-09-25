@@ -5,5 +5,6 @@ pydantic-settings>=2.2.0
 python-multipart>=0.0.9
 flet==0.86.5
 flet-web==0.86.5
+edge-tts>=7.0.0
 sqlite3-to-mysql>=2.1.0; sys_platform == 'never'
 

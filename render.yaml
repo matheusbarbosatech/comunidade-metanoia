@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: ministerio-metanoia
+    name: comunidade-metanoia
     env: python
     region: oregon
     plan: free
