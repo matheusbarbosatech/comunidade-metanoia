@@ -734,6 +734,11 @@
                 display: none;
             }
         }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(1.18); }
+        }
     </style>
 </head>
 <body>
@@ -742,9 +747,13 @@
         <div class="logo">
             Metanoia <span>// Um Refúgio Seguro</span>
         </div>
-        <div style="display: flex; align-items: center; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+            <button id="btn-radio-web" onclick="iniciarRadioWeb()" style="background: rgba(225, 29, 72, 0.15); border: 1px solid rgba(225, 29, 72, 0.4); color: #FDA4AF; padding: 7px 16px; border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.3s;" title="Tocar sem parar em segundo plano">
+                <span style="display: inline-block; width: 8px; height: 8px; background: #EF4444; border-radius: 50%; box-shadow: 0 0 8px #EF4444; animation: pulse 1.5s infinite;"></span>
+                🔴 Rádio Web 24h
+            </button>
             <a href="#louvores" style="color: var(--gold-light); text-decoration: none; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px;">
-                🎶 Playlist Louvor
+                🎶 Playlist (50)
             </a>
             <a href="/plataforma" class="btn-header">Entrar no Refúgio</a>
         </div>
@@ -839,6 +848,26 @@
             🤍 Entrar na Sala & Pedir Cobertura de Oração
         </a>
     </section>
+
+    <!-- SEÇÃO MURAL DE ORAÇÃO & DESABAFO ANÔNIMO -->
+    <section class="card-celula-hospital" id="mural-oracao" style="margin-top: 48px; border-color: rgba(245, 158, 11, 0.35);">
+        <div class="badge-suave">🕊️ Mural de Oração & Intercessão Contínua</div>
+        <h2>Deixe o Peso do Seu Coração no Altar</h2>
+        <p>
+            Mesmo que você só consiga chorar e não tenha forças nem para pedir ajuda: Deus conhece o som das suas lágrimas. 
+            Envie seu desabafo ou pedido anônimo. Nossa liderança e grupo de intercessores estarão clamando pelo seu alívio e restauração.
+        </p>
+
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 24px;">
+            <a href="/plataforma" class="btn-principal" style="background: linear-gradient(135deg, #10B981, #059669); font-size: 16px; padding: 14px 32px;">
+                🙏 Deixar Meu Pedido no Mural de Oração
+            </a>
+            <a href="/plataforma" class="btn-principal" style="background: rgba(255,255,255,0.06); border: 1px solid var(--border); font-size: 16px; padding: 14px 32px;">
+                🤍 Só Preciso de um Abraço e Oração
+            </a>
+        </div>
+    </section>
+
 
     <!-- SEÇÃO LOUVORES & ADORAÇÃO (PLAYLIST MATHEUS) -->
     <section class="secao-louvores" id="louvores">
@@ -1037,12 +1066,45 @@
                 btnPlayPause.textContent = '⏸';
                 playerDock.classList.add('visible');
                 renderizarLista();
+
+                // Integração com a Central de Mídia do Windows e Celular (MediaSession API)
+                if ('mediaSession' in navigator) {
+                    navigator.mediaSession.metadata = new MediaMetadata({
+                        title: m.titulo,
+                        artist: m.artista,
+                        album: 'Ministério Metanoia // Rádio Web Louvor',
+                        artwork: [
+                            { src: 'https://images.unsplash.com/photo-1507692049790-de58290a4334?w=512&h=512&fit=crop', sizes: '512x512', type: 'image/jpeg' }
+                        ]
+                    });
+
+                    navigator.mediaSession.setActionHandler('play', () => { audio.play(); btnPlayPause.textContent = '⏸'; });
+                    navigator.mediaSession.setActionHandler('pause', () => { audio.pause(); btnPlayPause.textContent = '▶'; });
+                    navigator.mediaSession.setActionHandler('previoustrack', () => { btnPrev.click(); });
+                    navigator.mediaSession.setActionHandler('nexttrack', () => { btnNext.click(); });
+                }
             }).catch(err => {
                 console.log("Erro na reprodução:", err);
             });
 
             // Registrar reprodução
             fetch(`/api/v1/musicas/${m.id}/play`, { method: 'POST' }).catch(() => {});
+        }
+
+        function iniciarRadioWeb() {
+            const btn = document.getElementById('btn-radio-web');
+            btn.style.background = 'rgba(16, 185, 129, 0.2)';
+            btn.style.borderColor = '#10B981';
+            btn.style.color = '#6EE7B7';
+            btn.innerHTML = '<span style="display: inline-block; width: 8px; height: 8px; background: #10B981; border-radius: 50%; box-shadow: 0 0 8px #10B981; animation: pulse 1s infinite;"></span> 🟢 RÁDIO NO AR';
+            
+            if (faixaAtualIndex === -1 || audio.paused) {
+                const randIndex = Math.floor(Math.random() * (musicasData.length || 1));
+                const target = musicasData[randIndex] || musicasData[0];
+                if (target) tocarMusicaPorId(target.id);
+            } else {
+                playerDock.classList.add('visible');
+            }
         }
 
         function tocarPrimeiraFaixaOracao(e) {
