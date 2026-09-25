@@ -71,9 +71,15 @@ def stream_audio(musica_id: int, request: Request):
     if not musica:
         raise HTTPException(status_code=404, detail="Música não encontrada.")
 
-    caminho = Path(musica["caminho_completo"])
-    if not caminho.exists():
-        raise HTTPException(status_code=404, detail="Arquivo de áudio físico não encontrado no disco.")
+    caminho = Path(musica["caminho_completo"]) if musica.get("caminho_completo") else None
+    if not caminho or not caminho.exists():
+        # Fallback de Alta Performance para Nuvem (GitHub Releases CDN 24/7):
+        import urllib.parse
+        from fastapi.responses import RedirectResponse
+        arquivo_nome = musica.get("arquivo_nome") or f"{musica['titulo']}.mp3"
+        encoded_name = urllib.parse.quote(arquivo_nome)
+        cdn_url = f"https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/{encoded_name}"
+        return RedirectResponse(url=cdn_url, status_code=307)
 
     file_size = caminho.stat().st_size
     range_header = request.headers.get("range")
