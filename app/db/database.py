@@ -1,0 +1,118 @@
+"""Camada de banco de dados SQLite para o ecossistema ministerial."""
+import sqlite3
+from typing import Generator
+from app.core.config import DB_PATH
+
+def get_connection() -> sqlite3.Connection:
+    """Retorna uma conexão ativa configurada com Row Factory."""
+    conn = sqlite3.connect(DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+def init_db() -> None:
+    """Inicializa as tabelas fundamentais do ministério e da escola de estudos."""
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    # 1. Tabela de Membros & Alunos
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS membros (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome TEXT NOT NULL,
+        email TEXT UNIQUE,
+        whatsapp TEXT,
+        papel TEXT DEFAULT 'aluno', -- aluno, intercessor, lider_celula, pastor
+        ativo BOOLEAN DEFAULT 1,
+        criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+
+    # 2. Cursos & Trilhas de Estudo (Inspirado no currículo teológico)
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS trilhas_teologicas (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nivel TEXT NOT NULL, -- Basico, Medio, Bacharel, Especializacao
+        materia TEXT NOT NULL, -- Ex: Bibliologia, Hermeneutica, Escatologia
+        total_aulas INTEGER DEFAULT 0,
+        descricao TEXT,
+        apostila_path TEXT
+    );
+    """)
+
+    # 3. Aulas e Estudos (Base para os Vídeos Longos do YouTube)
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS estudos_aulas (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        trilha_id INTEGER REFERENCES trilhas_teologicas(id),
+        codigo_aula TEXT, -- Ex: #A0001, #A0189
+        titulo TEXT NOT NULL,
+        texto_biblico TEXT,
+        resumo_conteudo TEXT,
+        video_youtube_url TEXT,
+        status_estudo TEXT DEFAULT 'a_estudar', -- a_estudar, estudado, roteirizado, gravado
+        criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+
+    # 4. Cortes Curtos derivados dos Vídeos Longos (Reels / TikTok / Shorts)
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS cortes_videos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        aula_id INTEGER REFERENCES estudos_aulas(id),
+        titulo_corte TEXT NOT NULL,
+        hook TEXT NOT NULL,
+        timestamp_inicio TEXT,
+        timestamp_fim TEXT,
+        status TEXT DEFAULT 'planejado', -- planejado, renderizado, publicado
+        video_path TEXT,
+        publicado_em TIMESTAMP
+    );
+    """)
+
+    # 5. Devocionais da Forja dos 90 Dias
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS devocionais_90d (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        dia INTEGER UNIQUE NOT NULL,
+        fase TEXT NOT NULL, -- O Resgatado, O Discipulo, O Guerreiro, O Sacerdote, O Patriarca
+        titulo TEXT NOT NULL,
+        versiculo TEXT NOT NULL,
+        conteudo TEXT NOT NULL,
+        ordem_missao TEXT,
+        audio_path TEXT
+    );
+    """)
+
+    # 6. Mural de Oração da Célula Digital
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS pedidos_oracao (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        nome_solicitante TEXT NOT NULL,
+        motivo TEXT NOT NULL,
+        categoria TEXT DEFAULT 'geral', -- saude, familia, espiritual, financas
+        anonimo BOOLEAN DEFAULT 0,
+        status TEXT DEFAULT 'em_oracao', -- em_oracao, respondido
+        intercessoes_count INTEGER DEFAULT 0,
+        criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+
+    # 7. Células Digitais e Encontros Semanais
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS encontros_celula (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        tema TEXT NOT NULL,
+        data_hora TIMESTAMP NOT NULL,
+        link_sala TEXT,
+        material_apoio TEXT,
+        resumo_pos_encontro TEXT,
+        realizado BOOLEAN DEFAULT 0
+    );
+    """)
+
+    conn.commit()
+    conn.close()
+
+if __name__ == "__main__":
+    init_db()
+    print("Banco de dados SQLite inicializado com sucesso!")

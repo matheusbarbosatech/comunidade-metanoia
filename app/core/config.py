@@ -1,0 +1,14 @@
+"""Configurações centrais do sistema Ministério Metanoia."""
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+DATA_DIR = BASE_DIR / "data"
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+
+DB_PATH = DATA_DIR / "ministerio.db"
+
+# Informações da Aplicação
+APP_NAME = "Ministério Metanoia // API Ministerial & Escola Bíblica"
+APP_VERSION = "1.0.0"
+API_PREFIX = "/api/v1"

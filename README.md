@@ -58,6 +58,7 @@ Pegar o indivíduo que acabou de ser encontrado por Jesus (como Saulo na estrada
 
 | Arquivo | Descrição |
 | :--- | :--- |
+| [`ESTRATEGIA_YOUTUBE_E_ESCOLA_TEOLOGICA.md`](./ESTRATEGIA_YOUTUBE_E_ESCOLA_TEOLOGICA.md) | Estratégia do YouTube longo, cortes e currículo da Escola Bíblica. |
 | [`MEGA_PLANO_DE_IMPLEMENTACAO.md`](./MEGA_PLANO_DE_IMPLEMENTACAO.md) | O plano diretor de 5 fases integrando Reino, Célula, Software e IA. |
 | [`ESTRATEGIA_MINISTERIAL_METANOIA.md`](./ESTRATEGIA_MINISTERIAL_METANOIA.md) | Estratégia pastoral completa, livros, cursos teológicos e visão de expansão. |
 | [`MANUAL_DA_VIDA_CRISTA.md`](./MANUAL_DA_VIDA_CRISTA.md) | O manual prático de instrução, protocolos SOS e disciplinas da vida cristã. |
