@@ -53,6 +53,7 @@ except Exception as e:
 
 # Landing Page de Apresentação em '/'
 STATIC_INDEX = Path(__file__).resolve().parent / "static" / "index.html"
+STATIC_TELEPROMPTER = Path(__file__).resolve().parent / "static" / "teleprompter.html"
 
 @app.get("/", response_class=HTMLResponse)
 def index_landing():
@@ -60,6 +61,13 @@ def index_landing():
         with open(STATIC_INDEX, "r", encoding="utf-8") as f:
             return f.read()
     return "<h1>Ministério Metanoia</h1><a href='/plataforma'>Acessar Plataforma</a>"
+
+@app.get("/teleprompter", response_class=HTMLResponse)
+def teleprompter_view():
+    if STATIC_TELEPROMPTER.exists():
+        with open(STATIC_TELEPROMPTER, "r", encoding="utf-8") as f:
+            return f.read()
+    return "<h1>Teleprompter não encontrado</h1>"
 
 if __name__ == "__main__":
     import uvicorn

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teleprompter Ministerial // Refúgio Metanoia</title>
+    <style>
+        :root {
+            --bg-color: #050508;
+            --text-color: #F8FAFC;
+            --highlight: #F59E0B;
+            --instruction: #38BDF8;
+            --pause: #10B981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* Linha Guia de Olhar (Para manter o contato visual com a lente) */
+        .eye-level-guide {
+            position: fixed;
+            top: 35%;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            background: linear-gradient(90deg, rgba(245, 158, 11, 0.08) 0%, rgba(245, 158, 11, 0.18) 50%, rgba(245, 158, 11, 0.08) 100%);
+            border-top: 1px dashed rgba(245, 158, 11, 0.4);
+            border-bottom: 1px dashed rgba(245, 158, 11, 0.4);
+            pointer-events: none;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            color: rgba(245, 158, 11, 0.8);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Container de Rolagem do Texto */
+        #teleprompter-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: scroll;
+            scrollbar-width: none;
+            scroll-behavior: auto;
+            padding: 40vh 15% 60vh 15%;
+        }
+
+        #teleprompter-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        #teleprompter-text {
+            font-size: 42px;
+            line-height: 1.6;
+            font-weight: 600;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            transition: font-size 0.2s ease;
+        }
+
+        p {
+            margin-bottom: 45px;
+        }
+
+        .hook {
+            color: #FBBF24;
+            font-size: 1.15em;
+            font-weight: 800;
+            text-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+        }
+
+        .instrucao {
+            display: block;
+            font-size: 0.55em;
+            color: var(--instruction);
+            background: rgba(56, 189, 248, 0.12);
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 15px auto;
+            width: fit-content;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .pausa {
+            display: block;
+            font-size: 0.55em;
+            color: var(--pause);
+            background: rgba(16, 185, 129, 0.12);
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin: 15px auto;
+            width: fit-content;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .destaque {
+            color: #F59E0B;
+            text-decoration: underline;
+            text-underline-offset: 6px;
+        }
+
+        /* Barra de Controle Flutuante */
+        .controls-bar {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(18, 18, 24, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 40px;
+            padding: 10px 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            z-index: 100;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        .btn-ctrl {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 16px;
+            padding: 10px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-ctrl:hover {
+            background: rgba(245, 158, 11, 0.2);
+            border-color: #F59E0B;
+            color: #F59E0B;
+            transform: translateY(-2px);
+        }
+
+        .btn-play {
+            background: #F59E0B;
+            color: #000;
+            font-size: 18px;
+            padding: 12px 26px;
+            border: none;
+            border-radius: 30px;
+            font-weight: 800;
+        }
+
+        .btn-play:hover {
+            background: #FBBF24;
+            color: #000;
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.5);
+        }
+
+        .stat-badge {
+            font-size: 13px;
+            color: #94A3B8;
+            font-weight: 600;
+            min-width: 75px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            #teleprompter-container {
+                padding: 30vh 8% 50vh 8%;
+            }
+            #teleprompter-text {
+                font-size: 28px;
+            }
+            .controls-bar {
+                width: 92%;
+                justify-content: space-around;
+                padding: 8px 12px;
+                gap: 6px;
+            }
+            .btn-ctrl {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Linha Guia do Olhar (Foque os olhos aqui enquanto fala!) -->
+    <div class="eye-level-guide">
+        <span>👁️ Olhe na Lente</span>
+        <span>Linha de Foco Natural</span>
+        <span>Respire com Calma 🕊️</span>
+    </div>
+
+    <!-- Container do Teleprompter com o Roteiro Oficial do Matheus -->
+    <div id="teleprompter-container">
+        <div id="teleprompter-text">
+            
+            <p>
+                <span class="instrucao">🎬 BLOCO 1 // GANCHO DE ACOLHIMENTO (0 A 15 SEGUNDOS)</span>
+                <span class="instrucao">[Tom calmo, sincero, olhando direto no olho de quem assiste]</span>
+                <span class="hook">Se hoje o seu peito acordou apertado...</span>
+            </p>
+
+            <p>
+                E parece que ninguém ao seu redor entende o tamanho do cansaço que você tá carregando por dentro...
+            </p>
+
+            <p>
+                <span class="pausa">⏸️ [PAUSA DE 2 SEGUNDOS • RESPIRE • NÃO CORRA]</span>
+                Eu quero que você saiba de uma coisa:
+            </p>
+
+            <p>
+                <span class="destaque">Você não caiu nesse vídeo por acaso.</span><br>
+                E você não precisa mais fingir que tá tudo bem.
+            </p>
+
+            <p>
+                <span class="instrucao">🎬 BLOCO 2 // IDENTIFICAÇÃO E VERDADE (15 A 60 SEGUNDOS)</span>
+                Meu nome é Matheus Barbosa.
+            </p>
+
+            <p>
+                Eu não tô aqui como um juiz pra te apontar o dedo, nem pra te cobrar religiosidade ou perfeição.
+            </p>
+
+            <p>
+                Eu tô aqui como um irmão que conhece de perto o que é enfrentar noites escuras da mente, ansiedade e momentos onde até a oração parecia difícil de sair.
+            </p>
+
+            <p>
+                <span class="pausa">⏸️ [PAUSA SUAVE • TOM QUENTE E FRATERNAL]</span>
+                A Bíblia diz em Mateus 11:28 algo muito simples, mas que nós esquecemos no meio da correria:
+            </p>
+
+            <p style="color: #6EE7B7; font-style: italic;">
+                "Venham a mim todos vocês que estão cansados e sobrecarregados, e Eu lhes darei descanso."
+            </p>
+
+            <p>
+                Jesus não pediu pra você se consertar primeiro pra depois se aproximar Dele.
+            </p>
+
+            <p>
+                <span class="destaque">Ele te chamou exatamente do jeito que você está hoje:</span> cansado, ferido, mas vivo.
+            </p>
+
+            <p>
+                <span class="instrucao">🎬 BLOCO 3 // O PROPÓSITO DO REFÚGIO METANOIA (60 A 100 SEGUNDOS)</span>
+                Foi exatamente por isso que nós criamos o <strong>Refúgio Metanoia</strong>.
+            </p>
+
+            <p>
+                Metanoia significa mudança profunda de mente e de coração. É o lugar onde a dor não tem a última palavra.
+            </p>
+
+            <p>
+                Nós preparamos um espaço 100% gratuito:
+            </p>
+
+            <p>
+                Com louvores de adoração tocando 24 horas por dia pra acalmar o seu ambiente...
+            </p>
+
+            <p>
+                Um mural onde você pode pedir oração de forma totalmente anônima, pra nossa célula clamar pelo seu nome...
+            </p>
+
+            <p>
+                E estudos bíblicos profundos, pra forjar a sua fé e a sua identidade.
+            </p>
+
+            <p>
+                <span class="instrucao">🎬 BLOCO 4 // UMA ORAÇÃO RÁPIDA POR VOCÊ (100 A 140 SEGUNDOS)</span>
+                <span class="instrucao">[Feche os olhos suavemente ou olhe com compaixão]</span>
+                Coloca a mão no seu coração agora. Deixa eu orar por você 30 segundos:
+            </p>
+
+            <p>
+                <em>"Senhor Deus, Tu conheces cada pensamento e cada lágrima escondida desse irmão ou dessa irmã agora.</em>
+            </p>
+
+            <p>
+                <em>Entra com a Tua paz que excede todo entendimento. Arranca todo nó na garganta, dissipa todo espírito de ansiedade e medo...</em>
+            </p>
+
+            <p>
+                <em>E lembra o coração dele hoje de que a vida dele tem um valor infinito diante dos Teus olhos. Em nome de Jesus, Amém."</em>
+            </p>
+
+            <p>
+                <span class="instrucao">🎬 BLOCO 5 // CHAMADA FINAL AMOROSA (140 A 170 SEGUNDOS)</span>
+                Se essa mensagem trouxe um alívio pro seu peito:
+            </p>
+
+            <p>
+                Se inscreve aqui no canal pra caminhar com a gente toda semana.
+            </p>
+
+            <p>
+                E clica no link do primeiro comentário ou da descrição pra entrar agora no nosso <strong>Refúgio Metanoia</strong>.
+            </p>
+
+            <p>
+                Lá tem louvores tocando agora mesmo pra você respirar em paz.
+            </p>
+
+            <p>
+                <span class="pausa">⏸️ [SORRISO LEVE • PAZ NO OLHAR]</span>
+                Você não está sozinho. Deus te abençoe, e até o próximo vídeo.
+            </p>
+
+            <div style="height: 300px;"></div>
+        </div>
+    </div>
+
+    <!-- Barra de Controle Fixa na Base -->
+    <div class="controls-bar">
+        <button class="btn-ctrl" id="btn-restart" title="Recomeçar do Início">⏮️ Início</button>
+        <button class="btn-ctrl" id="btn-slower" title="Diminuir Velocidade">🐢 -</button>
+        <button class="btn-ctrl btn-play" id="btn-toggle-play">▶ ROLAR</button>
+        <button class="btn-ctrl" id="btn-faster" title="Aumentar Velocidade">🐇 +</button>
+        <button class="btn-ctrl" id="btn-font" title="Tamanho da Letra">🔤 Tam</button>
+        <div class="stat-badge" id="speed-label">Vel: 2.0</div>
+    </div>
+
+    <script>
+        const container = document.getElementById('teleprompter-container');
+        const textElement = document.getElementById('teleprompter-text');
+        const btnPlay = document.getElementById('btn-toggle-play');
+        const btnRestart = document.getElementById('btn-restart');
+        const btnFaster = document.getElementById('btn-faster');
+        const btnSlower = document.getElementById('btn-slower');
+        const btnFont = document.getElementById('btn-font');
+        const speedLabel = document.getElementById('speed-label');
+
+        let isPlaying = false;
+        let speed = 2.0; // pixels por tick
+        let animationFrameId = null;
+        let fontSizes = [28, 34, 42, 50, 60];
+        let currentFontIdx = 2;
+
+        function updateSpeedLabel() {
+            speedLabel.textContent = `Vel: ${speed.toFixed(1)}`;
+        }
+
+        function scrollStep() {
+            if (isPlaying) {
+                container.scrollTop += speed;
+                animationFrameId = requestAnimationFrame(scrollStep);
+            }
+        }
+
+        function togglePlay() {
+            isPlaying = !isPlaying;
+            if (isPlaying) {
+                btnPlay.textContent = '⏸ PAUSAR';
+                btnPlay.style.background = '#EF4444';
+                scrollStep();
+            } else {
+                btnPlay.textContent = '▶ ROLAR';
+                btnPlay.style.background = '#F59E0B';
+                cancelAnimationFrame(animationFrameId);
+            }
+        }
+
+        btnPlay.addEventListener('click', togglePlay);
+
+        btnRestart.addEventListener('click', () => {
+            container.scrollTop = 0;
+            if (isPlaying) togglePlay();
+        });
+
+        btnFaster.addEventListener('click', () => {
+            speed = Math.min(6.0, speed + 0.5);
+            updateSpeedLabel();
+        });
+
+        btnSlower.addEventListener('click', () => {
+            speed = Math.max(0.5, speed - 0.5);
+            updateSpeedLabel();
+        });
+
+        btnFont.addEventListener('click', () => {
+            currentFontIdx = (currentFontIdx + 1) % fontSizes.length;
+            textElement.style.fontSize = fontSizes[currentFontIdx] + 'px';
+        });
+
+        // Atalhos de teclado (Espaço = Play/Pause, Setas = Velocidade)
+        window.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                togglePlay();
+            } else if (e.code === 'ArrowUp') {
+                e.preventDefault();
+                speed = Math.min(6.0, speed + 0.5);
+                updateSpeedLabel();
+            } else if (e.code === 'ArrowDown') {
+                e.preventDefault();
+                speed = Math.max(0.5, speed - 0.5);
+                updateSpeedLabel();
+            }
+        });
+
+        // Clique na tela para pausar/retomar
+        container.addEventListener('click', (e) => {
+            // Se não clicou nos controles
+            if (!e.target.closest('.controls-bar')) {
+                togglePlay();
+            }
+        });
+    </script>
+</body>
+</html>
