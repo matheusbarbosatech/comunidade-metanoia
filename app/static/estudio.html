@@ -293,6 +293,24 @@
         
         <!-- MONITOR DE GRAVAÇÃO -->
         <div class="camera-panel">
+            <!-- Barra Superior: Seleção de Câmera & Integração OBS -->
+            <div style="width:100%; max-width:820px; display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:10px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:12px; font-weight:700; color:var(--gold-light);">📷 CÂMERA:</span>
+                    <select id="camera-select" onchange="trocarDispositivoCamera()" style="background:#0F131D; color:#FFF; border:1px solid var(--border); padding:6px 12px; border-radius:8px; font-size:12px; outline:none; max-width:280px;">
+                        <option value="">Detectando câmeras e OBS...</option>
+                    </select>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span id="obs-status-badge" style="font-size:11px; padding:4px 10px; border-radius:12px; background:rgba(239,68,68,0.15); color:#EF4444; border:1px solid rgba(239,68,68,0.3); font-weight:700;">
+                        OBS Virtual Cam
+                    </span>
+                    <button onclick="conectarObsWebSocket()" id="btn-obs-ws" style="background:#1F2536; color:var(--gold-light); border:1px solid rgba(245,158,11,0.3); padding:5px 12px; border-radius:8px; font-size:11px; font-weight:600; cursor:pointer;">
+                        🔗 Sincronizar OBS Studio
+                    </button>
+                </div>
+            </div>
+
             <div class="video-wrapper">
                 <video id="webcam-video" autoplay playsinline muted></video>
                 <canvas id="output-canvas" width="1280" height="720"></canvas>
@@ -393,6 +411,21 @@
                         </div>
                         <input type="range" id="slider-contrast" min="100" max="140" value="110" oninput="atualizarFiltros()" style="width:100%; accent-color:var(--gold);">
                     </div>
+                </div>
+
+                <div class="option-group" style="background:#0F1420; border:1px solid rgba(245,158,11,0.35); border-radius:12px; padding:16px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                        <span class="option-title" style="margin-bottom:0;">👕 Filtro Camiseta Preta Fosca (Matte Black)</span>
+                        <input type="checkbox" id="check-black-shirt" onchange="toggleBlackShirt()" checked style="width:20px; height:20px; cursor:pointer; accent-color:var(--gold);">
+                    </div>
+                    <p style="font-size:12px; color:var(--text-muted); line-height:1.5; margin-bottom:10px;">
+                        Remove cores e estampa do tórax mantendo 100% das sombras, dobras e do tecido real. Não fica artificial!
+                    </p>
+                    <div style="display:flex; justify-content:space-between; font-size:12px;">
+                        <span>Escurecimento da Roupa:</span>
+                        <span id="label-shirt-intensity" style="color:var(--gold-light); font-weight:700;">85%</span>
+                    </div>
+                    <input type="range" id="slider-shirt-intensity" min="40" max="100" value="85" oninput="atualizarFiltroCamisa()" style="width:100%; accent-color:var(--gold);">
                 </div>
 
                 <div class="option-group">
@@ -528,32 +561,55 @@ No final da história, a dor acaba, a lágrima é enxugada e nós vencemos com E
         bgCtxStudio.lineWidth = 4;
         bgCtxStudio.strokeRect(100, 80, 1080, 560);
 
-        // Inicializar Webcam
-        async function initCamera() {
+        // Inicializar Webcam (Aceita Câmera padrão ou OBS Virtual Cam)
+        async function initCamera(deviceId = null) {
             try {
+                if (videoEl.srcObject) {
+                    videoEl.srcObject.getTracks().forEach(t => t.stop());
+                }
+                const videoConstraints = { width: { ideal: 1280 }, height: { ideal: 720 } };
+                if (deviceId) {
+                    videoConstraints.deviceId = { exact: deviceId };
+                }
                 const stream = await navigator.mediaDevices.getUserMedia({
-                    video: { width: { ideal: 1280 }, height: { ideal: 720 } },
+                    video: videoConstraints,
                     audio: true
                 });
                 videoEl.srcObject = stream;
                 videoEl.play();
+                listarDispositivosCamera();
                 requestAnimationFrame(processFrame);
             } catch (err) {
                 console.error("Erro ao acessar câmera:", err);
-                // Fallback amigável desenhando na tela
                 ctx.fillStyle = "#0F131D";
                 ctx.fillRect(0, 0, canvasEl.width, canvasEl.height);
                 ctx.fillStyle = "#F59E0B";
                 ctx.font = "24px 'Playfair Display'";
                 ctx.textAlign = "center";
-                ctx.fillText("Permissão de câmera necessária para iniciar o Estúdio", 640, 360);
+                ctx.fillText("Selecione sua câmera ou inicie a Câmera Virtual no OBS Studio", 640, 360);
             }
+        }
+
+        // Filtro de Camiseta Preta
+        let blackShirtActive = true;
+        let shirtIntensity = 0.85;
+
+        function toggleBlackShirt() {
+            blackShirtActive = document.getElementById('check-black-shirt').checked;
+        }
+
+        function atualizarFiltroCamisa() {
+            const val = document.getElementById('slider-shirt-intensity').value;
+            shirtIntensity = val / 100;
+            document.getElementById('label-shirt-intensity').innerText = val + '%';
         }
 
         // Variáveis de Filtro de Imagem
         let filterBrightness = 115;
         let filterContrast = 110;
         let ringLightActive = false;
+        let currentDeviceId = null;
+        let obsWsSocket = null;
 
         function toggleRingLight() {
             ringLightActive = document.getElementById('check-ring-light').checked;
@@ -569,6 +625,65 @@ No final da história, a dor acaba, a lágrima é enxugada e nós vencemos com E
             filterContrast = document.getElementById('slider-contrast').value;
             document.getElementById('label-brightness').innerText = filterBrightness + '%';
             document.getElementById('label-contrast').innerText = filterContrast + '%';
+        }
+
+        // Integração OBS WebSocket (ws://localhost:4455)
+        function conectarObsWebSocket() {
+            const badge = document.getElementById('obs-status-badge');
+            const btn = document.getElementById('btn-obs-ws');
+            badge.innerText = "Conectando...";
+            badge.style.color = "#F59E0B";
+
+            try {
+                obsWsSocket = new WebSocket('ws://localhost:4455');
+                obsWsSocket.onopen = () => {
+                    badge.innerText = "✅ OBS Conectado";
+                    badge.style.color = "#10B981";
+                    badge.style.background = "rgba(16,185,129,0.15)";
+                    badge.style.borderColor = "rgba(16,185,129,0.3)";
+                    btn.innerText = "Sincronizado";
+                };
+                obsWsSocket.onerror = () => {
+                    badge.innerText = "OBS Desconectado";
+                    badge.style.color = "#EF4444";
+                    alert("Para sincronizar os botões com o OBS, abra o OBS Studio no seu PC e certifique-se de que o WebSocket está ativo em Ferramentas > Configurações do Servidor WebSocket.");
+                };
+            } catch(e) {
+                badge.innerText = "OBS Desconectado";
+            }
+        }
+
+        // Listar todos os dispositivos de vídeo disponíveis no PC (Webcam, OBS Virtual Cam, etc.)
+        async function listarDispositivosCamera() {
+            const sel = document.getElementById('camera-select');
+            try {
+                const devices = await navigator.mediaDevices.enumerateDevices();
+                const videoDevices = devices.filter(d => d.kind === 'videoinput');
+                sel.innerHTML = '';
+
+                videoDevices.forEach((d, idx) => {
+                    const opt = document.createElement('option');
+                    opt.value = d.deviceId;
+                    opt.text = d.label || `Câmera ${idx + 1}`;
+                    if (d.label.toLowerCase().includes('obs')) {
+                        opt.text = `⭐ ${d.label} (Recomendado)`;
+                        opt.selected = true;
+                    }
+                    sel.appendChild(opt);
+                });
+
+                if (videoDevices.length === 0) {
+                    sel.innerHTML = '<option value="">Nenhuma câmera detectada</option>';
+                }
+            } catch(e) {
+                console.warn("Erro ao enumerar dispositivos:", e);
+            }
+        }
+
+        async function trocarDispositivoCamera() {
+            const sel = document.getElementById('camera-select');
+            currentDeviceId = sel.value;
+            await initCamera(currentDeviceId);
         }
 
         // Processamento de Vídeo em Tempo Real no Canvas
@@ -607,12 +722,19 @@ No final da história, a dor acaba, a lágrima é enxugada e nós vencemos com E
 
                 ctx.filter = 'none';
 
-                // Vinheta Escura no Peito (Para garantir que a estampa da blusa fique disfarçada!)
-                const chestVignette = ctx.createLinearGradient(0, 500, 0, 720);
-                chestVignette.addColorStop(0, 'rgba(0,0,0,0)');
-                chestVignette.addColorStop(1, 'rgba(7,9,14,0.85)');
-                ctx.fillStyle = chestVignette;
-                ctx.fillRect(0, 500, canvasEl.width, 220);
+                // FILTRO DE CAMISETA PRETA FOSCA INTELIGENTE
+                // Escurece a estampa e harmoniza o tecido do peito mantendo sombras e dobras reais
+                if (blackShirtActive) {
+                    ctx.save();
+                    const chestGradient = ctx.createLinearGradient(0, 460, 0, 720);
+                    chestGradient.addColorStop(0, 'rgba(10, 12, 16, 0)');
+                    chestGradient.addColorStop(0.35, `rgba(10, 12, 16, ${shirtIntensity * 0.85})`);
+                    chestGradient.addColorStop(1, `rgba(5, 7, 10, ${shirtIntensity})`);
+                    
+                    ctx.fillStyle = chestGradient;
+                    ctx.fillRect(0, 460, canvasEl.width, 260);
+                    ctx.restore();
+                }
 
                 ctx.restore();
             }
