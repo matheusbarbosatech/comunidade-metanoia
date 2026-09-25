@@ -110,8 +110,26 @@ def init_db() -> None:
     );
     """)
 
+    # 8. Músicas & Louvores (Playlist Matheus & Repertório Ministerial)
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS musicas_louvores (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        titulo TEXT NOT NULL,
+        artista TEXT NOT NULL,
+        arquivo_nome TEXT NOT NULL UNIQUE,
+        caminho_completo TEXT NOT NULL,
+        tamanho_mb REAL DEFAULT 0,
+        categoria TEXT DEFAULT 'Geral',
+        tags TEXT DEFAULT '',
+        favorito BOOLEAN DEFAULT 0,
+        reproducoes_count INTEGER DEFAULT 0,
+        adicionado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+
     conn.commit()
     conn.close()
+
 
 if __name__ == "__main__":
     init_db()

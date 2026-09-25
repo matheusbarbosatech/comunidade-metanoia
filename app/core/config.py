@@ -12,3 +12,7 @@ DB_PATH = DATA_DIR / "ministerio.db"
 APP_NAME = "Ministério Metanoia // API Ministerial & Escola Bíblica"
 APP_VERSION = "1.0.0"
 API_PREFIX = "/api/v1"
+
+# Diretório Oficial de Músicas / Louvores da Playlist
+MUSIC_PLAYLIST_DIR = Path(r"C:\Users\matheus\Music\Playlist MATHEUS")
+
