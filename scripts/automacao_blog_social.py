@@ -22,6 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BASE_DIR))
 
 from app.db.database import get_connection
+from app.core.config import BASE_URL
 
 OUTPUT_DIR = BASE_DIR / "data" / "posts_redes"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -55,7 +56,7 @@ def gerar_kit_social(artigo: dict) -> dict:
     conteudo_md = artigo["conteudo_markdown"]
     meta = extrair_metadados_estudo(conteudo_md, titulo)
     versiculo_chave = meta["versiculos"][0] if meta["versiculos"] else "Salmos 119:105"
-    url_artigo = f"https://ministerio-ts5s.onrender.com/blog/{slug}"
+    url_artigo = f"{BASE_URL}/blog/{slug}"
 
     # 1. Instagram Carrossel (6 Slides)
     carrossel_slides = [

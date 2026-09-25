@@ -1,5 +1,5 @@
 # 🚀 KIT DE REDES SOCIAIS // Apostila Modulo 1233 08. EVANGELHOS
-**Artigo no Blog:** [https://ministerio-ts5s.onrender.com/blog/apostila-modulo-1233-08-evangelhos](https://ministerio-ts5s.onrender.com/blog/apostila-modulo-1233-08-evangelhos)
+**Artigo no Blog:** [https://comunidade-metanoia.onrender.com/blog/apostila-modulo-1233-08-evangelhos](https://comunidade-metanoia.onrender.com/blog/apostila-modulo-1233-08-evangelhos)
 **Comunidade Metanoia // "Ninguém Luta Sozinho"**
 
 ---
@@ -54,7 +54,7 @@ Na Comunidade Metanoia, ninguém fica para trás.
 🤍 GOSTOU DESTE ESTUDO?
 
 Leia a matéria completa no nosso Blog Bíblico:
-🔗 https://ministerio-ts5s.onrender.com/blog/apostila-modulo-1233-08-evangelhos
+🔗 https://comunidade-metanoia.onrender.com/blog/apostila-modulo-1233-08-evangelhos
 
 💬 Comente 'METANOIA' para receber no direct ou entre na nossa Célula Digital.
 ```
@@ -73,7 +73,7 @@ Neste estudo profundo da nossa Escola Bíblica, analisamos as raízes de Apostil
 João 11:1"
 
 👉 Quer ler a análise completa de graça no nosso Blog?
-Acesse agora pelo link da bio: https://ministerio-ts5s.onrender.com/blog/apostila-modulo-1233-08-evangelhos
+Acesse agora pelo link da bio: https://comunidade-metanoia.onrender.com/blog/apostila-modulo-1233-08-evangelhos
 
 🤍 "Ninguém luta sozinho."
 Marque um irmão que precisa dessa palavra hoje nos comentários!
@@ -123,7 +123,7 @@ João 11:1
 Se você está precisando de direção espiritual, clareza sobre as Escrituras e um renovo para a sua semana, não deixe de ler:
 
 👉 *Clique para ler o estudo completo:*
-https://ministerio-ts5s.onrender.com/blog/apostila-modulo-1233-08-evangelhos
+https://comunidade-metanoia.onrender.com/blog/apostila-modulo-1233-08-evangelhos
 
 Compartilhe com alguém da sua família ou célula que precisa desta mensagem hoje! 🤍
 _Comunidade Metanoia // "Ninguém luta sozinho"_
@@ -147,6 +147,6 @@ João 11:1, vemos que a Revelação de Deus não é um peso moralista, mas um ma
 ```
 
 ```text
-4/4 🤍 Liberamos o estudo teológico completo com acesso livre no nosso blog da Comunidade Metanoia. Leia e compartilhe: https://ministerio-ts5s.onrender.com/blog/apostila-modulo-1233-08-evangelhos
+4/4 🤍 Liberamos o estudo teológico completo com acesso livre no nosso blog da Comunidade Metanoia. Leia e compartilhe: https://comunidade-metanoia.onrender.com/blog/apostila-modulo-1233-08-evangelhos
 ```
 

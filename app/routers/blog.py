@@ -7,6 +7,7 @@ from pathlib import Path
 import re
 import html
 from app.db.database import get_connection
+from app.core.config import BASE_URL
 
 router = APIRouter(tags=["Blog Bíblico & Estudos da Palavra"])
 
@@ -211,7 +212,7 @@ def ler_artigo_blog(slug: str):
 
     escaped_title = html.escape(artigo['titulo'])
     escaped_cat = html.escape(artigo['categoria'])
-    share_url = f"https://comunidade-metanoia.onrender.com/blog/{slug}"
+    share_url = f"{BASE_URL}/blog/{slug}"
     share_text = f"📖 Estudo Bíblico Impactante: {artigo['titulo']}\nLeia completo na Comunidade Metanoia: {share_url}"
     import urllib.parse
     whatsapp_link = f"https://api.whatsapp.com/send?text={urllib.parse.quote(share_text)}"

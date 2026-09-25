@@ -12,6 +12,7 @@ DB_PATH = DATA_DIR / "ministerio.db"
 APP_NAME = "Comunidade Metanoia // Ninguém Luta Sozinho"
 APP_VERSION = "1.0.0"
 API_PREFIX = "/api/v1"
+BASE_URL = os.getenv("BASE_URL", "https://comunidade-metanoia.onrender.com").rstrip("/")
 
 # Diretório Oficial de Músicas / Louvores da Playlist
 MUSIC_PLAYLIST_DIR = Path(r"C:\Users\matheus\Music\Playlist MATHEUS")

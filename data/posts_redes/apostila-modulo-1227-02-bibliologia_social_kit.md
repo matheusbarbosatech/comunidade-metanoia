@@ -1,5 +1,5 @@
 # 🚀 KIT DE REDES SOCIAIS // Apostila Modulo 1227 02. BIBLIOLOGIA
-**Artigo no Blog:** [https://ministerio-ts5s.onrender.com/blog/apostila-modulo-1227-02-bibliologia](https://ministerio-ts5s.onrender.com/blog/apostila-modulo-1227-02-bibliologia)
+**Artigo no Blog:** [https://comunidade-metanoia.onrender.com/blog/apostila-modulo-1227-02-bibliologia](https://comunidade-metanoia.onrender.com/blog/apostila-modulo-1227-02-bibliologia)
 **Comunidade Metanoia // "Ninguém Luta Sozinho"**
 
 ---
@@ -55,7 +55,7 @@ Na Comunidade Metanoia, ninguém fica para trás.
 🤍 GOSTOU DESTE ESTUDO?
 
 Leia a matéria completa no nosso Blog Bíblico:
-🔗 https://ministerio-ts5s.onrender.com/blog/apostila-modulo-1227-02-bibliologia
+🔗 https://comunidade-metanoia.onrender.com/blog/apostila-modulo-1227-02-bibliologia
 
 💬 Comente 'METANOIA' para receber no direct ou entre na nossa Célula Digital.
 ```
@@ -73,7 +73,7 @@ Neste estudo profundo da nossa Escola Bíblica, analisamos as raízes de Apostil
 🕊️ " Mateus 24:35"
 
 👉 Quer ler a análise completa de graça no nosso Blog?
-Acesse agora pelo link da bio: https://ministerio-ts5s.onrender.com/blog/apostila-modulo-1227-02-bibliologia
+Acesse agora pelo link da bio: https://comunidade-metanoia.onrender.com/blog/apostila-modulo-1227-02-bibliologia
 
 🤍 "Ninguém luta sozinho."
 Marque um irmão que precisa dessa palavra hoje nos comentários!
@@ -120,7 +120,7 @@ Acabamos de disponibilizar um estudo bíblico poderoso e totalmente gratuito na 
 Se você está precisando de direção espiritual, clareza sobre as Escrituras e um renovo para a sua semana, não deixe de ler:
 
 👉 *Clique para ler o estudo completo:*
-https://ministerio-ts5s.onrender.com/blog/apostila-modulo-1227-02-bibliologia
+https://comunidade-metanoia.onrender.com/blog/apostila-modulo-1227-02-bibliologia
 
 Compartilhe com alguém da sua família ou célula que precisa desta mensagem hoje! 🤍
 _Comunidade Metanoia // "Ninguém luta sozinho"_
@@ -143,6 +143,6 @@ _Comunidade Metanoia // "Ninguém luta sozinho"_
 ```
 
 ```text
-4/4 🤍 Liberamos o estudo teológico completo com acesso livre no nosso blog da Comunidade Metanoia. Leia e compartilhe: https://ministerio-ts5s.onrender.com/blog/apostila-modulo-1227-02-bibliologia
+4/4 🤍 Liberamos o estudo teológico completo com acesso livre no nosso blog da Comunidade Metanoia. Leia e compartilhe: https://comunidade-metanoia.onrender.com/blog/apostila-modulo-1227-02-bibliologia
 ```
 
