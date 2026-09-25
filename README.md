@@ -58,6 +58,7 @@ Pegar o indivíduo que acabou de ser encontrado por Jesus (como Saulo na estrada
 
 | Arquivo | Descrição |
 | :--- | :--- |
+| [`MEGA_PLANO_DE_IMPLEMENTACAO.md`](./MEGA_PLANO_DE_IMPLEMENTACAO.md) | O plano diretor de 5 fases integrando Reino, Célula, Software e IA. |
 | [`ESTRATEGIA_MINISTERIAL_METANOIA.md`](./ESTRATEGIA_MINISTERIAL_METANOIA.md) | Estratégia pastoral completa, livros, cursos teológicos e visão de expansão. |
 | [`MANUAL_DA_VIDA_CRISTA.md`](./MANUAL_DA_VIDA_CRISTA.md) | O manual prático de instrução, protocolos SOS e disciplinas da vida cristã. |
 | [`PLANO_DE_CONTEUDO_1_ANO.md`](./PLANO_DE_CONTEUDO_1_ANO.md) | Plano de marketing, calendário de 52 semanas e roteiros virais de vídeo. |
