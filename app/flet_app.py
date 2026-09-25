@@ -7,18 +7,94 @@ sys.path.insert(0, str(BASE_DIR))
 
 import flet as ft
 
-# Camada de Compatibilidade Universal Flet (0.8x e 1.0+)
-if not hasattr(ft, "ElevatedButton"):
-    class CompatibleButton(getattr(ft, "Button", object)):
-        def __init__(self, text=None, content=None, *args, **kwargs):
-            color = kwargs.pop("color", None)
-            if text and not content:
-                content = ft.Text(text, color=color)
-            super().__init__(content=content, *args, **kwargs)
-    ft.ElevatedButton = CompatibleButton
-    ft.FilledButton = CompatibleButton
-    ft.OutlinedButton = CompatibleButton
-    ft.TextButton = CompatibleButton
+# Camada de Compatibilidade Universal Flet (0.8x, 0.86+ e 1.0+)
+def _make_compatible_button(orig_cls):
+    if orig_cls is None:
+        return object
+    class CompatibleButton(orig_cls):
+        def __init__(self, *args, **kwargs):
+            text_val = kwargs.pop("text", None)
+            if text_val is not None and "content" not in kwargs:
+                kwargs["content"] = text_val
+            super().__init__(*args, **kwargs)
+
+        @property
+        def text(self):
+            if isinstance(self.content, str):
+                return self.content
+            elif hasattr(self.content, "value"):
+                return self.content.value
+            return ""
+
+        @text.setter
+        def text(self, val):
+            if isinstance(self.content, str) or self.content is None:
+                self.content = val
+            elif hasattr(self.content, "value"):
+                self.content.value = str(val)
+            else:
+                self.content = val
+
+    return CompatibleButton
+
+ft.ElevatedButton = _make_compatible_button(getattr(ft, "ElevatedButton", None) or getattr(ft, "Button", object))
+ft.FilledButton = _make_compatible_button(getattr(ft, "FilledButton", None) or getattr(ft, "Button", object))
+ft.OutlinedButton = _make_compatible_button(getattr(ft, "OutlinedButton", None) or getattr(ft, "Button", object))
+ft.TextButton = _make_compatible_button(getattr(ft, "TextButton", None) or getattr(ft, "Button", object))
+
+# Compatibilidade para Border, Padding e Margin minúsculos vs maiúsculos
+if hasattr(ft, "Border"):
+    ft.border.only = ft.Border.only
+    ft.border.all = ft.Border.all
+    ft.border.symmetric = ft.Border.symmetric
+
+if hasattr(ft, "Padding"):
+    ft.padding.all = ft.Padding.all
+    ft.padding.only = ft.Padding.only
+    ft.padding.symmetric = ft.Padding.symmetric
+
+if hasattr(ft, "Margin"):
+    ft.margin.all = ft.Margin.all
+    ft.margin.only = ft.Margin.only
+    ft.margin.symmetric = ft.Margin.symmetric
+
+# Compatibilidade para ft.Page.dialog e ft.Page.show_snack_bar
+if not hasattr(ft.Page, "dialog"):
+    def _get_page_dialog(self):
+        dialogs = getattr(self, "_dialogs", None)
+        if dialogs and hasattr(dialogs, "controls"):
+            return next((dlg for dlg in reversed(dialogs.controls) if getattr(dlg, "open", False)), None)
+        return getattr(self, "_active_dialog", None)
+
+    def _set_page_dialog(self, dlg):
+        self._active_dialog = dlg
+        if dlg:
+            if hasattr(self, "show_dialog"):
+                try:
+                    self.show_dialog(dlg)
+                except Exception:
+                    pass
+            elif hasattr(self, "overlay"):
+                if dlg not in self.overlay:
+                    self.overlay.append(dlg)
+                dlg.open = True
+                self.update()
+
+    ft.Page.dialog = property(_get_page_dialog, _set_page_dialog)
+
+if not hasattr(ft.Page, "show_snack_bar"):
+    def _show_snack_bar(self, snack_bar):
+        if hasattr(self, "overlay"):
+            if snack_bar not in self.overlay:
+                self.overlay.append(snack_bar)
+            snack_bar.open = True
+            self.update()
+        elif hasattr(self, "snack_bar"):
+            self.snack_bar = snack_bar
+            self.snack_bar.open = True
+            self.update()
+
+    ft.Page.show_snack_bar = _show_snack_bar
 
 from app.db.database import get_connection
 from app.services.music_service import (
@@ -134,9 +210,12 @@ def main(page: ft.Page):
         ], expand=True, spacing=12)
 
     def abrir_detalhe_aula(aula):
-        def fechar(e):
-            dialog.open = False
-            page.update()
+        def fechar(e=None):
+            if hasattr(page, "pop_dialog"):
+                page.pop_dialog()
+            else:
+                dialog.open = False
+                page.update()
 
         dialog = ft.AlertDialog(
             title=ft.Text(aula["titulo"], color=COLOR_ACCENT, weight=ft.FontWeight.BOLD),
@@ -263,6 +342,13 @@ def main(page: ft.Page):
         campo_nome = ft.TextField(label="Seu Nome ou 'Anônimo'", bgcolor="#1E293B", border_color=COLOR_BORDER)
         campo_desabafo = ft.TextField(label="Como está o seu coração hoje? (Desabafe)", multiline=True, min_lines=3, bgcolor="#1E293B", border_color=COLOR_BORDER)
 
+        def fechar(e=None):
+            if hasattr(page, "pop_dialog"):
+                page.pop_dialog()
+            else:
+                dialog.open = False
+                page.update()
+
         def enviar_desabafo(e):
             if campo_desabafo.value:
                 conn = get_connection()
@@ -272,8 +358,7 @@ def main(page: ft.Page):
                 """, (campo_nome.value or "Alguém que precisa de um abraço", campo_desabafo.value, 1 if not campo_nome.value else 0))
                 conn.commit()
                 conn.close()
-                dialog.open = False
-                page.update()
+                fechar()
                 page.show_snack_bar(ft.SnackBar(ft.Text("Seu desabafo foi acolhido. Nossa equipe e grupo de oração já estão intercedendo por você!")))
 
         dialog = ft.AlertDialog(
@@ -288,7 +373,7 @@ def main(page: ft.Page):
                 ], spacing=12)
             ),
             actions=[
-                ft.TextButton("Cancelar", on_click=lambda e: setattr(dialog, 'open', False) or page.update()),
+                ft.TextButton("Cancelar", on_click=lambda e: fechar()),
                 ft.ElevatedButton("Entregar nas Mãos de Deus", bgcolor=COLOR_FLAME, color=COLOR_TEXT, on_click=enviar_desabafo)
             ]
         )
@@ -297,9 +382,12 @@ def main(page: ft.Page):
         page.update()
 
     def abrir_modal_sos():
-        def fechar(e):
-            dialog.open = False
-            page.update()
+        def fechar(e=None):
+            if hasattr(page, "pop_dialog"):
+                page.pop_dialog()
+            else:
+                dialog.open = False
+                page.update()
 
         dialog = ft.AlertDialog(
             title=ft.Text("🕊️ PARE POR UM SEGUNDO. DEUS ESTÁ AQUI.", color=COLOR_ACCENT, weight=ft.FontWeight.BOLD),
