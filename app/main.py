@@ -8,7 +8,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import APP_NAME, APP_VERSION, API_PREFIX
 from app.db.database import init_db
-from app.routers import estudos, oracao, celula, musica, blog, comunidade
+from app.routers import estudos, oracao, celula, musica, blog, comunidade, gamificacao
 from app.services.music_service import sync_music_playlist
 
 
@@ -65,6 +65,7 @@ app.include_router(estudos.router, prefix=API_PREFIX)
 app.include_router(oracao.router, prefix=API_PREFIX)
 app.include_router(celula.router, prefix=API_PREFIX)
 app.include_router(musica.router, prefix=API_PREFIX)
+app.include_router(gamificacao.router, prefix=API_PREFIX)
 
 
 # Montar Plataforma Web Flet interativa em /plataforma

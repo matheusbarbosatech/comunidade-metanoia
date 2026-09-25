@@ -109,7 +109,7 @@ if not hasattr(ft.Page, "show_snack_bar"):
     ft.Page.show_snack_bar = _show_snack_bar
 
 from app.db.database import get_connection
-from app.services import comunidade_service
+from app.services import comunidade_service, gamificacao_service
 
 # Paleta Dark Obsidian & Ouro Imperial
 COLOR_BG = "#08080A"
@@ -133,7 +133,8 @@ def main(page: ft.Page):
         "aba_atual": "comunidade", # Comunidade Circle como espaço principal
         "resumo_selecionado": None,
         "espaco_comunidade_id": None,
-        "busca_comunidade": ""
+        "busca_comunidade": "",
+        "modo_estudos": "gamificado" # "gamificado" (Duolingo) ou "grade" (Catálogo Tradicional)
     }
 
     # Container dinâmico central
@@ -164,7 +165,261 @@ def main(page: ft.Page):
         else:
             page.show_snack_bar(ft.SnackBar(ft.Text(f"Arquivo localizado em: {caminho or 'Pasta Desktop'}")))
 
+    def abrir_apostila_pdf(caminho):
+        if caminho and os.path.exists(caminho):
+            try:
+                os.startfile(caminho)
+                page.show_snack_bar(ft.SnackBar(ft.Text("📑 Abrindo Apostila Oficial em PDF...")))
+            except Exception as ex:
+                page.show_snack_bar(ft.SnackBar(ft.Text(f"Erro ao abrir PDF: {ex}")))
+        else:
+            page.show_snack_bar(ft.SnackBar(ft.Text(f"Apostila localizada em: {caminho or 'Pasta Desktop'}")))
+
+    def abrir_quiz_modal(aula_g):
+        def fechar_quiz(e=None):
+            if hasattr(page, "pop_dialog"):
+                page.pop_dialog()
+            else:
+                dialog_quiz.open = False
+                page.update()
+
+        def selecionar_resposta(opcao_texto):
+            resultado = gamificacao_service.responder_quiz(aula_g["codigo_aula"], opcao_texto)
+            fechar_quiz()
+            if resultado.get("acertou"):
+                page.show_snack_bar(ft.SnackBar(
+                    ft.Text(f"🎉 {resultado['mensagem']} Total: {resultado['novo_xp']} XP!"),
+                    bgcolor="#065F46"
+                ))
+            else:
+                page.show_snack_bar(ft.SnackBar(
+                    ft.Text(f"{resultado['mensagem']}\n{resultado['explicacao']}"),
+                    bgcolor="#991B1B"
+                ))
+            atualizar_tela()
+
+        botoes_opcoes = []
+        for idx, op in enumerate(aula_g.get("quiz_opcoes", [])):
+            letra = chr(65 + idx)
+            botoes_opcoes.append(
+                ft.ElevatedButton(
+                    f"{letra}) {op}",
+                    bgcolor="#1E293B",
+                    color=COLOR_TEXT,
+                    on_click=lambda e, o=op: selecionar_resposta(o)
+                )
+            )
+
+        dialog_quiz = ft.AlertDialog(
+            title=ft.Row([
+                ft.Text(f"⚡ Desafio Bereano: #{aula_g['codigo_aula']}"),
+                ft.Container(
+                    bgcolor="rgba(245, 158, 11, 0.2)",
+                    padding=ft.padding.symmetric(horizontal=8, vertical=4),
+                    border_radius=6,
+                    content=ft.Text("+50 XP", color=COLOR_ACCENT, size=12, weight=ft.FontWeight.BOLD)
+                )
+            ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
+            content=ft.Column([
+                ft.Text(aula_g["quiz_pergunta"], size=15, weight=ft.FontWeight.BOLD, color=COLOR_TEXT),
+                ft.Divider(color=COLOR_BORDER),
+                ft.Column(botoes_opcoes, spacing=8)
+            ], tight=True, width=480),
+            actions=[
+                ft.TextButton("Cancelar", on_click=fechar_quiz)
+            ]
+        )
+
+        if hasattr(page, "open"):
+            page.open(dialog_quiz)
+        else:
+            page.dialog = dialog_quiz
+            dialog_quiz.open = True
+            page.update()
+
     def render_admin_estudos():
+        modo_estudos = estado.get("modo_estudos", "gamificado")
+
+        def alternar_modo(novo_modo):
+            estado["modo_estudos"] = novo_modo
+            atualizar_tela()
+
+        botoes_modo = ft.Row([
+            ft.ElevatedButton(
+                "⚡ Trilha Gamificada Duolingo (Módulo 01)",
+                bgcolor=COLOR_ACCENT if modo_estudos == "gamificado" else COLOR_CARD,
+                color="#000" if modo_estudos == "gamificado" else COLOR_TEXT,
+                on_click=lambda e: alternar_modo("gamificado")
+            ),
+            ft.ElevatedButton(
+                "📑 Grade Tradicional de Aulas",
+                bgcolor=COLOR_ACCENT if modo_estudos == "grade" else COLOR_CARD,
+                color="#000" if modo_estudos == "grade" else COLOR_TEXT,
+                on_click=lambda e: alternar_modo("grade")
+            )
+        ], spacing=10)
+
+        if modo_estudos == "gamificado":
+            dados_g = gamificacao_service.get_modulo1_data()
+            perfil = dados_g["perfil"]
+            mundos = dados_g["mundos"]
+
+            hud_container = ft.Container(
+                bgcolor="#0E1320",
+                border=ft.border.all(1, "rgba(245, 158, 11, 0.35)"),
+                border_radius=16,
+                padding=ft.padding.symmetric(horizontal=20, vertical=16),
+                content=ft.Row([
+                    ft.Row([
+                        ft.Container(
+                            bgcolor="rgba(234, 88, 12, 0.2)",
+                            padding=ft.padding.symmetric(horizontal=12, vertical=8),
+                            border_radius=10,
+                            content=ft.Row([
+                                ft.Text("🔥", size=20),
+                                ft.Column([
+                                    ft.Text(f"{perfil['streak_dias']} Dias", weight=ft.FontWeight.BOLD, size=14, color=COLOR_TEXT),
+                                    ft.Text("Ofensiva Ativa", size=10, color=COLOR_MUTED)
+                                ], spacing=0)
+                            ], spacing=8)
+                        ),
+                        ft.Container(
+                            bgcolor="rgba(245, 158, 11, 0.2)",
+                            padding=ft.padding.symmetric(horizontal=12, vertical=8),
+                            border_radius=10,
+                            content=ft.Row([
+                                ft.Text("⚡", size=20),
+                                ft.Column([
+                                    ft.Text(f"{perfil['xp_total']} XP", weight=ft.FontWeight.BOLD, size=14, color=COLOR_ACCENT),
+                                    ft.Text("Experiência", size=10, color=COLOR_MUTED)
+                                ], spacing=0)
+                            ], spacing=8)
+                        ),
+                        ft.Container(
+                            bgcolor="rgba(56, 189, 248, 0.15)",
+                            padding=ft.padding.symmetric(horizontal=12, vertical=8),
+                            border_radius=10,
+                            content=ft.Row([
+                                ft.Text("🛡️", size=20),
+                                ft.Column([
+                                    ft.Text(f"{perfil['nivel']}", weight=ft.FontWeight.BOLD, size=14, color="#38BDF8"),
+                                    ft.Text("Patente Bereana", size=10, color=COLOR_MUTED)
+                                ], spacing=0)
+                            ], spacing=8)
+                        )
+                    ], wrap=True, spacing=12),
+                    ft.Column([
+                        ft.Row([
+                            ft.Text(f"Progresso: {perfil['aulas_concluidas']} / {perfil['total_aulas']} Aulas", size=12, weight=ft.FontWeight.BOLD, color=COLOR_TEXT),
+                            ft.Text(f"{perfil['porcentagem']}%", size=12, weight=ft.FontWeight.BOLD, color=COLOR_ACCENT)
+                        ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
+                        ft.ProgressBar(
+                            value=perfil["porcentagem"] / 100.0,
+                            color=COLOR_ACCENT,
+                            bgcolor="#1E293B",
+                            width=220,
+                            height=8
+                        )
+                    ], spacing=4)
+                ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN, wrap=True)
+            )
+
+            lista_mundos_controls = []
+            for m in mundos:
+                cards_mundo = []
+                for a in m["aulas"]:
+                    concluida = bool(a.get("concluida"))
+                    card_borda = "#10B981" if concluida else COLOR_BORDER
+                    status_badge = ft.Container(
+                        bgcolor="rgba(16, 185, 129, 0.2)" if concluida else "rgba(245, 158, 11, 0.15)",
+                        padding=ft.padding.symmetric(horizontal=10, vertical=4),
+                        border_radius=20,
+                        content=ft.Text(
+                            "✓ Concluída (+50 XP)" if concluida else "⚡ +50 XP Disponíveis",
+                            color="#10B981" if concluida else COLOR_ACCENT,
+                            size=11,
+                            weight=ft.FontWeight.BOLD
+                        )
+                    )
+
+                    botoes_aula = [
+                        ft.ElevatedButton(
+                            "▶️ Áudio MP3",
+                            bgcolor=COLOR_FLAME,
+                            color=COLOR_TEXT,
+                            on_click=lambda e, p=a["audio_path"], t=a["titulo"]: tocar_aula_audio(p, t)
+                        ),
+                        ft.ElevatedButton(
+                            "📑 Apostila PDF",
+                            bgcolor="#1E293B",
+                            color=COLOR_TEXT,
+                            on_click=lambda e, p=a["apostila_path"]: abrir_apostila_pdf(p)
+                        ),
+                        ft.ElevatedButton(
+                            "⚡ Desafio (Quiz)" if not concluida else "✓ Refazer Quiz",
+                            bgcolor=COLOR_ACCENT if not concluida else "#065F46",
+                            color="#000" if not concluida else "#FFF",
+                            on_click=lambda e, ag=a: abrir_quiz_modal(ag)
+                        )
+                    ]
+
+                    cards_mundo.append(
+                        ft.Container(
+                            bgcolor=COLOR_CARD,
+                            border=ft.border.all(1, card_borda),
+                            border_radius=14,
+                            padding=18,
+                            content=ft.Column([
+                                ft.Row([
+                                    ft.Text(a.get("icone", "📖"), size=26),
+                                    ft.Column([
+                                        ft.Text(a["titulo"], size=16, weight=ft.FontWeight.BOLD, color=COLOR_TEXT),
+                                        ft.Text(f"📖 {a['texto_biblico']}", size=12, color="#38BDF8")
+                                    ], spacing=2, expand=True),
+                                    status_badge
+                                ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
+                                ft.Text(a["resumo"], size=13, color=COLOR_MUTED),
+                                ft.Row(botoes_aula, alignment=ft.MainAxisAlignment.END, spacing=10, wrap=True)
+                            ], spacing=10)
+                        )
+                    )
+
+                lista_mundos_controls.append(
+                    ft.Container(
+                        bgcolor="#0B0E17",
+                        border=ft.border.all(1, "rgba(245, 158, 11, 0.25)"),
+                        border_radius=18,
+                        padding=18,
+                        content=ft.Column([
+                            ft.Row([
+                                ft.Container(
+                                    bgcolor="rgba(245, 158, 11, 0.15)",
+                                    padding=ft.padding.symmetric(horizontal=10, vertical=4),
+                                    border_radius=8,
+                                    content=ft.Text(f"MUNDO 0{m['id']}", size=11, color=COLOR_ACCENT, weight=ft.FontWeight.BOLD)
+                                ),
+                                ft.Text(m["nome"], size=17, weight=ft.FontWeight.BOLD, color=COLOR_TEXT)
+                            ], spacing=10),
+                            ft.Divider(color=COLOR_BORDER),
+                            ft.Column(cards_mundo, spacing=12)
+                        ], spacing=12)
+                    )
+                )
+
+            return ft.Column([
+                ft.Row([
+                    ft.Column([
+                        ft.Text("⚡ Trilha Gamificada Bíblica // Módulo 01", size=22, weight=ft.FontWeight.BOLD, color=COLOR_TEXT),
+                        ft.Text("Aprenda Introdução à Teologia com o método gamificado do Duolingo: áudios, apostilas e ganho de XP.", size=14, color=COLOR_MUTED)
+                    ], spacing=4),
+                    botoes_modo
+                ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN, wrap=True),
+                hud_container,
+                ft.Divider(color=COLOR_BORDER),
+                ft.ListView(controls=lista_mundos_controls, spacing=20, expand=True)
+            ], expand=True, spacing=14)
+
+        # MODO GRADE TRADICIONAL
         conn = get_connection()
         cursor = conn.cursor()
 
@@ -302,13 +557,8 @@ def main(page: ft.Page):
                     ft.Text("📚 Escola Bíblica & Apostilas Teológicas", size=22, weight=ft.FontWeight.BOLD, color=COLOR_TEXT),
                     ft.Text("15 Aulas de Introdução à Teologia, Bibliologia e acervo de apostilas completas.", size=14, color=COLOR_MUTED)
                 ], spacing=4),
-                ft.Container(
-                    bgcolor=COLOR_CARD,
-                    border_radius=8,
-                    padding=ft.padding.symmetric(horizontal=14, vertical=8),
-                    content=ft.Text(f"{len(aulas)} Aulas Listadas", color=COLOR_ACCENT, weight=ft.FontWeight.BOLD)
-                )
-            ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
+                botoes_modo
+            ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN, wrap=True),
             ft.Row(botoes_filtro, scroll=ft.ScrollMode.AUTO),
             ft.Divider(color=COLOR_BORDER),
             ft.ListView(controls=cards_aulas, spacing=16, expand=True)
@@ -892,11 +1142,12 @@ def main(page: ft.Page):
             ], alignment=ft.MainAxisAlignment.START),
             ft.Row([
                 btn_role,
-                ft.IconButton(ft.Icons.FORUM_ROUNDED, tooltip="🌐 Rede Social // Comunidade Circle", on_click=lambda e: navegar_para("comunidade")),
-                ft.IconButton(ft.Icons.BOOK_ROUNDED, tooltip="Estudos & Apostilas", on_click=lambda e: navegar_para("estudos")),
+                ft.IconButton(ft.Icons.BOLT_ROUNDED, tooltip="⚡ Trilha Gamificada Duolingo (Módulo 01)", icon_color=COLOR_ACCENT, on_click=lambda e: (estado.update({"aba_atual": "estudos", "modo_estudos": "gamificado"}), atualizar_tela())),
+                ft.IconButton(ft.Icons.FORUM_ROUNDED, tooltip="🌐 Rede Social // Comunidade Skool", on_click=lambda e: navegar_para("comunidade")),
+                ft.IconButton(ft.Icons.BOOK_ROUNDED, tooltip="Estudos & Apostilas", on_click=lambda e: (estado.update({"aba_atual": "estudos", "modo_estudos": "grade"}), atualizar_tela())),
                 ft.IconButton(ft.Icons.VOLUNTEER_ACTIVISM_ROUNDED, tooltip="Mural de Oração", on_click=lambda e: navegar_para("oracao")),
                 ft.IconButton(ft.Icons.PEOPLE_ROUNDED, tooltip="Célula Digital", on_click=lambda e: navegar_para("celula")),
-            ], spacing=12)
+            ], spacing=10)
         ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
     )
 

@@ -275,6 +275,13 @@ def init_db() -> None:
         VALUES (?, ?, ?, ?, ?, ?)
         """, comentarios_iniciais)
 
+    # 15. Trilha Gamificada Bíblica (Módulo 01 - 15 Aulas)
+    try:
+        from app.services.gamificacao_service import init_gamificacao_db
+        init_gamificacao_db(conn)
+    except Exception as e:
+        print(f"[AVISO] Falha ao inicializar gamificação: {e}")
+
     conn.commit()
     conn.close()
 
