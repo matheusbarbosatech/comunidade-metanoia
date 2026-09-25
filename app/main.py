@@ -5,17 +5,16 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
-import flet.fastapi as flet_fastapi
-
 from app.core.config import APP_NAME, APP_VERSION, API_PREFIX
 from app.db.database import init_db
-from app.routers import estudos, oracao, celula
-from app.flet_app import main as flet_main
+from app.routers import estudos, oracao, celula, musica
+from app.services.music_service import sync_music_playlist
+
 
 app = FastAPI(
     title=APP_NAME,
     version=APP_VERSION,
-    description="Backend e Plataforma oficial de Escola Bíblica, Discipulado, Célula Digital e Gestão Ministerial.",
+    description="Backend e Plataforma oficial de Escola Bíblica, Discipulado, Célula Digital, Gestão Ministerial e Playlist de Adoração.",
     docs_url="/docs",
     redoc_url="/redoc"
 )
@@ -29,18 +28,28 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Inicializar Banco SQLite no startup
+# Inicializar Banco SQLite e Sincronizar Músicas no startup
 @app.on_event("startup")
 def on_startup():
     init_db()
+    sync_music_playlist()
 
 # Incluir Roteadores REST API
 app.include_router(estudos.router, prefix=API_PREFIX)
 app.include_router(oracao.router, prefix=API_PREFIX)
 app.include_router(celula.router, prefix=API_PREFIX)
+app.include_router(musica.router, prefix=API_PREFIX)
+
 
 # Montar Plataforma Web Flet interativa em /plataforma
-app.mount("/plataforma", flet_fastapi.app(flet_main))
+try:
+    import flet.fastapi as flet_fastapi
+    from app.flet_app import main as flet_main
+    app.mount("/plataforma", flet_fastapi.app(flet_main))
+    print("[OK] Plataforma Web Flet montada com sucesso em /plataforma")
+except Exception as e:
+    print(f"[AVISO] Flet Web não pôde ser montado em /plataforma: {e}")
+
 
 # Landing Page de Apresentação em '/'
 STATIC_INDEX = Path(__file__).resolve().parent / "static" / "index.html"
