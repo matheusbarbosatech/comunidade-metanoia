@@ -1,8 +1,8 @@
 # 🛡️ RELATÓRIO OFICIAL DE AUDITORIA & TESTES E2E
 > **Ministério Metanoia // Plataforma Pastoral, Escola Teológica & Landing Page**  
-> **Data da Auditoria:** 25/09/2026 às 16:48:56  
+> **Data da Auditoria:** 25/09/2026 às 16:54:18  
 > **Taxa de Sucesso:** 100.0% (25/25 testes aprovados)  
-> **Tempo de Execução:** 1.2 segundos  
+> **Tempo de Execução:** 1.92 segundos  
 
 ---
 
@@ -20,53 +20,53 @@
 
 ### 🔍 Detalhamento dos Testes Executados
 
-- ✅ **[Banco de Dados]** Tabelas Essenciais Criadas — *3.0ms*
+- ✅ **[Banco de Dados]** Tabelas Essenciais Criadas — *5.0ms*
   > *Detalhes:* `Esperadas: ['membros', 'trilhas_teologicas', 'estudos_aulas', 'cortes_videos', 'devocionais_90d', 'pedidos_oracao', 'encontros_celula', 'musicas_louvores']. Encontradas: ['membros', 'sqlite_sequence', 'trilhas_teologicas', 'estudos_aulas', 'cortes_videos', 'devocionais_90d', 'pedidos_oracao', 'encontros_celula', 'musicas_louvores', 'artigos_blog', 'postagens_redes_sociais']`
-- ✅ **[Banco de Dados]** Trilhas Teológicas Pré-Cadastradas — *1.0ms*
+- ✅ **[Banco de Dados]** Trilhas Teológicas Pré-Cadastradas — *0.0ms*
   > *Detalhes:* `Total de trilhas: 5 (esperado >= 5)`
-- ✅ **[Banco de Dados]** Acervo de Apostilas & Resumos Markdown — *0.0ms*
+- ✅ **[Banco de Dados]** Acervo de Apostilas & Resumos Markdown — *1.0ms*
   > *Detalhes:* `Total de resumos em data/resumos_estudos/: 13`
-- ✅ **[Usuário Final]** Acesso à Landing Page & Elementos Emocionais — *36.99ms*
+- ✅ **[Usuário Final]** Acesso à Landing Page & Elementos Emocionais — *58.0ms*
   > *Detalhes:* `Status: 200. Contém todos os blocos acolhedores.`
-- ✅ **[Usuário Final]** Envio de Pedido de Oração / Desabafo de Ansiedade — *95.82ms*
-  > *Detalhes:* `ID retornado: 21, Status: 200`
-- ✅ **[Usuário Final]** Envio de Pedido Anônimo (Desemprego) — *144.2ms*
+- ✅ **[Usuário Final]** Envio de Pedido de Oração / Desabafo de Ansiedade — *206.76ms*
+  > *Detalhes:* `ID retornado: 23, Status: 200`
+- ✅ **[Usuário Final]** Envio de Pedido Anônimo (Desemprego) — *180.69ms*
   > *Detalhes:* `Status: 200`
-- ✅ **[Usuário Final]** Mural Público Exibe Pedidos Ativos — *7.99ms*
-  > *Detalhes:* `Total de pedidos no mural: 22`
-- ✅ **[Usuário Final]** Ação de Intercessão Comunitária ('Orar por este irmão') — *124.96ms*
+- ✅ **[Usuário Final]** Mural Público Exibe Pedidos Ativos — *8.71ms*
+  > *Detalhes:* `Total de pedidos no mural: 24`
+- ✅ **[Usuário Final]** Ação de Intercessão Comunitária ('Orar por este irmão') — *146.04ms*
   > *Detalhes:* `Resposta: {"status":"sucesso","mensagem":"Oração computada! Ninguém luta sozinho."}`
-- ✅ **[Usuário Final]** Consulta ao Próximo Encontro da Célula Digital — *52.49ms*
+- ✅ **[Usuário Final]** Consulta ao Próximo Encontro da Célula Digital — *9.0ms*
   > *Detalhes:* `Status: 200`
-- ✅ **[Usuário Final]** Listagem do Acervo de Louvores & Adoração — *22.0ms*
+- ✅ **[Usuário Final]** Listagem do Acervo de Louvores & Adoração — *15.0ms*
   > *Detalhes:* `Total de faixas disponíveis: 50`
 - ✅ **[Usuário Final]** Filtro Musical por Categoria (Guerra & Fé) — *8.0ms*
   > *Detalhes:* `Faixas filtradas: 0`
-- ✅ **[Usuário Final]** Favoritar Faixa no Player — *131.81ms*
-  > *Detalhes:* `Favorito: True`
-- ✅ **[Usuário Final]** Registrar Reprodução de Louvor — *131.92ms*
+- ✅ **[Usuário Final]** Favoritar Faixa no Player — *167.55ms*
+  > *Detalhes:* `Favorito: False`
+- ✅ **[Usuário Final]** Registrar Reprodução de Louvor — *277.0ms*
   > *Detalhes:* `Resposta: {'sucesso': True}`
-- ✅ **[Liderança ADM]** Consulta às 5 Trilhas da Escola Teológica — *8.0ms*
+- ✅ **[Liderança ADM]** Consulta às 5 Trilhas da Escola Teológica — *10.0ms*
   > *Detalhes:* `Trilhas mapeadas: 5`
-- ✅ **[Liderança ADM]** Cadastrar Estudo / Vídeo Planejado para YouTube — *136.15ms*
-  > *Detalhes:* `Aula ID criada: 24`
-- ✅ **[Liderança ADM]** Mapear Corte de Ouro para Redes Sociais — *108.1ms*
-  > *Detalhes:* `Corte ID: 11`
-- ✅ **[Liderança ADM]** Agendamento de Encontro da Célula Digital — *122.46ms*
-  > *Detalhes:* `Encontro ID: 11`
-- ✅ **[Liderança ADM]** Próximo Encontro Refletido na Célula Digital — *7.0ms*
+- ✅ **[Liderança ADM]** Cadastrar Estudo / Vídeo Planejado para YouTube — *178.55ms*
+  > *Detalhes:* `Aula ID criada: 25`
+- ✅ **[Liderança ADM]** Mapear Corte de Ouro para Redes Sociais — *198.0ms*
+  > *Detalhes:* `Corte ID: 12`
+- ✅ **[Liderança ADM]** Agendamento de Encontro da Célula Digital — *365.1ms*
+  > *Detalhes:* `Encontro ID: 12`
+- ✅ **[Liderança ADM]** Próximo Encontro Refletido na Célula Digital — *6.0ms*
   > *Detalhes:* `Tema retornado: Elias na Caverna: Quando o Profeta Deseja a Morte`
-- ✅ **[Liderança ADM]** Painel de Métricas do Acervo Musical — *7.0ms*
-  > *Detalhes:* `Métricas: {'total_faixas': 50, 'total_mb': 337.2, 'favoritos': 1, 'por_categoria': {'Graça & Restauração': 10, 'Guerra Espiritual & Fé': 13, 'Oração & Adoração': 9, 'Pentecostal & Celebração': 3, 'Trap Gospel & Edificação': 15}}`
-- ✅ **[Plataforma Flet]** Endpoint Flet ASGI Web (/plataforma) — *45.08ms*
+- ✅ **[Liderança ADM]** Painel de Métricas do Acervo Musical — *9.0ms*
+  > *Detalhes:* `Métricas: {'total_faixas': 50, 'total_mb': 337.2, 'favoritos': 0, 'por_categoria': {'Graça & Restauração': 10, 'Guerra Espiritual & Fé': 13, 'Oração & Adoração': 9, 'Pentecostal & Celebração': 3, 'Trap Gospel & Edificação': 15}}`
+- ✅ **[Plataforma Flet]** Endpoint Flet ASGI Web (/plataforma) — *60.79ms*
   > *Detalhes:* `Status code retornado: 200`
-- ✅ **[Documentação API]** Swagger UI Ativo (/docs) — *3.0ms*
+- ✅ **[Documentação API]** Swagger UI Ativo (/docs) — *5.0ms*
   > *Detalhes:* `Status: 200`
-- ✅ **[Plataforma Desktop]** Script Nativo app/flet_app.py Presente — *0.0ms*
+- ✅ **[Plataforma Desktop]** Script Nativo app/flet_app.py Presente — *1.0ms*
   > *Detalhes:* `Tamanho do arquivo: 25811 bytes`
 - ✅ **[Mobile APK/AAB]** Ponto de Entrada Nativo main.py Presente — *0.0ms*
   > *Detalhes:* `Localizado em: C:\Users\matheus\Desktop\ministerio\main.py`
-- ✅ **[Automação IA]** Script Deepgram Nova-2 (transcritor_deepgram.py) — *0.0ms*
+- ✅ **[Automação IA]** Script Deepgram Nova-2 (transcritor_deepgram.py) — *1.02ms*
   > *Detalhes:* `Localizado em: C:\Users\matheus\Desktop\ministerio\scripts\transcritor_deepgram.py`
 - ✅ **[Automação IA]** Atalho Executável .bat Deepgram Presente — *0.0ms*
   > *Detalhes:* `Localizado em: C:\Users\matheus\Desktop\ministerio\3_TRANSCREVER_AUDIOS_DEEPGRAM.bat`
