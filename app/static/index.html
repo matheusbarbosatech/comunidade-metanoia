@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ministério Metanoia // Um Refúgio para a Sua Alma</title>
+    <title>Comunidade Metanoia // "Ninguém Luta Sozinho"</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
@@ -737,7 +737,88 @@
 
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(1.18); }
+        /* SEÇÃO SOS MADRUGADA (MODELADO DO GLORIFY) */
+        .secao-sos {
+            margin: 60px auto;
+            max-width: 860px;
+            padding: 36px 32px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(17, 20, 29, 0.9) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box-respiracao {
+            margin: 28px auto 20px;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0%, rgba(16, 185, 129, 0.05) 70%);
+            border: 2px solid #10B981;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: respirarCycle 12s infinite ease-in-out;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.25);
+            transition: all 0.3s;
+        }
+
+        .box-respiracao:hover {
+            box-shadow: 0 0 35px rgba(16, 185, 129, 0.5);
+        }
+
+        @keyframes respirarCycle {
+            0%, 100% { transform: scale(1); border-color: #10B981; }
+            33% { transform: scale(1.2); border-color: #38BDF8; box-shadow: 0 0 35px rgba(56, 189, 248, 0.4); }
+            66% { transform: scale(1.08); border-color: #F59E0B; }
+        }
+
+        /* SEÇÃO ESCOLA BÍBLICA METANOIA (MODELADO DA ACADEMIA DE PREGADORES & BIBLEPROJECT) */
+        .secao-escola {
+            margin: 80px auto;
+            max-width: 1100px;
+            padding: 0 24px;
+        }
+
+        .grid-trilhas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 22px;
+            margin-top: 36px;
+        }
+
+        .card-trilha {
+            background: #11141D;
+            border: 1px solid var(--border-card);
+            border-radius: 20px;
+            padding: 26px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-trilha:hover {
+            transform: translateY(-5px);
+            border-color: rgba(245, 158, 11, 0.4);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .trilha-nivel {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
         }
     </style>
 </head>
@@ -745,17 +826,23 @@
 
     <header>
         <div class="logo">
-            Metanoia <span>// Um Refúgio Seguro</span>
+            Comunidade Metanoia <span>// "Ninguém Luta Sozinho"</span>
         </div>
-        <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
             <button id="btn-radio-web" onclick="iniciarRadioWeb()" style="background: rgba(225, 29, 72, 0.15); border: 1px solid rgba(225, 29, 72, 0.4); color: #FDA4AF; padding: 7px 16px; border-radius: 50px; font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: all 0.3s;" title="Tocar sem parar em segundo plano">
                 <span style="display: inline-block; width: 8px; height: 8px; background: #EF4444; border-radius: 50%; box-shadow: 0 0 8px #EF4444; animation: pulse 1.5s infinite;"></span>
                 🔴 Rádio Web 24h
             </button>
-            <a href="#louvores" style="color: var(--gold-light); text-decoration: none; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px;">
-                🎶 Playlist (50)
+            <a href="#sos-madrugada" style="color: #6EE7B7; text-decoration: none; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 5px;">
+                🌿 SOS Madrugada
             </a>
-            <a href="/plataforma" class="btn-header">Entrar no Refúgio</a>
+            <a href="#escola-biblica" style="color: var(--gold-light); text-decoration: none; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 5px;">
+                📖 Escola Bíblica
+            </a>
+            <a href="#louvores" style="color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 5px;">
+                🎶 Louvores (50)
+            </a>
+            <a href="/plataforma" class="btn-header">Entrar na Comunidade</a>
         </div>
     </header>
 
@@ -810,6 +897,41 @@
                 <h3>O Desemprego & A Humilhação</h3>
                 <p>O envio de dezenas de currículos sem resposta, a vergonha de não conseguir honrar a mesa e o peso da incerteza. Deus conhece o seu suor e não te deixará desamparado.</p>
             </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO SOS MADRUGADA & RESPIRAÇÃO BÍBLICA (MODELO GLORIFY) -->
+    <section class="secao-sos" id="sos-madrugada">
+        <div class="tag-acolhimento" style="color: #6EE7B7; border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.1);">
+            🌿 SOS Madrugada // Alívio Imediato da Crise
+        </div>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; color: var(--text-title); margin: 14px 0 10px;">
+            O Coração Apertou? Respire Fundo com a Palavra.
+        </h2>
+        <p style="color: var(--text-muted); font-size: 15px; max-width: 640px; margin: 0 auto;">
+            Quando o ar parecer faltar ou a insônia bater forte na madrugada: toque no círculo abaixo e acompanhe o ritmo da respiração guiada enquanto descansa na promessa do Pai.
+        </p>
+
+        <div class="box-respiracao" id="circulo-sos" onclick="alternarRespiracaoGuiada()" title="Toque para iniciar o exercício de respiração bíblica">
+            <span style="font-size: 24px;" id="icone-respiro">🕊️</span>
+            <span style="font-size: 13px; font-weight: 700; margin-top: 4px;" id="texto-respiro">Inspire Paz</span>
+            <span style="font-size: 11px; opacity: 0.75;" id="segundos-respiro">4s</span>
+        </div>
+
+        <div class="quote-box" style="margin-top: 20px; padding: 18px 24px; border-color: rgba(16, 185, 129, 0.3);">
+            <p style="font-size: 17px; color: #A7F3D0;">
+                "Em paz me deito e logo pego no sono, porque só Tu, Senhor, me fazes viver em segurança."
+            </p>
+            <span style="color: #6EE7B7;">Salmo 4:8</span>
+        </div>
+
+        <div style="margin-top: 22px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+            <button onclick="tocarPrimeiraFaixaOracao(event)" class="btn-principal" style="background: linear-gradient(135deg, #10B981, #059669); font-size: 14px; padding: 12px 26px;">
+                🎧 Tocar Louvor de Oração Agora
+            </button>
+            <a href="/teleprompter" class="btn-header" style="font-size: 14px; padding: 12px 24px; border-color: rgba(245, 158, 11, 0.4);">
+                📜 Ouvir Mensagem de Paz
+            </a>
         </div>
     </section>
 
@@ -868,6 +990,91 @@
         </div>
     </section>
 
+    <!-- SEÇÃO ESCOLA BÍBLICA METANOIA (MODELO ACADEMIA DE PREGADORES & BIBLEPROJECT) -->
+    <section class="secao-escola" id="escola-biblica">
+        <div style="text-align: center; max-width: 780px; margin: 0 auto;">
+            <div class="tag-acolhimento" style="color: var(--gold-light); border-color: rgba(245, 158, 11, 0.35);">
+                📖 Escola Bíblica Metanoia // Discipulado & Formação Teológica
+            </div>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 36px; color: var(--text-title); margin: 16px 0 12px;">
+                Aprofunde Suas Raízes na Palavra de Deus
+            </h2>
+            <p style="color: var(--text-muted); font-size: 16px;">
+                Depois de ser acolhido e curado pela comunidade, é hora de ser forjado na Verdade. Mais de 800 estudos, 5 trilhas estruturadas e resumos bíblicos didáticos para edificação da sua fé.
+            </p>
+        </div>
+
+        <div class="grid-trilhas">
+            <div class="card-trilha">
+                <div>
+                    <span class="trilha-nivel" style="background: rgba(56, 189, 248, 0.15); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.3);">Nível Básico</span>
+                    <h3 style="color: var(--text-title); font-size: 20px; margin-bottom: 8px;">1. Fundamentos & O Resgatado</h3>
+                    <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">Bibliologia, autoridade das Escrituras, a doutrina da Graça e a certeza da salvação para quem está começando a caminhada cristã.</p>
+                </div>
+                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-card); display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 13px; color: var(--gold-light); font-weight: 600;">📑 Apostila PDF Incluída</span>
+                    <span style="font-size: 13px; color: var(--text-muted);">Trilha 01</span>
+                </div>
+            </div>
+
+            <div class="card-trilha">
+                <div>
+                    <span class="trilha-nivel" style="background: rgba(245, 158, 11, 0.15); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.3);">Nível Médio</span>
+                    <h3 style="color: var(--text-title); font-size: 20px; margin-bottom: 8px;">2. Oração & Batalha Espiritual</h3>
+                    <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">O poder do clamor secreto, jejum bíblico, a armadura de Deus em Efésios 6 e autoridade espiritual em dias de batalha.</p>
+                </div>
+                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-card); display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 13px; color: var(--gold-light); font-weight: 600;">📑 Apostila PDF Incluída</span>
+                    <span style="font-size: 13px; color: var(--text-muted);">Trilha 02</span>
+                </div>
+            </div>
+
+            <div class="card-trilha">
+                <div>
+                    <span class="trilha-nivel" style="background: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.3);">Nível Avançado</span>
+                    <h3 style="color: var(--text-title); font-size: 20px; margin-bottom: 8px;">3. Hermenêutica & Interpretação</h3>
+                    <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">Aprenda a interpretar qualquer texto da Bíblia sem tirar do contexto histórico, cultural e literário, guardando a sã doutrina.</p>
+                </div>
+                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-card); display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 13px; color: var(--gold-light); font-weight: 600;">📑 Apostila PDF Incluída</span>
+                    <span style="font-size: 13px; color: var(--text-muted);">Trilha 03</span>
+                </div>
+            </div>
+
+            <div class="card-trilha">
+                <div>
+                    <span class="trilha-nivel" style="background: rgba(192, 132, 252, 0.15); color: #C084FC; border: 1px solid rgba(192, 132, 252, 0.3);">Nível Bacharel</span>
+                    <h3 style="color: var(--text-title); font-size: 20px; margin-bottom: 8px;">4. Panorama dos 66 Livros</h3>
+                    <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">Estudo esquematizado estilo BibleProject: o fio condutor de Cristo desde o Gênesis até as profecias do Apocalipse.</p>
+                </div>
+                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-card); display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 13px; color: var(--gold-light); font-weight: 600;">📑 Apostila PDF Incluída</span>
+                    <span style="font-size: 13px; color: var(--text-muted);">Trilha 04</span>
+                </div>
+            </div>
+
+            <div class="card-trilha">
+                <div>
+                    <span class="trilha-nivel" style="background: rgba(251, 113, 133, 0.15); color: #FB7185; border: 1px solid rgba(251, 113, 133, 0.3);">Especialização</span>
+                    <h3 style="color: var(--text-title); font-size: 20px; margin-bottom: 8px;">5. Aconselhamento & Célula Digital</h3>
+                    <p style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">Como acolher e discipular pessoas quebrantadas, lidar com desabafos e liderar pequenos grupos de apoio com amor cristão.</p>
+                </div>
+                <div style="margin-top: 18px; padding-top: 14px; border-top: 1px solid var(--border-card); display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 13px; color: var(--gold-light); font-weight: 600;">📑 Apostila PDF Incluída</span>
+                    <span style="font-size: 13px; color: var(--text-muted);">Trilha 05</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="/plataforma" class="btn-principal" style="font-size: 16px; padding: 16px 38px;">
+                📚 Acessar Escola Bíblica & Apostilas na Plataforma
+            </a>
+            <p style="margin-top: 12px; font-size: 13px; color: var(--gold-light);">
+                ✦ 100% Gratuito • Inspirado no modelo BibleProject de generosidade e livre acesso à Palavra
+            </p>
+        </div>
+    </section>
 
     <!-- SEÇÃO LOUVORES & ADORAÇÃO (PLAYLIST MATHEUS) -->
     <section class="secao-louvores" id="louvores">
@@ -905,7 +1112,7 @@
     </div>
 
     <footer>
-        <p>© 2026 Ministério Metanoia // Matheus Barbosa. Um refúgio de acolhimento bíblico e cura de almas.</p>
+        <p>© 2026 Comunidade Metanoia // Matheus Barbosa. "Ninguém Luta Sozinho." Um refúgio de acolhimento bíblico, louvor e escola teológica.</p>
         <p style="margin-top: 8px; font-size: 13px; color: var(--gold-light);">"Ele não quebrará a cana trilhada, nem apagará a torcida que fumega." — <strong>Isaías 42:3</strong></p>
     </footer>
 
@@ -917,7 +1124,7 @@
             <div class="dock-cover" id="dock-cover">🕊️</div>
             <div class="dock-track-details">
                 <h4 id="dock-titulo">Selecione um Louvor</h4>
-                <p id="dock-artista">Playlist Ministerial Metanoia</p>
+                <p id="dock-artista">Comunidade Metanoia // Louvores 24h</p>
             </div>
         </div>
 
@@ -1118,6 +1325,42 @@
             if (oracao) {
                 tocarMusicaPorId(oracao.id);
             }
+        }
+
+        // Exercício de Respiração Bíblica (Modelado do Glorify)
+        let timerRespiracao = null;
+        let faseRespiro = 0;
+        const fases = [
+            { texto: 'Inspire a Paz', sec: '4s', icone: '🕊️' },
+            { texto: 'Sinta o Cuidado', sec: '4s', icone: '🤍' },
+            { texto: 'Solte o Peso', sec: '4s', icone: '🌿' }
+        ];
+
+        function alternarRespiracaoGuiada() {
+            const texto = document.getElementById('texto-respiro');
+            const seg = document.getElementById('segundos-respiro');
+            const ico = document.getElementById('icone-respiro');
+
+            if (timerRespiracao) {
+                clearInterval(timerRespiracao);
+                timerRespiracao = null;
+                if (texto) texto.textContent = 'Toque p/ Iniciar';
+                if (seg) seg.textContent = '4-4-4';
+                if (ico) ico.textContent = '🕊️';
+                return;
+            }
+
+            faseRespiro = 0;
+            const ciclo = () => {
+                const f = fases[faseRespiro];
+                if (texto) texto.textContent = f.texto;
+                if (seg) seg.textContent = f.sec;
+                if (ico) ico.textContent = f.icone;
+                faseRespiro = (faseRespiro + 1) % fases.length;
+            };
+
+            ciclo();
+            timerRespiracao = setInterval(ciclo, 4000);
         }
 
         // Eventos do Audio

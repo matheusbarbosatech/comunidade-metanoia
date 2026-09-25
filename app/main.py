@@ -14,7 +14,7 @@ from app.services.music_service import sync_music_playlist
 app = FastAPI(
     title=APP_NAME,
     version=APP_VERSION,
-    description="Backend e Plataforma oficial de Escola Bíblica, Discipulado, Célula Digital, Gestão Ministerial e Playlist de Adoração.",
+    description="Plataforma oficial da Comunidade Metanoia // Acolhimento, Louvores 24h, Célula Digital e Escola Bíblica.",
     docs_url="/docs",
     redoc_url="/redoc"
 )

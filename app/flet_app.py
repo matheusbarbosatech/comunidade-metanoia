@@ -39,7 +39,7 @@ COLOR_TEXT = "#F8FAFC"
 COLOR_MUTED = "#94A3B8"
 
 def main(page: ft.Page):
-    page.title = "Ministério Metanoia // Plataforma Pastoral & Escola Bíblica"
+    page.title = "Comunidade Metanoia // Ninguém Luta Sozinho"
     page.theme_mode = ft.ThemeMode.DARK
     page.bgcolor = COLOR_BG
     page.padding = 0

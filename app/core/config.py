@@ -9,7 +9,7 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 DB_PATH = DATA_DIR / "ministerio.db"
 
 # Informações da Aplicação
-APP_NAME = "Ministério Metanoia // API Ministerial & Escola Bíblica"
+APP_NAME = "Comunidade Metanoia // Ninguém Luta Sozinho"
 APP_VERSION = "1.0.0"
 API_PREFIX = "/api/v1"
 
