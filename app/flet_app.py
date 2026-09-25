@@ -6,6 +6,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BASE_DIR))
 
 import flet as ft
+
+# Camada de Compatibilidade Universal Flet (0.8x e 1.0+)
+if not hasattr(ft, "ElevatedButton"):
+    class CompatibleButton(getattr(ft, "Button", object)):
+        def __init__(self, text=None, content=None, *args, **kwargs):
+            color = kwargs.pop("color", None)
+            if text and not content:
+                content = ft.Text(text, color=color)
+            super().__init__(content=content, *args, **kwargs)
+    ft.ElevatedButton = CompatibleButton
+    ft.FilledButton = CompatibleButton
+    ft.OutlinedButton = CompatibleButton
+    ft.TextButton = CompatibleButton
+
 from app.db.database import get_connection
 from app.services.music_service import (
     get_all_musicas,
