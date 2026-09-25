@@ -1,6 +1,4 @@
-"""Plataforma Integrada Ministério Metanoia & Escola de Pregadores.
-Construída em Python + Flet com perfis de Administrador (Pastor) e Aluno (Discípulo).
-"""
+import os
 import sys
 from pathlib import Path
 
@@ -9,6 +7,12 @@ sys.path.insert(0, str(BASE_DIR))
 
 import flet as ft
 from app.db.database import get_connection
+from app.services.music_service import (
+    get_all_musicas,
+    get_musicas_stats,
+    toggle_favorito,
+    increment_play_count
+)
 
 # Paleta Dark Obsidian & Ouro Imperial
 COLOR_BG = "#08080A"
@@ -30,7 +34,9 @@ def main(page: ft.Page):
     estado = {
         "usuario_role": "admin", # "admin" (Pastor) ou "aluno" (Discípulo)
         "aba_atual": "estudos",
-        "resumo_selecionado": None
+        "resumo_selecionado": None,
+        "filtro_musica_cat": "Todos",
+        "busca_musica": ""
     }
 
     # Container dinâmico central
@@ -38,12 +44,12 @@ def main(page: ft.Page):
 
     def alternar_papel(e):
         estado["usuario_role"] = "aluno" if estado["usuario_role"] == "admin" else "admin"
-        btn_role.text = f"Modo: {'👑 Pastor (ADM)' if estado['usuario_role'] == 'admin' else '🐑 Discípulo (Aluno)'}"
+        btn_role.text = f"Modo: {'👑 Liderança (ADM)' if estado['usuario_role'] == 'admin' else '🐑 Discípulo (Aluno)'}"
         btn_role.update()
         atualizar_tela()
 
     btn_role = ft.ElevatedButton(
-        text="Modo: 👑 Pastor (ADM)",
+        text="Modo: 👑 Liderança (ADM)",
         bgcolor=COLOR_CARD,
         color=COLOR_ACCENT,
         on_click=alternar_papel
@@ -200,7 +206,7 @@ def main(page: ft.Page):
                     ft.Text("Se hoje você só consegue chorar, se o desespero do desemprego, a angústia da depressão ou o peso da ansiedade tiraram o seu chão... você não precisa fingir força aqui. Deus se apresenta a você hoje não como um juiz, mas como um Pai amoroso que te abraça em silêncio.", size=14, color=COLOR_TEXT),
                     ft.Row([
                         ft.ElevatedButton("🤍 Só Preciso de um Abraço e Oração", bgcolor=COLOR_FLAME, color=COLOR_TEXT, on_click=lambda e: abrir_modal_desabafo()),
-                        ft.OutlinedButton("🎧 Áudio de Alívio e Paz (3 min)", style=ft.ButtonStyle(color=COLOR_ACCENT))
+                        ft.OutlinedButton("🎧 Áudio de Alívio e Paz (3 min)", style=ft.ButtonStyle(color=COLOR_ACCENT), on_click=lambda e: tocar_audio_alivio())
                     ], spacing=12)
                 ], spacing=14)
             ),
@@ -254,7 +260,7 @@ def main(page: ft.Page):
                 conn.close()
                 dialog.open = False
                 page.update()
-                page.show_snack_bar(ft.SnackBar(ft.Text("Seu desabafo foi acolhido. O pastor e a equipe de oração já estão intercedendo por você!")))
+                page.show_snack_bar(ft.SnackBar(ft.Text("Seu desabafo foi acolhido. Nossa equipe e grupo de oração já estão intercedendo por você!")))
 
         dialog = ft.AlertDialog(
             title=ft.Text("🤍 Você Não Está Sozinho", color=COLOR_ACCENT, weight=ft.FontWeight.BOLD),
@@ -308,10 +314,174 @@ def main(page: ft.Page):
         page.show_snack_bar(ft.SnackBar(ft.Text("Oração registrada! Deus ouve o clamor dos santos.")))
         atualizar_tela()
 
+    # --- SEÇÃO MÚSICA & LOUVOR (PLAYLIST MATHEUS) ---
+
+    def tocar_faixa_audio(musica):
+        increment_play_count(musica["id"])
+        caminho = musica["caminho_completo"]
+        if os.path.exists(caminho):
+            try:
+                os.startfile(caminho)
+                page.show_snack_bar(ft.SnackBar(ft.Text(f"🎶 Tocando: {musica['titulo']} — {musica['artista']}")))
+            except Exception:
+                page.launch_url(f"http://127.0.0.1:8000/api/v1/musicas/{musica['id']}/stream")
+        else:
+            page.launch_url(f"http://127.0.0.1:8000/api/v1/musicas/{musica['id']}/stream")
+
+    def tocar_audio_alivio():
+        musicas_oracao = get_all_musicas(categoria="Oração & Adoração")
+        if musicas_oracao:
+            faixa = musicas_oracao[0]
+            tocar_faixa_audio(faixa)
+            page.show_snack_bar(ft.SnackBar(ft.Text(f"🕊️ Louvor de Alívio e Oração iniciado: '{faixa['titulo']}'. Respire em paz.")))
+        else:
+            page.show_snack_bar(ft.SnackBar(ft.Text("Iniciando momento devocional de oração...")))
+
+    def render_louvores():
+        stats = get_musicas_stats()
+        musicas = get_all_musicas(
+            categoria=estado.get("filtro_musica_cat"),
+            busca=estado.get("busca_musica")
+        )
+
+        def filtrar_cat(cat):
+            estado["filtro_musica_cat"] = cat
+            atualizar_tela()
+
+        def on_busca_submit(e):
+            estado["busca_musica"] = e.control.value
+            atualizar_tela()
+
+        def toggle_fav(m):
+            novo = toggle_favorito(m["id"])
+            page.show_snack_bar(ft.SnackBar(ft.Text(f"{'⭐ Adicionado aos favoritos' if novo else 'Removido dos favoritos'}: {m['titulo']}")))
+            atualizar_tela()
+
+        def usar_na_celula(m):
+            page.show_snack_bar(ft.SnackBar(ft.Text(f"🕊️ Louvor selecionado para a Célula Digital: '{m['titulo']}'!")))
+
+        categorias = [
+            "Todos",
+            "Oração & Adoração",
+            "Guerra Espiritual & Fé",
+            "Trap Gospel & Edificação",
+            "Graça & Restauração",
+            "Pentecostal & Celebração"
+        ]
+        botoes_cat = []
+        for c in categorias:
+            selecionado = (estado.get("filtro_musica_cat", "Todos") == c)
+            botoes_cat.append(
+                ft.ElevatedButton(
+                    c,
+                    bgcolor=COLOR_ACCENT if selecionado else COLOR_CARD,
+                    color="#000" if selecionado else COLOR_TEXT,
+                    on_click=lambda e, cat=c: filtrar_cat(cat)
+                )
+            )
+
+        cards_musicas = []
+        if not musicas:
+            cards_musicas.append(ft.Text("Nenhuma música encontrada para os filtros selecionados.", color=COLOR_MUTED))
+        else:
+            for m in musicas:
+                cor_cat = "#38BDF8" if "Oração" in m["categoria"] else (
+                    "#F59E0B" if "Guerra" in m["categoria"] else (
+                        "#10B981" if "Graça" in m["categoria"] else (
+                            "#A855F7" if "Trap" in m["categoria"] else COLOR_FLAME
+                        )
+                    )
+                )
+                icone = ft.Icons.VOLUNTEER_ACTIVISM_ROUNDED if "Oração" in m["categoria"] else (
+                    ft.Icons.SHIELD_ROUNDED if "Guerra" in m["categoria"] else (
+                        ft.Icons.FAVORITE_ROUNDED if "Graça" in m["categoria"] else ft.Icons.GRAPHIC_EQ_ROUNDED
+                    )
+                )
+
+                cards_musicas.append(
+                    ft.Container(
+                        bgcolor=COLOR_CARD,
+                        border=ft.border.all(1, COLOR_BORDER),
+                        border_radius=12,
+                        padding=16,
+                        content=ft.Row([
+                            ft.Icon(icone, color=cor_cat, size=30),
+                            ft.Column([
+                                ft.Row([
+                                    ft.Text(m["titulo"], size=16, weight=ft.FontWeight.BOLD, color=COLOR_TEXT),
+                                    ft.Container(
+                                        bgcolor="#1E293B",
+                                        padding=ft.padding.symmetric(horizontal=8, vertical=2),
+                                        border_radius=6,
+                                        content=ft.Text(m["categoria"], size=11, color=cor_cat, weight=ft.FontWeight.BOLD)
+                                    )
+                                ], spacing=10),
+                                ft.Text(f"👤 {m['artista']} • 💾 {m['tamanho_mb']} MB • 🏷️ {m['tags']}", size=12, color=COLOR_MUTED)
+                            ], expand=True, spacing=4),
+                            ft.Row([
+                                ft.IconButton(
+                                    ft.Icons.STAR_ROUNDED if m["favorito"] else ft.Icons.STAR_BORDER_ROUNDED,
+                                    icon_color=COLOR_ACCENT if m["favorito"] else COLOR_MUTED,
+                                    tooltip="Favoritar",
+                                    on_click=lambda e, musica=m: toggle_fav(musica)
+                                ),
+                                ft.ElevatedButton(
+                                    "🕊️ Célula",
+                                    bgcolor="#1E293B",
+                                    color=COLOR_TEXT,
+                                    tooltip="Definir para o Louvor da Célula",
+                                    on_click=lambda e, musica=m: usar_na_celula(musica)
+                                ),
+                                ft.ElevatedButton(
+                                    "▶️ Tocar",
+                                    bgcolor=COLOR_FLAME,
+                                    color=COLOR_TEXT,
+                                    on_click=lambda e, musica=m: tocar_faixa_audio(musica)
+                                )
+                            ], spacing=8)
+                        ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
+                    )
+                )
+
+        campo_busca = ft.TextField(
+            hint_text="Buscar por título, artista ou tema bíblico (ex: Hebreus, Davi, Oração)...",
+            prefix_icon=ft.Icons.SEARCH_ROUNDED,
+            bgcolor="#1E293B",
+            border_color=COLOR_BORDER,
+            value=estado.get("busca_musica", ""),
+            on_submit=on_busca_submit,
+            expand=True
+        )
+
+        return ft.Column([
+            ft.Row([
+                ft.Column([
+                    ft.Text("🎶 Estação de Louvor & Adoração (Playlist Matheus)", size=22, weight=ft.FontWeight.BOLD, color=COLOR_TEXT),
+                    ft.Text("50 faixas catalogadas de Trap Gospel, Oração & Batalha Espiritual (2metro, Nesk Only e Adoração).", size=14, color=COLOR_MUTED)
+                ], spacing=4),
+                ft.Container(
+                    bgcolor=COLOR_CARD,
+                    border_radius=8,
+                    padding=ft.padding.symmetric(horizontal=14, vertical=8),
+                    content=ft.Row([
+                        ft.Text(f"{stats['total_faixas']} Faixas", color=COLOR_ACCENT, weight=ft.FontWeight.BOLD),
+                        ft.Text("•", color=COLOR_MUTED),
+                        ft.Text(f"{stats['total_mb']} MB", color=COLOR_TEXT, size=12)
+                    ], spacing=6)
+                )
+            ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
+            ft.Row([campo_busca]),
+            ft.Row(botoes_cat, scroll=ft.ScrollMode.AUTO),
+            ft.Divider(color=COLOR_BORDER),
+            ft.ListView(controls=cards_musicas, spacing=12, expand=True)
+        ], expand=True, spacing=14)
+
     # --- BARRA DE NAVEGAÇÃO LATERAL / HEADER ---
     def atualizar_tela():
         conteudo_view.content = None
-        if estado["usuario_role"] == "admin":
+        if estado["aba_atual"] == "musica":
+            conteudo_view.content = render_louvores()
+        elif estado["usuario_role"] == "admin":
             if estado["aba_atual"] == "estudos":
                 conteudo_view.content = render_admin_estudos()
             elif estado["aba_atual"] == "oracao":
@@ -340,6 +510,7 @@ def main(page: ft.Page):
                 btn_role,
                 ft.IconButton(ft.Icons.BOOK_ROUNDED, tooltip="Estudos & Apostilas", on_click=lambda e: navegar_para("estudos")),
                 ft.IconButton(ft.Icons.VOLUNTEER_ACTIVISM_ROUNDED, tooltip="Mural de Oração", on_click=lambda e: navegar_para("oracao")),
+                ft.IconButton(ft.Icons.MUSIC_NOTE_ROUNDED, tooltip="Louvores & Playlist Matheus", on_click=lambda e: navegar_para("musica")),
                 ft.IconButton(ft.Icons.PEOPLE_ROUNDED, tooltip="Célula Digital", on_click=lambda e: navegar_para("celula")),
             ], spacing=12)
         ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
@@ -356,3 +527,4 @@ def main(page: ft.Page):
 
 if __name__ == "__main__":
     ft.app(target=main)
+
