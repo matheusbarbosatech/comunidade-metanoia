@@ -66,18 +66,23 @@ def sync_music_playlist() -> int:
                 cadastrados = 0
                 for item in faixas_seed:
                     cursor.execute("""
-                    INSERT OR IGNORE INTO musicas_louvores (
-                        id, titulo, artista, arquivo_nome, caminho_completo, tamanho_mb, categoria, tags
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                    INSERT INTO musicas_louvores (
+                        id, titulo, artista, arquivo_nome, caminho_completo, tamanho_mb, categoria, tags, cdn_url
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    ON CONFLICT(arquivo_nome) DO UPDATE SET
+                        cdn_url = excluded.cdn_url,
+                        tamanho_mb = excluded.tamanho_mb,
+                        categoria = excluded.categoria
                     """, (
                         item.get("id"),
                         item.get("titulo"),
                         item.get("artista"),
-                        f"{item.get('titulo')}.mp3",
+                        item.get("arquivo_nome", f"{item.get('titulo')}.mp3"),
                         "",
                         item.get("tamanho_mb", 0),
                         item.get("categoria", "Geral"),
-                        ""
+                        "",
+                        item.get("cdn_url", "")
                     ))
                     cadastrados += 1
                 conn.commit()
@@ -88,7 +93,7 @@ def sync_music_playlist() -> int:
         conn.close()
         return 0
 
-
+    import unicodedata, re
     arquivos = list(MUSIC_PLAYLIST_DIR.glob("*.mp3"))
     cadastrados = 0
 
@@ -97,17 +102,23 @@ def sync_music_playlist() -> int:
             stat = f.stat()
             tamanho_mb = round(stat.st_size / (1024 * 1024), 2)
             artist, title, categoria, tags = parse_track_info(f.name)
+            
+            clean = unicodedata.normalize('NFKD', f.name).encode('ASCII', 'ignore').decode('ASCII')
+            clean = re.sub(r'[^a-zA-Z0-9._-]', '.', clean)
+            clean = re.sub(r'\.+', '.', clean)
+            cdn_url = f"https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/{clean}"
 
             cursor.execute("""
             INSERT INTO musicas_louvores (
-                titulo, artista, arquivo_nome, caminho_completo, tamanho_mb, categoria, tags
-            ) VALUES (?, ?, ?, ?, ?, ?, ?)
+                titulo, artista, arquivo_nome, caminho_completo, tamanho_mb, categoria, tags, cdn_url
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(arquivo_nome) DO UPDATE SET
                 caminho_completo = excluded.caminho_completo,
                 tamanho_mb = excluded.tamanho_mb,
                 categoria = excluded.categoria,
-                tags = excluded.tags
-            """, (title, artist, f.name, str(f), tamanho_mb, categoria, tags))
+                tags = excluded.tags,
+                cdn_url = excluded.cdn_url
+            """, (title, artist, f.name, str(f), tamanho_mb, categoria, tags, cdn_url))
             cadastrados += 1
         except Exception as e:
             print(f"Erro ao processar arquivo {f.name}: {e}")

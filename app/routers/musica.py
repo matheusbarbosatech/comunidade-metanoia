@@ -74,11 +74,16 @@ def stream_audio(musica_id: int, request: Request):
     caminho = Path(musica["caminho_completo"]) if musica.get("caminho_completo") else None
     if not caminho or not caminho.exists():
         # Fallback de Alta Performance para Nuvem (GitHub Releases CDN 24/7):
-        import urllib.parse
         from fastapi.responses import RedirectResponse
-        arquivo_nome = musica.get("arquivo_nome") or f"{musica['titulo']}.mp3"
-        encoded_name = urllib.parse.quote(arquivo_nome)
-        cdn_url = f"https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/{encoded_name}"
+        if musica.get("cdn_url"):
+            return RedirectResponse(url=musica["cdn_url"], status_code=307)
+
+        import unicodedata, re
+        raw_name = musica.get("arquivo_nome") or f"{musica['titulo']}.mp3"
+        clean = unicodedata.normalize('NFKD', raw_name).encode('ASCII', 'ignore').decode('ASCII')
+        clean = re.sub(r'[^a-zA-Z0-9._-]', '.', clean)
+        clean = re.sub(r'\.+', '.', clean)
+        cdn_url = f"https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/{clean}"
         return RedirectResponse(url=cdn_url, status_code=307)
 
     file_size = caminho.stat().st_size

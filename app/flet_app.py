@@ -338,9 +338,11 @@ def main(page: ft.Page):
                 os.startfile(caminho)
                 page.show_snack_bar(ft.SnackBar(ft.Text(f"🎶 Tocando: {musica['titulo']} — {musica['artista']}")))
             except Exception:
-                page.launch_url(f"http://127.0.0.1:8000/api/v1/musicas/{musica['id']}/stream")
+                stream_url = musica.get("cdn_url") or f"/api/v1/musicas/{musica['id']}/stream"
+                page.launch_url(stream_url)
         else:
-            page.launch_url(f"http://127.0.0.1:8000/api/v1/musicas/{musica['id']}/stream")
+            stream_url = musica.get("cdn_url") or f"/api/v1/musicas/{musica['id']}/stream"
+            page.launch_url(stream_url)
 
     def tocar_audio_alivio():
         musicas_oracao = get_all_musicas(categoria="Oração & Adoração")

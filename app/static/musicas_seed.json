@@ -4,349 +4,499 @@
     "titulo": "Abençoado (Speed Up)",
     "artista": "2metro & Nesk Only / Urban Worship",
     "categoria": "Graça & Restauração",
-    "tamanho_mb": 5.3
+    "tamanho_mb": 5.3,
+    "arquivo_nome": "Abençoado (Speed Up).mp3",
+    "asset_name": "Abencoado.Speed.Up.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Abencoado.Speed.Up.mp3"
   },
   {
     "id": 25,
     "titulo": "Amor de Deus",
     "artista": "2metro & Nesk Only / Urban Worship",
     "categoria": "Graça & Restauração",
-    "tamanho_mb": 6.95
+    "tamanho_mb": 6.95,
+    "arquivo_nome": "Amor de Deus.mp3",
+    "asset_name": "Amor.de.Deus.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Amor.de.Deus.mp3"
   },
   {
     "id": 3,
     "titulo": "Bartimeu",
     "artista": "2metro",
     "categoria": "Graça & Restauração",
-    "tamanho_mb": 8.19
+    "tamanho_mb": 8.19,
+    "arquivo_nome": "2metro - Bartimeu.mp3",
+    "asset_name": "2metro.-.Bartimeu.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.Bartimeu.mp3"
   },
   {
     "id": 42,
     "titulo": "Bom Samaritano",
     "artista": "Nesk Only",
     "categoria": "Graça & Restauração",
-    "tamanho_mb": 4.59
+    "tamanho_mb": 4.59,
+    "arquivo_nome": "Nesk Only - Bom Samaritano.mp3",
+    "asset_name": "Nesk.Only.-.Bom.Samaritano.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Nesk.Only.-.Bom.Samaritano.mp3"
   },
   {
     "id": 29,
     "titulo": "CRISTO",
     "artista": "2metro & Nesk Only / Urban Worship",
     "categoria": "Graça & Restauração",
-    "tamanho_mb": 7.59
+    "tamanho_mb": 7.59,
+    "arquivo_nome": "CRISTO.mp3",
+    "asset_name": "CRISTO.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/CRISTO.mp3"
   },
   {
     "id": 4,
     "titulo": "Chuvas de Deus (Libras) - Clipe oficial",
     "artista": "2metro",
     "categoria": "Graça & Restauração",
-    "tamanho_mb": 7.21
+    "tamanho_mb": 7.21,
+    "arquivo_nome": "2metro - Chuvas de Deus (Libras) - Clipe oficial.mp3",
+    "asset_name": "2metro.-.Chuvas.de.Deus.Libras.-.Clipe.oficial.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.Chuvas.de.Deus.Libras.-.Clipe.oficial.mp3"
   },
   {
     "id": 27,
     "titulo": "Chuvas de Deus (Speed Up)",
     "artista": "2metro & Nesk Only / Urban Worship",
     "categoria": "Graça & Restauração",
-    "tamanho_mb": 6.56
+    "tamanho_mb": 6.56,
+    "arquivo_nome": "Chuvas de Deus (Speed Up).mp3",
+    "asset_name": "Chuvas.de.Deus.Speed.Up.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Chuvas.de.Deus.Speed.Up.mp3"
   },
   {
     "id": 8,
     "titulo": "Cristo e Mais Nada (Cristo e Mais Nada)",
     "artista": "2metro",
     "categoria": "Graça & Restauração",
-    "tamanho_mb": 10.56
+    "tamanho_mb": 10.56,
+    "arquivo_nome": "2metro - Cristo e Mais Nada (Cristo e Mais Nada).mp3",
+    "asset_name": "2metro.-.Cristo.e.Mais.Nada.Cristo.e.Mais.Nada.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.Cristo.e.Mais.Nada.Cristo.e.Mais.Nada.mp3"
   },
   {
     "id": 13,
     "titulo": "Leviano (Cristo e Mais Nada)",
     "artista": "2metro",
     "categoria": "Graça & Restauração",
-    "tamanho_mb": 4.71
+    "tamanho_mb": 4.71,
+    "arquivo_nome": "2metro - Leviano (Cristo e Mais Nada).mp3",
+    "asset_name": "2metro.-.Leviano.Cristo.e.Mais.Nada.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.Leviano.Cristo.e.Mais.Nada.mp3"
   },
   {
     "id": 36,
     "titulo": "Mefibosete",
     "artista": "2metro & Nesk Only / Urban Worship",
     "categoria": "Graça & Restauração",
-    "tamanho_mb": 6.56
+    "tamanho_mb": 6.56,
+    "arquivo_nome": "Mefibosete.mp3",
+    "asset_name": "Mefibosete.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Mefibosete.mp3"
   },
   {
     "id": 26,
     "titulo": "Arão e UR",
     "artista": "2metro & Nesk Only / Urban Worship",
     "categoria": "Guerra Espiritual & Fé",
-    "tamanho_mb": 7.5
+    "tamanho_mb": 7.5,
+    "arquivo_nome": "Arão e UR.mp3",
+    "asset_name": "Arao.e.UR.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Arao.e.UR.mp3"
   },
   {
     "id": 6,
     "titulo": "COROA DA VIDA",
     "artista": "2metro",
     "categoria": "Guerra Espiritual & Fé",
-    "tamanho_mb": 8.98
+    "tamanho_mb": 8.98,
+    "arquivo_nome": "2metro - COROA DA VIDA.mp3",
+    "asset_name": "2metro.-.COROA.DA.VIDA.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.COROA.DA.VIDA.mp3"
   },
   {
     "id": 28,
     "titulo": "Conquista",
     "artista": "2metro & Nesk Only / Urban Worship",
     "categoria": "Guerra Espiritual & Fé",
-    "tamanho_mb": 5.76
+    "tamanho_mb": 5.76,
+    "arquivo_nome": "Conquista.mp3",
+    "asset_name": "Conquista.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Conquista.mp3"
   },
   {
     "id": 30,
     "titulo": "Efésios 6",
     "artista": "2metro & Nesk Only / Urban Worship",
     "categoria": "Guerra Espiritual & Fé",
-    "tamanho_mb": 5.54
+    "tamanho_mb": 5.54,
+    "arquivo_nome": "Efésios 6.mp3",
+    "asset_name": "Efesios.6.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Efesios.6.mp3"
   },
   {
     "id": 23,
     "titulo": "Fica Atento",
     "artista": "2metro e Nesk Only",
     "categoria": "Guerra Espiritual & Fé",
-    "tamanho_mb": 5.56
+    "tamanho_mb": 5.56,
+    "arquivo_nome": "2metro e Nesk Only - Fica Atento.mp3",
+    "asset_name": "2metro.e.Nesk.Only.-.Fica.Atento.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.e.Nesk.Only.-.Fica.Atento.mp3"
   },
   {
     "id": 11,
     "titulo": "Guardado",
     "artista": "2metro",
     "categoria": "Guerra Espiritual & Fé",
-    "tamanho_mb": 6.58
+    "tamanho_mb": 6.58,
+    "arquivo_nome": "2metro - Guardado.mp3",
+    "asset_name": "2metro.-.Guardado.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.Guardado.mp3"
   },
   {
     "id": 1,
     "titulo": "Hebreus 12",
     "artista": "2metro & Nesk Only",
     "categoria": "Guerra Espiritual & Fé",
-    "tamanho_mb": 5.36
+    "tamanho_mb": 5.36,
+    "arquivo_nome": "2metro & Nesk Only - Hebreus 12.mp3",
+    "asset_name": "2metro.Nesk.Only.-.Hebreus.12.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.Nesk.Only.-.Hebreus.12.mp3"
   },
   {
     "id": 12,
     "titulo": "Josué",
     "artista": "2metro",
     "categoria": "Guerra Espiritual & Fé",
-    "tamanho_mb": 5.31
+    "tamanho_mb": 5.31,
+    "arquivo_nome": "2metro - Josué.mp3",
+    "asset_name": "2metro.-.Josue.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.Josue.mp3"
   },
   {
     "id": 33,
     "titulo": "Josué (Speed)",
     "artista": "2metro & Nesk Only / Urban Worship",
     "categoria": "Guerra Espiritual & Fé",
-    "tamanho_mb": 5.2
+    "tamanho_mb": 5.2,
+    "arquivo_nome": "Josué (Speed).mp3",
+    "asset_name": "Josue.Speed.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Josue.Speed.mp3"
   },
   {
     "id": 15,
     "titulo": "Medley Ao Vivo IMAFE - O Escudo l Com Muito Louvor l Hino da Vitória l Além do Rio Azul",
     "artista": "2metro",
     "categoria": "Guerra Espiritual & Fé",
-    "tamanho_mb": 19.22
+    "tamanho_mb": 19.22,
+    "arquivo_nome": "2metro - Medley Ao Vivo IMAFE - O Escudo l Com Muito Louvor l Hino da Vitória l Além do Rio Azul.mp3",
+    "asset_name": "2metro.-.Medley.Ao.Vivo.IMAFE.-.O.Escudo.l.Com.Muito.Louvor.l.Hino.da.Vitoria.l.Alem.do.Rio.Azul.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.Medley.Ao.Vivo.IMAFE.-.O.Escudo.l.Com.Muito.Louvor.l.Hino.da.Vitoria.l.Alem.do.Rio.Azul.mp3"
   },
   {
     "id": 49,
     "titulo": "Rei Davi",
     "artista": "2metro & Nesk Only / Urban Worship",
     "categoria": "Guerra Espiritual & Fé",
-    "tamanho_mb": 5.46
+    "tamanho_mb": 5.46,
+    "arquivo_nome": "Rei Davi (Versão Alternativa).mp3",
+    "asset_name": "Rei.Davi.Versao.Alternativa.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Rei.Davi.Versao.Alternativa.mp3"
   },
   {
     "id": 48,
     "titulo": "Rei Davi (Versão Alternativa)",
     "artista": "2metro & Nesk Only / Urban Worship",
     "categoria": "Guerra Espiritual & Fé",
-    "tamanho_mb": 4.92
+    "tamanho_mb": 4.92,
+    "arquivo_nome": "Rei Davi (Versão Alternativa).mp3",
+    "asset_name": "Rei.Davi.Versao.Alternativa.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Rei.Davi.Versao.Alternativa.mp3"
   },
   {
     "id": 22,
     "titulo": "Vigia",
     "artista": "2metro",
     "categoria": "Guerra Espiritual & Fé",
-    "tamanho_mb": 6.23
+    "tamanho_mb": 6.23,
+    "arquivo_nome": "2metro - Vigia.mp3",
+    "asset_name": "2metro.-.Vigia.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.Vigia.mp3"
   },
   {
     "id": 2,
     "titulo": "Abba Vem (Cristo e Mais Nada)",
     "artista": "2metro",
     "categoria": "Oração & Adoração",
-    "tamanho_mb": 7.87
+    "tamanho_mb": 7.87,
+    "arquivo_nome": "2metro - Abba Vem (Cristo e Mais Nada).mp3",
+    "asset_name": "2metro.-.Abba.Vem.Cristo.e.Mais.Nada.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.Abba.Vem.Cristo.e.Mais.Nada.mp3"
   },
   {
     "id": 5,
     "titulo": "Contemplação (Cristo e Mais Nada)",
     "artista": "2metro",
     "categoria": "Oração & Adoração",
-    "tamanho_mb": 8.24
+    "tamanho_mb": 8.24,
+    "arquivo_nome": "2metro - Contemplação (Cristo e Mais Nada).mp3",
+    "asset_name": "2metro.-.Contemplacao.Cristo.e.Mais.Nada.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.Contemplacao.Cristo.e.Mais.Nada.mp3"
   },
   {
     "id": 10,
     "titulo": "Em Fervente Oração (Cristo e Mais Nada)",
     "artista": "2metro",
     "categoria": "Oração & Adoração",
-    "tamanho_mb": 6.46
+    "tamanho_mb": 6.46,
+    "arquivo_nome": "2metro - Em Fervente Oração (Cristo e Mais Nada).mp3",
+    "asset_name": "2metro.-.Em.Fervente.Oracao.Cristo.e.Mais.Nada.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.Em.Fervente.Oracao.Cristo.e.Mais.Nada.mp3"
   },
   {
     "id": 47,
     "titulo": "Oração",
     "artista": "2metro & Nesk Only / Urban Worship",
     "categoria": "Oração & Adoração",
-    "tamanho_mb": 5.88
+    "tamanho_mb": 5.88,
+    "arquivo_nome": "2metro - Em Fervente Oração (Cristo e Mais Nada).mp3",
+    "asset_name": "2metro.-.Em.Fervente.Oracao.Cristo.e.Mais.Nada.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.Em.Fervente.Oracao.Cristo.e.Mais.Nada.mp3"
   },
   {
     "id": 45,
     "titulo": "Pela Manhã",
     "artista": "Nesk Only",
     "categoria": "Oração & Adoração",
-    "tamanho_mb": 4.06
+    "tamanho_mb": 4.06,
+    "arquivo_nome": "Nesk Only - Pela Manhã.mp3",
+    "asset_name": "Nesk.Only.-.Pela.Manha.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Nesk.Only.-.Pela.Manha.mp3"
   },
   {
     "id": 17,
     "titulo": "SHEKINAH - AO VIVO",
     "artista": "2metro",
     "categoria": "Oração & Adoração",
-    "tamanho_mb": 10.18
+    "tamanho_mb": 10.18,
+    "arquivo_nome": "2metro - SHEKINAH - AO VIVO.mp3",
+    "asset_name": "2metro.-.SHEKINAH.-.AO.VIVO.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.SHEKINAH.-.AO.VIVO.mp3"
   },
   {
     "id": 16,
     "titulo": "Shekinah (Cristo e Mais Nada)",
     "artista": "2metro",
     "categoria": "Oração & Adoração",
-    "tamanho_mb": 8.45
+    "tamanho_mb": 8.45,
+    "arquivo_nome": "2metro - Shekinah (Cristo e Mais Nada).mp3",
+    "asset_name": "2metro.-.Shekinah.Cristo.e.Mais.Nada.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.Shekinah.Cristo.e.Mais.Nada.mp3"
   },
   {
     "id": 20,
     "titulo": "Teu Amor (Cristo e Mais Nada)",
     "artista": "2metro",
     "categoria": "Oração & Adoração",
-    "tamanho_mb": 9.84
+    "tamanho_mb": 9.84,
+    "arquivo_nome": "2metro - Teu Amor (Cristo e Mais Nada).mp3",
+    "asset_name": "2metro.-.Teu.Amor.Cristo.e.Mais.Nada.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.Teu.Amor.Cristo.e.Mais.Nada.mp3"
   },
   {
     "id": 40,
     "titulo": "Toque | DADR",
     "artista": "Nesk Only & 2metro",
     "categoria": "Oração & Adoração",
-    "tamanho_mb": 6.69
+    "tamanho_mb": 6.69,
+    "arquivo_nome": "Toque | DADR.mp3",
+    "asset_name": "Toque.DADR.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Toque.DADR.mp3"
   },
   {
     "id": 14,
     "titulo": "Mano, Eu Sou Pentecostal!",
     "artista": "2metro",
     "categoria": "Pentecostal & Celebração",
-    "tamanho_mb": 7.67
+    "tamanho_mb": 7.67,
+    "arquivo_nome": "2metro - Mano, Eu Sou Pentecostal!.mp3",
+    "asset_name": "2metro.-.Mano.Eu.Sou.Pentecostal.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.Mano.Eu.Sou.Pentecostal.mp3"
   },
   {
     "id": 19,
     "titulo": "Sobrenatural",
     "artista": "2metro",
     "categoria": "Pentecostal & Celebração",
-    "tamanho_mb": 6.67
+    "tamanho_mb": 6.67,
+    "arquivo_nome": "2metro - Sobrenatural (Speed ⧸ Lyric Video).mp3",
+    "asset_name": "2metro.-.Sobrenatural.Speed.Lyric.Video.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.Sobrenatural.Speed.Lyric.Video.mp3"
   },
   {
     "id": 18,
     "titulo": "Sobrenatural (Speed / Lyric Video)",
     "artista": "2metro",
     "categoria": "Pentecostal & Celebração",
-    "tamanho_mb": 5.27
+    "tamanho_mb": 5.27,
+    "arquivo_nome": "Sobrenatural (Speed / Lyric Video).mp3",
+    "asset_name": "Sobrenatural.Speed.Lyric.Video.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Sobrenatural.Speed.Lyric.Video.mp3"
   },
   {
     "id": 41,
     "titulo": "Ah Teu (Sample： Naquela Mesa)",
     "artista": "Nesk Only & VICTIN",
     "categoria": "Trap Gospel & Edificação",
-    "tamanho_mb": 5.66
+    "tamanho_mb": 5.66,
+    "arquivo_nome": "Nesk Only & VICTIN - Ah Teu (Sample： Naquela Mesa).mp3",
+    "asset_name": "Nesk.Only.VICTIN.-.Ah.Teu.Sample.Naquela.Mesa.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Nesk.Only.VICTIN.-.Ah.Teu.Sample.Naquela.Mesa.mp3"
   },
   {
     "id": 7,
     "titulo": "CRENTE",
     "artista": "2metro",
     "categoria": "Trap Gospel & Edificação",
-    "tamanho_mb": 4.94
+    "tamanho_mb": 4.94,
+    "arquivo_nome": "2metro - CRENTE.mp3",
+    "asset_name": "2metro.-.CRENTE.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.CRENTE.mp3"
   },
   {
     "id": 43,
     "titulo": "DETALHES (TRAP)",
     "artista": "Nesk Only",
     "categoria": "Trap Gospel & Edificação",
-    "tamanho_mb": 6.68
+    "tamanho_mb": 6.68,
+    "arquivo_nome": "Nesk Only - DETALHES (TRAP).mp3",
+    "asset_name": "Nesk.Only.-.DETALHES.TRAP.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Nesk.Only.-.DETALHES.TRAP.mp3"
   },
   {
     "id": 9,
     "titulo": "DEVOTO",
     "artista": "2metro",
     "categoria": "Trap Gospel & Edificação",
-    "tamanho_mb": 5.9
+    "tamanho_mb": 5.9,
+    "arquivo_nome": "2metro - DEVOTO.mp3",
+    "asset_name": "2metro.-.DEVOTO.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.DEVOTO.mp3"
   },
   {
     "id": 31,
     "titulo": "Eu Falo De Bíblia",
     "artista": "2metro & Nesk Only / Urban Worship",
     "categoria": "Trap Gospel & Edificação",
-    "tamanho_mb": 7.42
+    "tamanho_mb": 7.42,
+    "arquivo_nome": "Eu Falo De Bíblia.mp3",
+    "asset_name": "Eu.Falo.De.Biblia.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Eu.Falo.De.Biblia.mp3"
   },
   {
     "id": 44,
     "titulo": "Fogo De Palha",
     "artista": "Nesk Only",
     "categoria": "Trap Gospel & Edificação",
-    "tamanho_mb": 4.01
+    "tamanho_mb": 4.01,
+    "arquivo_nome": "Nesk Only - Fogo De Palha.mp3",
+    "asset_name": "Nesk.Only.-.Fogo.De.Palha.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Nesk.Only.-.Fogo.De.Palha.mp3"
   },
   {
     "id": 32,
     "titulo": "GOD",
     "artista": "2metro & Nesk Only / Urban Worship",
     "categoria": "Trap Gospel & Edificação",
-    "tamanho_mb": 5.8
+    "tamanho_mb": 5.8,
+    "arquivo_nome": "GOD.mp3",
+    "asset_name": "GOD.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/GOD.mp3"
   },
   {
     "id": 38,
     "titulo": "Limitado",
     "artista": "Nesk Only & 2metro",
     "categoria": "Trap Gospel & Edificação",
-    "tamanho_mb": 6.47
+    "tamanho_mb": 6.47,
+    "arquivo_nome": "Limitado (Speed).mp3",
+    "asset_name": "Limitado.Speed.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Limitado.Speed.mp3"
   },
   {
     "id": 34,
     "titulo": "Limitado (Speed)",
     "artista": "2metro & Nesk Only / Urban Worship",
     "categoria": "Trap Gospel & Edificação",
-    "tamanho_mb": 5.17
+    "tamanho_mb": 5.17,
+    "arquivo_nome": "Limitado (Speed).mp3",
+    "asset_name": "Limitado.Speed.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Limitado.Speed.mp3"
   },
   {
     "id": 35,
     "titulo": "Limitado 2",
     "artista": "Nesk Only, 2metro e Brunno Ramos",
     "categoria": "Trap Gospel & Edificação",
-    "tamanho_mb": 8.34
+    "tamanho_mb": 8.34,
+    "arquivo_nome": "Limitado 2 - Nesk Only, 2metro e Brunno Ramos.mp3",
+    "asset_name": "Limitado.2.-.Nesk.Only.2metro.e.Brunno.Ramos.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Limitado.2.-.Nesk.Only.2metro.e.Brunno.Ramos.mp3"
   },
   {
     "id": 37,
     "titulo": "Nave Espacial",
     "artista": "2metro & Nesk Only / Urban Worship",
     "categoria": "Trap Gospel & Edificação",
-    "tamanho_mb": 5.48
+    "tamanho_mb": 5.48,
+    "arquivo_nome": "Nave Espacial.mp3",
+    "asset_name": "Nave.Espacial.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Nave.Espacial.mp3"
   },
   {
     "id": 39,
     "titulo": "Nunca Mais",
     "artista": "Nesk Only & 2metro",
     "categoria": "Trap Gospel & Edificação",
-    "tamanho_mb": 8.19
+    "tamanho_mb": 8.19,
+    "arquivo_nome": "Nesk Only & 2metro - Nunca Mais.mp3",
+    "asset_name": "Nesk.Only.2metro.-.Nunca.Mais.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/Nesk.Only.2metro.-.Nunca.Mais.mp3"
   },
   {
     "id": 46,
     "titulo": "O Plano",
     "artista": "2metro & Nesk Only / Urban Worship",
     "categoria": "Trap Gospel & Edificação",
-    "tamanho_mb": 5.95
+    "tamanho_mb": 5.95,
+    "arquivo_nome": "O Plano.mp3",
+    "asset_name": "O.Plano.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/O.Plano.mp3"
   },
   {
     "id": 50,
     "titulo": "Trabalho Duro",
     "artista": "2metro & Nesk Only / Urban Worship",
     "categoria": "Trap Gospel & Edificação",
-    "tamanho_mb": 3.21
+    "tamanho_mb": 3.21,
+    "arquivo_nome": "2metro - Trabalho Duro Deluxe.mp3",
+    "asset_name": "2metro.-.Trabalho.Duro.Deluxe.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.Trabalho.Duro.Deluxe.mp3"
   },
   {
     "id": 21,
     "titulo": "Trabalho Duro Deluxe",
     "artista": "2metro",
     "categoria": "Trap Gospel & Edificação",
-    "tamanho_mb": 6.82
+    "tamanho_mb": 6.82,
+    "arquivo_nome": "2metro - Trabalho Duro Deluxe.mp3",
+    "asset_name": "2metro.-.Trabalho.Duro.Deluxe.mp3",
+    "cdn_url": "https://github.com/matheusbarbosatech/ministerio/releases/download/v1.0.0-louvores/2metro.-.Trabalho.Duro.Deluxe.mp3"
   }
 ]

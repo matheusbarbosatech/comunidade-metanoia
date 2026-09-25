@@ -123,9 +123,16 @@ def init_db() -> None:
         tags TEXT DEFAULT '',
         favorito BOOLEAN DEFAULT 0,
         reproducoes_count INTEGER DEFAULT 0,
+        cdn_url TEXT DEFAULT '',
         adicionado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
     """)
+
+    # Migração segura para garantir existência da coluna cdn_url
+    try:
+        cursor.execute("ALTER TABLE musicas_louvores ADD COLUMN cdn_url TEXT DEFAULT ''")
+    except sqlite3.OperationalError:
+        pass
 
     conn.commit()
     conn.close()

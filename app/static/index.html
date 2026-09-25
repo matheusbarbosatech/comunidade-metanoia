@@ -1061,7 +1061,8 @@
             dockArtista.textContent = m.artista;
             dockCover.textContent = infoCat.icone;
 
-            audio.src = `/api/v1/musicas/${m.id}/stream`;
+            // Prioriza link direto de streaming em alta velocidade (CDN 24/7), com fallback transparente para a API
+            audio.src = m.cdn_url || `/api/v1/musicas/${m.id}/stream`;
             audio.play().then(() => {
                 btnPlayPause.textContent = '⏸';
                 playerDock.classList.add('visible');
