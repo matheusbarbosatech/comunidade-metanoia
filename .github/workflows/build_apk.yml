@@ -30,15 +30,24 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Instalar Flet CLI
-        run: pip install flet
-
-      - name: Gerar APK Release
+      - name: Instalar Flet CLI e Dependências
         run: |
-          flet build apk --project-name "metanoia" --org "com.metanoia.ministerio" --product "Metanoia"
+          pip install --upgrade pip
+          pip install flet
 
-      - name: Salvar Artefato APK
+      - name: Gerar APK (Para Instalação Direta no Celular)
+        run: |
+          flet build apk --project "metanoia" --org "com.metanoia.ministerio" --product "Metanoia"
+
+      - name: Gerar AAB (Para Publicação na Google Play Store)
+        run: |
+          flet build aab --project "metanoia" --org "com.metanoia.ministerio" --product "Metanoia"
+
+      - name: Salvar Artefatos (APK e AAB)
         uses: actions/upload-artifact@v4
         with:
-          name: metanoia-release-apk
-          path: build/apk/*.apk
+          name: metanoia-android-builds
+          path: |
+            build/apk/*.apk
+            build/aab/*.aab
+
