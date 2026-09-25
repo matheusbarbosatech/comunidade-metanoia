@@ -3,19 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ministério Metanoia // Forja Bíblica & Célula Digital</title>
+    <title>Ministério Metanoia // Um Refúgio para a Sua Alma</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #08080A;
-            --bg-card: #121217;
-            --bg-card-hover: #181820;
-            --gold-accent: #F59E0B;
-            --flame: #EA580C;
-            --border: #23232E;
-            --text-main: #F8FAFC;
+            --bg-night: #090B10;
+            --bg-card: #11141D;
+            --bg-card-soft: rgba(23, 28, 42, 0.7);
+            --gold-light: #FCD34D;
+            --gold-warm: #F59E0B;
+            --rose-soft: #FDA4AF;
+            --border-soft: rgba(245, 158, 11, 0.15);
+            --border-card: #1F2536;
+            --text-title: #FFFFFF;
+            --text-body: #CBD5E1;
             --text-muted: #94A3B8;
         }
 
@@ -23,14 +26,17 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            background-color: var(--bg-night);
+            color: var(--text-body);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.7;
             overflow-x: hidden;
-            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 50% 10%, rgba(245, 158, 11, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(225, 29, 72, 0.04) 0%, transparent 40%);
         }
 
         /* HEADER */
@@ -38,10 +44,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 48px;
-            background: rgba(18, 18, 23, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border);
+            padding: 22px 48px;
+            background: rgba(9, 11, 16, 0.85);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border-card);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -51,197 +57,338 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            font-family: 'Cinzel', serif;
-            font-size: 22px;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: var(--text-main);
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-title);
         }
 
         .logo span {
-            color: var(--gold-accent);
-        }
-
-        nav a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-left: 28px;
-            font-size: 14px;
+            color: var(--gold-light);
+            font-size: 15px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 500;
-            transition: color 0.3s;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        nav a:hover {
-            color: var(--gold-accent);
-        }
-
-        .btn-cta {
-            background: linear-gradient(135deg, var(--flame), var(--gold-accent));
-            color: #000;
-            font-weight: 700;
-            padding: 10px 22px;
-            border-radius: 8px;
+        .btn-header {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.08));
+            color: var(--gold-light);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+            padding: 10px 24px;
+            border-radius: 50px;
             text-decoration: none;
-            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
-        .btn-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
+        .btn-header:hover {
+            background: var(--gold-warm);
+            color: #000;
+            box-shadow: 0 4px 20px rgba(245, 158, 11, 0.3);
         }
 
         /* HERO SECTION */
         .hero {
-            padding: 90px 24px 60px;
+            padding: 90px 24px 70px;
             text-align: center;
-            max-width: 900px;
+            max-width: 860px;
             margin: 0 auto;
         }
 
-        .badge {
-            display: inline-block;
-            background: rgba(245, 158, 11, 0.12);
-            color: var(--gold-accent);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            padding: 6px 16px;
+        .tag-acolhimento {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--gold-light);
+            border: 1px solid rgba(245, 158, 11, 0.25);
+            padding: 8px 20px;
             border-radius: 50px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            margin-bottom: 24px;
-            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 28px;
         }
 
         h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 48px;
-            line-height: 1.2;
+            font-family: 'Playfair Display', serif;
+            font-size: 46px;
+            line-height: 1.25;
+            color: var(--text-title);
             margin-bottom: 24px;
-            font-weight: 900;
+            font-weight: 700;
         }
 
-        h1 span {
-            background: linear-gradient(135deg, #FFF, var(--gold-accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        h1 em {
+            font-style: italic;
+            color: var(--gold-light);
+            font-weight: 600;
         }
 
-        .hero p {
-            font-size: 18px;
-            color: var(--text-muted);
-            margin-bottom: 36px;
+        .hero-desc {
+            font-size: 19px;
+            color: var(--text-body);
+            margin-bottom: 40px;
             max-width: 720px;
             margin-left: auto;
             margin-right: auto;
+            font-weight: 300;
+            line-height: 1.8;
         }
 
         .hero-actions {
             display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: 18px;
             flex-wrap: wrap;
         }
 
-        .btn-outline {
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 10px 22px;
-            border-radius: 8px;
+        .btn-principal {
+            background: linear-gradient(135deg, var(--gold-warm), #D97706);
+            color: #0F172A;
+            padding: 16px 36px;
+            border-radius: 50px;
             text-decoration: none;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .btn-principal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-suave {
             background: var(--bg-card);
-            transition: background 0.3s;
+            color: var(--text-title);
+            border: 1px solid var(--border-card);
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
 
-        .btn-outline:hover {
-            background: var(--bg-card-hover);
+        .btn-suave:hover {
+            background: #1A2030;
+            border-color: rgba(245, 158, 11, 0.4);
         }
 
-        /* PILARES */
-        .pilares {
+        /* SEÇÃO: A DOR QUE NINGUÉM VÊ */
+        .secao-dor {
             padding: 70px 24px;
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
-        .section-title {
-            text-align: center;
-            font-family: 'Cinzel', serif;
-            font-size: 32px;
+        .quote-box {
+            background: linear-gradient(135deg, rgba(23, 28, 42, 0.9), rgba(17, 20, 29, 0.95));
+            border-left: 4px solid var(--gold-warm);
+            border-radius: 0 16px 16px 0;
+            padding: 36px 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .quote-box p {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-style: italic;
+            color: var(--text-title);
             margin-bottom: 12px;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            margin-bottom: 48px;
-            font-size: 16px;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 32px 24px;
-            transition: transform 0.3s, border-color 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: var(--gold-accent);
-        }
-
-        .card-icon {
-            font-size: 36px;
-            margin-bottom: 16px;
-        }
-
-        .card h3 {
-            font-size: 20px;
-            margin-bottom: 12px;
-            color: var(--text-main);
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 14px;
             line-height: 1.6;
         }
 
-        /* BANNER CÉLULA */
-        .banner-celula {
-            background: linear-gradient(135deg, rgba(234, 88, 12, 0.1), rgba(245, 158, 11, 0.05));
-            border: 1px solid rgba(245, 158, 11, 0.25);
-            border-radius: 20px;
-            padding: 48px 36px;
-            max-width: 1100px;
-            margin: 40px auto 80px;
+        .quote-box span {
+            color: var(--gold-light);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .grid-feridas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 24px;
+            margin-top: 36px;
+        }
+
+        .card-ferida {
+            background: var(--bg-card);
+            border: 1px solid var(--border-card);
+            border-radius: 16px;
+            padding: 32px 26px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .card-ferida:hover {
+            border-color: rgba(245, 158, 11, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .card-ferida .icone {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .card-ferida h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: var(--text-title);
+            margin-bottom: 12px;
+        }
+
+        .card-ferida p {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* SEÇÃO: O ABRAÇO DO PAI */
+        .secao-abraco {
+            padding: 80px 24px;
+            background: linear-gradient(180deg, transparent 0%, rgba(18, 22, 33, 0.6) 50%, transparent 100%);
             text-align: center;
         }
 
-        .banner-celula h2 {
-            font-family: 'Cinzel', serif;
-            font-size: 32px;
+        .conteudo-abraco {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+
+        .conteudo-abraco h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 38px;
+            color: var(--text-title);
+            margin-bottom: 20px;
+        }
+
+        .conteudo-abraco p {
+            font-size: 17px;
+            color: var(--text-body);
+            margin-bottom: 32px;
+            line-height: 1.8;
+        }
+
+        /* CARD DA CÉLULA DIGITAL */
+        .card-celula-hospital {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 24px;
+            padding: 48px 36px;
+            max-width: 900px;
+            margin: 40px auto 80px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .card-celula-hospital .badge-suave {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--gold-light);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 18px;
+        }
+
+        .card-celula-hospital h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 34px;
+            color: var(--text-title);
             margin-bottom: 16px;
+        }
+
+        .card-celula-hospital p {
+            font-size: 16px;
+            color: var(--text-body);
+            max-width: 700px;
+            margin: 0 auto 30px;
+            line-height: 1.8;
+        }
+
+        .card-celula-hospital .regras-acolhimento {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-bottom: 36px;
+            text-align: left;
+        }
+
+        .regra-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .regra-item span {
+            color: var(--gold-warm);
+            font-weight: bold;
+        }
+
+        /* AVISO CVV */
+        .cvv-box {
+            max-width: 700px;
+            margin: 0 auto 60px;
+            padding: 18px 24px;
+            background: rgba(225, 29, 72, 0.08);
+            border: 1px solid rgba(225, 29, 72, 0.2);
+            border-radius: 12px;
+            text-align: center;
+            font-size: 13px;
+            color: #FDA4AF;
+        }
+
+        .cvv-box strong {
+            color: #FFE4E6;
         }
 
         /* FOOTER */
         footer {
-            border-top: 1px solid var(--border);
-            padding: 36px 24px;
+            border-top: 1px solid var(--border-card);
+            padding: 40px 24px;
             text-align: center;
             color: var(--text-muted);
             font-size: 14px;
         }
 
         footer strong {
-            color: var(--gold-accent);
+            color: var(--gold-light);
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 16px 20px;
+            }
+            h1 {
+                font-size: 32px;
+            }
+            .hero-desc {
+                font-size: 16px;
+            }
+            .quote-box {
+                padding: 24px;
+            }
+            .quote-box p {
+                font-size: 18px;
+            }
+            .card-celula-hospital {
+                padding: 32px 20px;
+            }
         }
     </style>
 </head>
@@ -249,61 +396,105 @@
 
     <header>
         <div class="logo">
-            ⚔️ METANOIA <span>MINISTÉRIO</span>
+            Metanoia <span>// Um Refúgio Seguro</span>
         </div>
-        <nav>
-            <a href="#pilares">Os 3 Pilares</a>
-            <a href="#celula">Célula Digital</a>
-            <a href="/plataforma" class="btn-cta">Entrar na Plataforma</a>
-        </nav>
+        <a href="/plataforma" class="btn-header">Entrar no Refúgio</a>
     </header>
 
     <section class="hero">
-        <div class="badge">🔥 Romanos 12:2 // Forja Bíblica & Pastoreio</div>
-        <h1>Transformai-vos pela Renovação da <span>Vossa Mente</span></h1>
-        <p>Um ministério bíblico radical que une o fogo do altar, a teologia expositiva e a tecnologia moderna para garantir que <strong>nenhuma ovelha fique para trás</strong>.</p>
-        <div class="hero-actions">
-            <a href="/plataforma" class="btn-cta">Acessar Plataforma & Estudos</a>
-            <a href="#celula" class="btn-outline">Participar da Célula Digital</a>
+        <div class="tag-acolhimento">
+            🕊️ "Vinde a mim todos os que estais cansados e sobrecarregados"
         </div>
-    </section>
-
-    <section class="pilares" id="pilares">
-        <h2 class="section-title">O Tripé do Ministério</h2>
-        <p class="section-subtitle">Construído sobre a rocha: do chão da congregação até o resgate digital.</p>
-        
-        <div class="grid-3">
-            <div class="card">
-                <div class="card-icon">📖</div>
-                <h3>1. Escola Bíblica & Púlpito</h3>
-                <p>Estudo sistemático das Escrituras inspirado nas matérias clássicas da fé cristã (Bibliologia, Hermenêutica, Escatologia). Teologia sólida descomplicada para a vida diária.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">🌐</div>
-                <h3>2. A Célula Digital</h3>
-                <p>O refúgio sagrado para quem não consegue estar nas reuniões físicas: trabalhadores noturnos, escala 12x36, acamados e enfermos. Encontro semanal ao vivo no Google Meet.</p>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">🛡️</div>
-                <h3>3. O Codex da Vida Cristã</h3>
-                <p>Um manual de instruções operacionais para o novo convertido: a Ordem Matinal das 06h, o protocolo Sentinela SOS 180s contra a dopamina e a aliança de honra no WhatsApp.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="banner-celula" id="celula">
-        <h2>Você Trabalha à Noite ou Está Impossibilitado de Ir à Igreja?</h2>
-        <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto 28px; font-size: 16px;">
-            A Igreja não é um prédio de concreto de quatro paredes; a Igreja é o corpo de Cristo reunido em Seu nome. Junte-se à nossa Célula Digital toda semana.
+        <h1>Você Não Precisa Fingir Força Aqui.<br><em>Deus Te Ouve Mesmo em Silêncio.</em></h1>
+        <p class="hero-desc">
+            Se hoje a sua alma só consegue chorar, se a dor da ansiedade trava o seu peito, ou se a escuridão do desespero fez você pensar em desistir de tudo... 
+            <strong>pare por um segundo</strong>. Esta página não foi um acaso. Deus está de braços abertos para te acolher exatamente como você está.
         </p>
-        <a href="/plataforma" class="btn-cta">Entrar na Sala & Pedir Oração</a>
+        <div class="hero-actions">
+            <a href="/plataforma" class="btn-principal">
+                🤍 Só Preciso de um Abraço e Oração
+            </a>
+            <a href="#celula" class="btn-suave">
+                Conhecer a Célula Digital
+            </a>
+        </div>
     </section>
+
+    <section class="secao-dor">
+        <div class="quote-box">
+            <p>"Perto está o Senhor dos que têm o coração quebrantado e salva os de espírito abatido. Ele cura os quebrantados de coração e lhes ata as feridas."</p>
+            <span>Salmo 34:18 & 147:3</span>
+        </div>
+
+        <div style="text-align: center; max-width: 680px; margin: 0 auto 36px;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 32px; color: var(--text-title); margin-bottom: 12px;">Nós Conhecemos o Peso da Sua Noite</h2>
+            <p style="color: var(--text-muted); font-size: 15px;">A religião dos homens muitas vezes aponta o dedo e exige perfeição. Jesus, porém, estendeu a mão ferida e caminhou até quem estava no chão.</p>
+        </div>
+
+        <div class="grid-feridas">
+            <div class="card-ferida">
+                <div class="icone">🌧️</div>
+                <h3>A Ansiedade & O Pânico</h3>
+                <p>O coração acelerado na madrugada, o ar que parece faltar e o medo constante de um futuro que você não consegue controlar. Você não é culpado por sentir isso.</p>
+            </div>
+
+            <div class="card-ferida">
+                <div class="icone">🌑</div>
+                <h3>A Depressão & O Silêncio</h3>
+                <p>A sensação de que a vida perdeu a cor, de que você é um fardo para quem está perto e de que ninguém sentiria sua falta. Essa mentira não define quem você é para o Pai.</p>
+            </div>
+
+            <div class="card-ferida">
+                <div class="icone">💼</div>
+                <h3>O Desemprego & A Humilhação</h3>
+                <p>O envio de dezenas de currículos sem resposta, a vergonha de não conseguir honrar a mesa e o peso da incerteza. Deus conhece o seu suor e não te deixará desamparado.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="secao-abraco">
+        <div class="conteudo-abraco">
+            <h2>O Amor de um Pai que Corre ao Seu Encontro</h2>
+            <p>
+                Na parábola do filho pródigo (Lucas 15), o rapaz voltou sujo, quebrado e sem nada a oferecer. Ele vinha ensaiando um pedido de desculpas humilhado. Mas a Bíblia diz que, quando ele ainda estava longe, <strong>o pai o avistou, encheu-se de compaixão, correu até ele, lançou-se ao seu pescoço e o cobriu de beijos.</strong>
+            </p>
+            <p style="color: var(--gold-light); font-style: italic; font-size: 18px;">
+                Deus não quer o seu discurso perfeito de fé hoje. Ele quer o seu coração machucado para derramar óleo e curar as suas feridas.
+            </p>
+        </div>
+    </section>
+
+    <section class="card-celula-hospital" id="celula">
+        <div class="badge-suave">🌐 Um Hospital de Almas Sem Quatro Paredes</div>
+        <h2>A Célula Digital: Ninguém Fica Abandonado</h2>
+        <p>
+            Criamos este encontro online semanal para quem não consegue estar nas reuniões físicas de uma igreja: quem trabalha em plantões noturnos, quem está preso em uma cama por enfermidade, quem cuida de parentes doentes ou quem está travado por uma crise de pânico e não consegue sair de casa.
+        </p>
+
+        <div class="regras-acolhimento">
+            <div class="regra-item">
+                <span>✓</span> Você não precisa abrir a câmera se estiver chorando.
+            </div>
+            <div class="regra-item">
+                <span>✓</span> Você não precisa falar se faltarem palavras.
+            </div>
+            <div class="regra-item">
+                <span>✓</span> Apenas coloque o fone e receba oração e a Palavra.
+            </div>
+        </div>
+
+        <a href="/plataforma" class="btn-principal" style="font-size: 17px; padding: 18px 42px;">
+            🤍 Entrar na Sala & Pedir Cobertura de Oração
+        </a>
+    </section>
+
+    <div class="cvv-box">
+        💛 <strong>Se você está em crise profunda ou com pensamentos de desistir da vida:</strong> Você não precisa passar por isso sozinho. Ligue agora gratuitamente para o <strong>188 (CVV)</strong> ou entre na nossa sala para conversarmos e orarmos por você. <strong>A sua vida tem um valor infinito para Deus.</strong>
+    </div>
 
     <footer>
-        <p>© 2026 Ministério Metanoia // Pr. Matheus Barbosa. Todos os direitos reservados para o Reino de Deus.</p>
-        <p style="margin-top: 8px; font-size: 12px;">"Como o ferro afia o ferro, o homem afia o seu irmão." — <strong>Provérbios 27:17</strong></p>
+        <p>© 2026 Ministério Metanoia // Pr. Matheus Barbosa. Um refúgio de acolhimento pastoral e cura de almas.</p>
+        <p style="margin-top: 8px; font-size: 13px; color: var(--gold-light);">"Ele não quebrará a cana trilhada, nem apagará a torcida que fumega." — <strong>Isaías 42:3</strong></p>
     </footer>
 
 </body>

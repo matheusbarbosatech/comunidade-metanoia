@@ -186,22 +186,22 @@ def main(page: ft.Page):
                 gradient=ft.LinearGradient(
                     begin=ft.alignment.top_left,
                     end=ft.alignment.bottom_right,
-                    colors=["#1E1E28", "#121217"]
+                    colors=["#1E2235", "#10131E"]
                 ),
-                border=ft.border.all(1, COLOR_BORDER),
+                border=ft.border.all(1, "rgba(245, 158, 11, 0.25)"),
                 border_radius=16,
                 padding=24,
                 content=ft.Column([
                     ft.Row([
-                        ft.Icon(ft.Icons.WB_SUNNY_ROUNDED, color=COLOR_ACCENT, size=32),
-                        ft.Text("A ORDEM MATINAL DAS 06H // DIA 01", size=20, weight=ft.FontWeight.BOLD, color=COLOR_TEXT)
+                        ft.Icon(ft.Icons.VOLUNTEER_ACTIVISM_ROUNDED, color=COLOR_ACCENT, size=32),
+                        ft.Text("UM REFÚGIO SEGURO PARA A SUA ALMA", size=18, weight=ft.FontWeight.BOLD, color=COLOR_TEXT)
                     ]),
-                    ft.Text('"Não vos conformeis com este século, mas transformai-vos pela renovação da vossa mente." — Romanos 12:2', size=14, italic=True, color=COLOR_ACCENT),
-                    ft.Text("Quem governa o seu dia hoje? O algoritmo ou o Senhor da sua alma? Antes de tocar em qualquer rede social, consagre o seu primeiro suspiro aos pés da cruz.", size=14, color=COLOR_MUTED),
+                    ft.Text('"Perto está o Senhor dos que têm o coração quebrantado e salva os de espírito abatido." — Salmo 34:18', size=14, italic=True, color=COLOR_ACCENT),
+                    ft.Text("Se hoje você só consegue chorar, se o desespero do desemprego, a angústia da depressão ou o peso da ansiedade tiraram o seu chão... você não precisa fingir força aqui. Deus se apresenta a você hoje não como um juiz, mas como um Pai amoroso que te abraça em silêncio.", size=14, color=COLOR_TEXT),
                     ft.Row([
-                        ft.ElevatedButton("🎧 Ouvir Áudio Devocional (2 min)", bgcolor=COLOR_FLAME, color=COLOR_TEXT),
-                        ft.OutlinedButton("✅ Cumprir Ordem de Missão", style=ft.ButtonStyle(color=COLOR_ACCENT))
-                    ])
+                        ft.ElevatedButton("🤍 Só Preciso de um Abraço e Oração", bgcolor=COLOR_FLAME, color=COLOR_TEXT, on_click=lambda e: abrir_modal_desabafo()),
+                        ft.OutlinedButton("🎧 Áudio de Alívio e Paz (3 min)", style=ft.ButtonStyle(color=COLOR_ACCENT))
+                    ], spacing=12)
                 ], spacing=14)
             ),
             ft.Row([
@@ -213,8 +213,8 @@ def main(page: ft.Page):
                     padding=20,
                     content=ft.Column([
                         ft.Icon(ft.Icons.PEOPLE_ALT_ROUNDED, color=COLOR_ACCENT, size=28),
-                        ft.Text("Célula Digital Metanoia", size=16, weight=ft.FontWeight.BOLD, color=COLOR_TEXT),
-                        ft.Text("Encontro Semanal ao Vivo às Terças 20h30. Ninguém luta sozinho!", size=13, color=COLOR_MUTED),
+                        ft.Text("Célula Digital (Hospital de Almas)", size=16, weight=ft.FontWeight.BOLD, color=COLOR_TEXT),
+                        ft.Text("Encontro ao vivo semanal. Você não precisa abrir a câmera nem falar se faltarem forças. Apenas ouça e receba oração.", size=13, color=COLOR_MUTED),
                         ft.ElevatedButton("Entrar na Sala Google Meet", bgcolor="#1E293B", color=COLOR_TEXT, url="https://meet.google.com")
                     ], spacing=10)
                 ),
@@ -225,11 +225,11 @@ def main(page: ft.Page):
                     border_radius=14,
                     padding=20,
                     content=ft.Column([
-                        ft.Icon(ft.Icons.SHIELD_ROUNDED, color="#EF4444", size=28),
-                        ft.Text("Protocolo SOS 180s", size=16, weight=ft.FontWeight.BOLD, color="#EF4444"),
-                        ft.Text("Fissura por dopamina ou crise de ansiedade? Quebre a onda agora.", size=13, color=COLOR_MUTED),
+                        ft.Icon(ft.Icons.FAVORITE_ROUNDED, color="#EF4444", size=28),
+                        ft.Text("Socorro Imediato (Ansiedade / Desespero)", size=16, weight=ft.FontWeight.BOLD, color="#EF4444"),
+                        ft.Text("O peito está apertado ou pensamentos de desistir da vida? Clique agora.", size=13, color=COLOR_MUTED),
                         ft.ElevatedButton(
-                            "Disparar SOS Imediato",
+                            "Receber Socorro e Oração",
                             bgcolor="#7F1D1D",
                             color=COLOR_TEXT,
                             on_click=lambda e: abrir_modal_sos()
@@ -239,25 +239,62 @@ def main(page: ft.Page):
             ], spacing=16)
         ], spacing=20, expand=True)
 
+    def abrir_modal_desabafo():
+        campo_nome = ft.TextField(label="Seu Nome ou 'Anônimo'", bgcolor="#1E293B", border_color=COLOR_BORDER)
+        campo_desabafo = ft.TextField(label="Como está o seu coração hoje? (Desabafe)", multiline=True, min_lines=3, bgcolor="#1E293B", border_color=COLOR_BORDER)
+
+        def enviar_desabafo(e):
+            if campo_desabafo.value:
+                conn = get_connection()
+                conn.execute("""
+                INSERT INTO pedidos_oracao (nome_solicitante, motivo, categoria, anonimo)
+                VALUES (?, ?, 'desabafo_acolhimento', ?)
+                """, (campo_nome.value or "Alguém que precisa de um abraço", campo_desabafo.value, 1 if not campo_nome.value else 0))
+                conn.commit()
+                conn.close()
+                dialog.open = False
+                page.update()
+                page.show_snack_bar(ft.SnackBar(ft.Text("Seu desabafo foi acolhido. O pastor e a equipe de oração já estão intercedendo por você!")))
+
+        dialog = ft.AlertDialog(
+            title=ft.Text("🤍 Você Não Está Sozinho", color=COLOR_ACCENT, weight=ft.FontWeight.BOLD),
+            content=ft.Container(
+                width=500,
+                height=300,
+                content=ft.Column([
+                    ft.Text("Coloque aqui o peso que está no seu peito. Ninguém vai te julgar. Vamos levar sua causa diante do Pai.", size=13, color=COLOR_MUTED),
+                    campo_nome,
+                    campo_desabafo
+                ], spacing=12)
+            ),
+            actions=[
+                ft.TextButton("Cancelar", on_click=lambda e: setattr(dialog, 'open', False) or page.update()),
+                ft.ElevatedButton("Entregar nas Mãos de Deus", bgcolor=COLOR_FLAME, color=COLOR_TEXT, on_click=enviar_desabafo)
+            ]
+        )
+        page.dialog = dialog
+        dialog.open = True
+        page.update()
+
     def abrir_modal_sos():
         def fechar(e):
             dialog.open = False
             page.update()
 
         dialog = ft.AlertDialog(
-            title=ft.Text("🚨 PROTOCOLO SENTINELA SOS // 180s", color="#EF4444", weight=ft.FontWeight.BOLD),
+            title=ft.Text("🕊️ PARE POR UM SEGUNDO. DEUS ESTÁ AQUI.", color=COLOR_ACCENT, weight=ft.FontWeight.BOLD),
             content=ft.Container(
-                width=450,
-                height=250,
+                width=500,
+                height=320,
                 content=ft.Column([
-                    ft.Text("1. LEVANTE DA CAMA OU CADEIRA AGORA.", weight=ft.FontWeight.BOLD, color=COLOR_TEXT),
-                    ft.Text("2. Vá até o banheiro e lave o rosto com água gelada (choque vagal).", color=COLOR_MUTED),
-                    ft.Text("3. Faça 20 flexões no chão ou 30 polichinelos para redirecionar o sangue.", color=COLOR_MUTED),
-                    ft.Text('"Aquele que cuida estar em pé, olhe que não caia." — 1 Co 10:12', color=COLOR_ACCENT, italic=True),
-                    ft.Text("A onda química quebra em 3 minutos. Você é livre em Cristo!", color=COLOR_TEXT)
-                ], spacing=12)
+                    ft.Text("1. Respire fundo devagar: puxe o ar em 4 segundos, segure 4 segundos e solte em 6 segundos.", color=COLOR_TEXT),
+                    ft.Text("2. Coloque a mão no seu peito. O seu coração está batendo porque Deus ainda tem um propósito sagrado com a sua história.", color=COLOR_TEXT, weight=ft.FontWeight.BOLD),
+                    ft.Text('"Não temas, porque eu sou contigo; não te assombres, porque eu sou o teu Deus; eu te fortaleço, e te ajudo, e te sustento com a destra da minha justiça." — Isaías 41:10', color=COLOR_ACCENT, italic=True),
+                    ft.Text("3. Se o desespero estiver extremo ou pensamentos de morte vierem, lembre-se: a sua dor tem cura. Ligue gratuitamente para o 188 (CVV) e nos mande uma mensagem. Nós amamos a sua vida!", color="#FDA4AF", size=13),
+                    ft.Text("Você vai sair desse vale. Essa noite escura não é o fim da sua história!", color=COLOR_TEXT)
+                ], spacing=14)
             ),
-            actions=[ft.ElevatedButton("Concluir Protocolo & De Pé", bgcolor=COLOR_FLAME, color=COLOR_TEXT, on_click=fechar)]
+            actions=[ft.ElevatedButton("Recebi esse Abraço de Paz", bgcolor=COLOR_FLAME, color=COLOR_TEXT, on_click=fechar)]
         )
         page.dialog = dialog
         dialog.open = True
