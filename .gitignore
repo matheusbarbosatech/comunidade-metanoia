@@ -9,3 +9,5 @@ env/
 data/relatorios_testes/
 .web/
 metanoia_web/.web/
+.env
+*.env

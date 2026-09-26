@@ -13,6 +13,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if str(BASE_DIR) not in sys.path:
     sys.path.insert(0, str(BASE_DIR))
 
+# Auto-carregar variáveis do .env se existirem
+env_file = BASE_DIR / ".env"
+if env_file.exists():
+    with open(env_file, "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                k, v = line.split("=", 1)
+                os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
 from app.db.database import get_connection, init_db
 
 # Diretório padrão para salvar as transcrições
@@ -157,6 +167,14 @@ def processar_pasta(pasta_audios: Path, api_key: str):
     print(f"=======================================================\n")
 
     for i, arq in enumerate(arquivos, 1):
+        titulo = arq.stem.replace("_", " ").strip()
+        slug = "".join([c if c.isalnum() or c in " -_" else "_" for c in titulo])
+        md_file = TRANSCRICOES_DIR / f"{slug}.md"
+
+        if md_file.exists() and md_file.stat().st_size > 500:
+            print(f"[{i}/{len(arquivos)}] [JÁ TRANSCRIÇÃO EXISTE - PULANDO]: {arq.name}")
+            continue
+
         print(f"[{i}/{len(arquivos)}] Processando: {arq.name}")
         resultado = transcrever_arquivo(arq, api_key)
         if resultado and resultado["texto_completo"]:
@@ -183,7 +201,8 @@ if __name__ == "__main__":
         sys.exit(1)
 
     caminho = Path(args.caminho) if args.caminho else (BASE_DIR / "data" / "audios_aulas")
-    caminho.mkdir(parents=True, exist_ok=True)
+    if not caminho.exists() and not caminho.suffix:
+        caminho.mkdir(parents=True, exist_ok=True)
 
     if caminho.is_file():
         res = transcrever_arquivo(caminho, api_key)
@@ -191,3 +210,5 @@ if __name__ == "__main__":
             salvar_transcricao(res)
     elif caminho.is_dir():
         processar_pasta(caminho, api_key)
+    else:
+        print(f"[ERRO] Caminho inválido ou não encontrado: {caminho}")
